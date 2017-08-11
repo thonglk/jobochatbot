@@ -661,12 +661,12 @@ function sendQuickReply_DangKy(recipientId) {
             text: "Để có thể tìm việc trên JOBO App bạn cần phải có tài khoản, bạn đã có tài khoản chưa?",
             quick_replies:[
               {
-                "content_type":"text",
+                "content_type":"postback",
                 "title":"Chưa (Tạo mới)",
                 "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACNO"
               },
               {
-                "content_type":"text",
+                "content_type":"postback",
                 "title":"Có rồi (Đăng nhập)",
                 "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACYES"
               }
