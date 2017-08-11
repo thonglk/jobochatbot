@@ -281,10 +281,6 @@ if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
     process.exit(1);
 }
 
-app.get('/test', function (req, res) {
-    res.json('HELLO ');
-});
-
 /*
  * Use your own validation token. Check that the token used in the Webhook 
  * setup is the same token used here.
@@ -353,7 +349,8 @@ app.post('/webhook', function (req, res) {
  * 
  */
 app.get('/authorize', function (req, res) {
-    var { username, password } = req.query;
+    var username = req.query.username;
+    var password = req.query.password;
     var redirectURI = req.query.redirect_uri;
 
     // Authorization Code should be generated per user by the developer. This will
