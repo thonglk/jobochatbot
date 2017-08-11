@@ -1,0 +1,56 @@
+<!-- 
+
+Copyright 2016-present, Facebook, Inc.
+All rights reserved.
+
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+
+-->
+<html>
+  <head>
+    <title>Joboapp authorie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      div { margin: 10px 0px 10px 0px; }
+    </style>
+  </head>
+  <body>
+
+    <h1>Login</h1>
+
+    <div>
+      <div>
+          <label for="username">
+            Username:
+          </label>
+          <input type="text" name="username" id='username' placeholder="User name" value="" />
+      </div>
+
+      <div>
+          <label for="password">
+            Password:
+          </label>
+          <input type="password" name="password" id='password' placeholder="Password" value="" />
+      </div>            
+      <div>
+        <button onclick="authorize('<%= redirectURISuccess %>')">Login</button>
+      </div>
+    </div>
+    <div>
+      Account linking token: <%= username %> 
+    </div>
+
+    <div>
+      Redirect URI: <%= redirectURI %> 
+    </div>
+
+    <div>
+      Redirect URI Successful: <%= redirectURISuccess %> 
+    </div>
+    
+
+
+    <script type="text/javascript" src='assets/js/authorize.js'></script>
+  </body>
+</html>
