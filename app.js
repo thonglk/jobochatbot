@@ -281,8 +281,8 @@ if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
     process.exit(1);
 }
 
-app.get('/test', function (req, res) => {
-    res.json('HELLO');
+app.get('/test', function (req, res) {
+    res.json('HELLO ');
 });
 
 /*
