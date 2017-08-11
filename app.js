@@ -648,7 +648,7 @@ function receivedPostback(event) {
 
     sendTextMessage(senderID, "Xin chào, cám ơn bạn đã sử dụng Jobo,")
     setTimeout(function () {
-        sendQuickReply_Diachi(senderID);
+        sendQuickReply_DangKy(senderID);
     }, 1000)
 }
 
