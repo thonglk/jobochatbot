@@ -649,7 +649,7 @@ function receivedPostback(event) {
     sendTextMessage(senderID, "Xin chào, cám ơn bạn đã sử dụng Jobo,")
     setTimeout(function () {
         sendQuickReply_DangKy(senderID);
-    }, 1000)
+    }, 500)
 }
 
 function sendQuickReply_DangKy(recipientId) {
@@ -661,12 +661,12 @@ function sendQuickReply_DangKy(recipientId) {
             text: "Để có thể tìm việc trên JOBO App bạn cần phải có tài khoản, bạn đã có tài khoản chưa?",
             quick_replies:[
               {
-                "content_type":"postback",
+                "content_type":"text",
                 "title":"Chưa (Tạo mới)",
                 "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACNO"
               },
               {
-                "content_type":"postback",
+                "content_type":"text",
                 "title":"Có rồi (Đăng nhập)",
                 "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACYES"
               }
