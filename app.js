@@ -16,7 +16,9 @@ const
     crypto = require('crypto'),
     express = require('express'),
     https = require('https'),
-    request = require('request');
+    request = require('request'),
+    firebase = require('firebase');
+const firebaseConfig = require('./config/firebase.json');
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -24,6 +26,12 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json({verify: verifyRequestSignature}));
 app.use(express.static('public'));
 
+// Firebase init
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+if (firebaseApp.options.apiKey === firebaseConfig.apiKey) {
+  console.log('==> 🛢 Firebase is connected 😉');
+}
 /*
  * Be sure to setup your config values before running this code. You can 
  * set them using environment variables or modifying the config file in /config.
@@ -479,7 +487,7 @@ function receivedMessage(event) {
     }
 
     if (messageText) {
-
+        // Handle message
         // If we receive a text message, check to see if it matches any special
         // keywords and send back the corresponding example. Otherwise, just echo
         // the text we received.
@@ -642,6 +650,31 @@ function receivedPostback(event) {
     setTimeout(function () {
         sendQuickReply_Diachi(senderID);
     }, 1000)
+}
+
+function sendQuickReply_DangKy(recipientId) {
+    var messageData = {
+        recipient: {
+            id: recipientId
+        },
+        message: {
+            text: "Để có thể tìm việc trên JOBO App bạn cần phải có tài khoản, bạn đã có tài khoản chưa?",
+            quick_replies:[
+              {
+                "content_type":"text",
+                "title":"Chưa (Tạo mới)",
+                "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACNO"
+              },
+              {
+                "content_type":"text",
+                "title":"Có rồi (Đăng nhập)",
+                "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACYES"
+              }
+            ]
+        }
+    };
+
+    callSendAPI(messageData);
 }
 
 /*
@@ -1114,6 +1147,7 @@ function sendQuickReply_Timviec(recipientId) {
 
     callSendAPI(messageData);
 }
+
 function sendQuickReply_Diachi(recipientId) {
     var messageData = {
         recipient: {
