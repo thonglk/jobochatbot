@@ -36,6 +36,7 @@ app.set('view engine', 'jade');
 
 /* ----------  Static Assets  ---------- */
 app.use(express.static('public'));
+app.use(favicon('public/icon.png'));
 
 /* ----------  Parsers  ---------- */
 

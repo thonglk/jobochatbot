@@ -16,7 +16,7 @@ const showPasswordError = () => {
   const errorSection = document.getElementById('error');
   const inputStatus = document.querySelector('#password2Field > div.inputStatus');
   if (errorSection) {
-    errorSection.innerHTML = '<p id="passwordError">Oops. Passwords don’t match.</p>';
+    errorSection.innerHTML = '<p id="passwordError">Mật khẩu không khớp.</p>';
   }
   if (inputStatus) {
     inputStatus.innerHTML = '<img src="/images/warning.svg" class="statusIcon warning">';

@@ -9,7 +9,7 @@
 import sendApi from './send';
 
 // ===== STORES ================================================================
-import UserStore from '../stores/user_store';
+import UserStore from 'stores/user_store';
 
 /*
  * Account Link Event - This event is called when the Link Account

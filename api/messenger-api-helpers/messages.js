@@ -23,7 +23,7 @@ const createAccountMessage = {
     type: 'template',
     payload: {
       template_type: 'button',
-      text: 'Để sử dụng ứng dụng của JOBO bạn cần phải đăng nhập.',
+      text: 'Để sử dụng ứng dụng của Jobo bạn cần phải đăng nhập.',
       buttons: [signInButton],
     },
   },

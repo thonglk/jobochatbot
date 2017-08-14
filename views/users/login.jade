@@ -1,11 +1,11 @@
 extends layout
 block head
-   - var title = 'Đăng nhập'
+   - var title = 'Jobo - Đăng nhập'
 block content
   div(class='main row')
     div(class='column')
       div(class='header')
-        h2 Log In
+        h2 Đăng nhập
       div(class='subtitle')
         p Tài khoản demo “jobo” mật khẩu “12345678”.
       form(action='/users/login', method='post', class='column')
@@ -13,14 +13,14 @@ block content
           fieldset(id='usernameField')
             div(class='input')
               label(for='username') Tên tài khoản
-              input(class='required',id='username',type='text',value=username,placeholder='Enter your username',name='username')
+              input(class='required',id='username',type='text',value=username,placeholder='Nhập tên tài khoản',name='username')
             div(class='inputStatus')
               if errorInput === 'username'
                 img(class='statusIcon warning' src='/images/warning.svg')
           fieldset(id='passwordField')
             div(class='input')
               label(for='password') Mật khẩu
-              input(class='required',id='password',type='password',value=password,placeholder='Enter password',name='password')
+              input(class='required',id='password',type='password',value=password,placeholder='Nhập mật khẩu',name='password')
             div(class='inputStatus')
               if errorInput === 'password'
                 img(class='statusIcon warning' src='/images/warning.svg')

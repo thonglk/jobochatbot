@@ -1,8 +1,7 @@
 import express from 'express';
 import uuid from 'uuid';
-
 // ===== STORES ================================================================
-import UserStore from '../stores/user_store';
+import UserStore from 'stores/user_store';
 
 const router = express.Router({
   mergeParams: true
@@ -71,7 +70,7 @@ router.route('/login')
       username,
       password,
       errorMessage: !userLogin
-        ? 'Tên tài khoản bạn vừa nhập chưa đúng, vui lòng nhập lại' // eslint-disable-line max-len
+        ? 'Tên tài khoản bạn vừa nhập chưa đúng, vui lòng nhập lại'
         : 'Mật khẩu chưa đúng, vui lòng thử lại',
       errorInput: !userLogin ? 'username' : 'password',
     });

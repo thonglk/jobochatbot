@@ -19,21 +19,21 @@ block content
           fieldset(id='usernameField')
             div(class='input')
               label(for='username') Tên tài khoản
-              input(class='required',id='username',type='text',value=username,placeholder='Choose a username',name='username')
+              input(class='required',id='username',type='text',value=username,placeholder='Nhập tên tài khoản',name='username')
             div(class='inputStatus')
               if errorInput === 'username'
                 img(class='statusIcon warning' src='/images/warning.svg')
           fieldset(id='passwordField')
             div(class='input')
               label(for='password') Mật khẩu
-              input(class='required',id='password',type='password',value=password,placeholder='Choose a password',name='password')
+              input(class='required',id='password',type='password',value=password,placeholder='Nhập mật khẩu',name='password')
             div(class='inputStatus')
               if errorInput === 'password'
                 img(class='statusIcon warning' src='/images/warning.svg')
           fieldset(id='password2Field')
             div(class='input')
               label(for='passwordVerification') Nhập lại mật khẩu
-              input(class='required', id='passwordVerification',type='password',value=password2,placeholder='Confirm your password',name='password2')
+              input(class='required', id='passwordVerification',type='password',value=password2,placeholder='Xác nhận mật khẩu',name='password2')
             div(class='inputStatus')
               if errorInput === 'password2'
                 img(class='statusIcon warning' src='/images/warning.svg')
