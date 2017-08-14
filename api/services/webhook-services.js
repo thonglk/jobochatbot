@@ -6,6 +6,7 @@ import {
 } from 'app-config';
 import {
   sendTextMessage,
+  callSendAPI
 } from 'services/message-services';
 /*
  * Authorization Event
