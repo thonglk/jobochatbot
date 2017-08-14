@@ -11,6 +11,8 @@ import {
   receivedMessageRead
 } from 'services/webhook-services';
 
+// ===== MESSENGER =============================================================
+import receiveApi from 'messenger-api-helpers/receive';
 const router = express.Router({
   mergeParams: true
 }); // eslint-disable-line
@@ -34,41 +36,36 @@ router.route('/')
     }
   })
   .post(function (req, res, next) {
+    res.sendStatus(200);
+
     const data = req.body;
 
     // Make sure this is a page subscription
-    if (data.object == 'page') {
+    if (data.object === 'page') {
       // Iterate over each entry
       // There may be multiple if batched
-      data.entry.forEach(function (pageEntry) {
-        var pageID = pageEntry.id;
-        var timeOfEvent = pageEntry.time;
-
+      data.entry.forEach((pageEntry) => {
+        if (!pageEntry.messaging) {
+          return;
+        }
         // Iterate over each messaging event
-        pageEntry.messaging.forEach(function (messagingEvent) {
-          if (messagingEvent.optin) {
-            receivedAuthentication(messagingEvent);
-          } else if (messagingEvent.message) {
-            receivedMessage(messagingEvent);
-          } else if (messagingEvent.delivery) {
-            receivedDeliveryConfirmation(messagingEvent);
-          } else if (messagingEvent.postback) {
-            receivedPostback(messagingEvent);
-          } else if (messagingEvent.read) {
-            receivedMessageRead(messagingEvent);
-          } else if (messagingEvent.account_linking) {
-            receivedAccountLink(messagingEvent);
+        pageEntry.messaging.forEach((messagingEvent) => {
+          console.log({ messagingEvent });
+          if (messagingEvent.message) {
+            receiveApi.handleReceiveMessage(messagingEvent);
+          } else if (messagingEvent.account_linking) { // eslint-disable-line camelcase, max-len
+            receiveApi.handleReceiveAccountLink(messagingEvent);
+          }
+          if (messagingEvent.postback) {
+            receiveApi.handleReceivePostback(messagingEvent);
           } else {
-            console.log("Webhook received unknown messagingEvent: ", messagingEvent);
+            console.error(
+              'Webhook received unknown messagingEvent: ',
+              messagingEvent
+            );
           }
         });
       });
-
-      // Assume all went well.
-      //
-      // You must send back a 200, within 20 seconds, to let us know you've
-      // successfully received the callback. Otherwise, the request will time out.
-      res.sendStatus(200);
     }
   });
 

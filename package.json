@@ -57,9 +57,13 @@
     "express": "^4.13.4",
     "firebase": "^4.2.0",
     "firebase-admin": "^5.1.0",
+    "jade": "^1.11.0",
+    "lodash": "^4.17.4",
     "nodemon": "^1.11.0",
     "pretty-error": "^2.1.1",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "serve-favicon": "^2.4.3",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "eslint": "1.10.3",
