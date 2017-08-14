@@ -23,7 +23,7 @@ const router = express.Router({
  *
  */
 router.route('/')
-  .get((req, res, next) => {
+  .get(function (req, res, next) {
     if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === VALIDATION_TOKEN) {
       console.log("Validating webhook");
@@ -33,7 +33,7 @@ router.route('/')
       res.sendStatus(403);
     }
   })
-  .post((req, res, next) => {
+  .post(function (req, res, next) {
     const data = req.body;
 
     // Make sure this is a page subscription
@@ -53,7 +53,6 @@ router.route('/')
           } else if (messagingEvent.delivery) {
             receivedDeliveryConfirmation(messagingEvent);
           } else if (messagingEvent.postback) {
-            console.log('askhdjkasdkjjaksndjaknsdnqoiwnd');
             receivedPostback(messagingEvent);
           } else if (messagingEvent.read) {
             receivedMessageRead(messagingEvent);

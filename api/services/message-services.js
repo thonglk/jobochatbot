@@ -1,3 +1,4 @@
+import request from 'request';
 import { PAGE_ACCESS_TOKEN, SERVER_URL } from 'app-config';
 
 /**
