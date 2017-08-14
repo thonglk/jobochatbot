@@ -219,17 +219,6 @@ function sendQuickReply_DangKy(recipientId) {
   callSendAPI(messageData);
 }
 
-function sendLoginAction(recipientId) {
-  const messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-
-    }
-  };
-}
-
 /*
  * Message Read Event
  *
