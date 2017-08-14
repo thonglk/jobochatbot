@@ -13,19 +13,24 @@ block content
       div(class='header')
         h2 Tạo tài khoản
       div(class='subtitle')
-        p Để tìm việc làm trên ứng dụng Jobo bạn cần phải tạo tài khoản
+        p Để có thể tìm việc làm và có thông tin tốt đến các nhà tuyển dụng trên Jobo, các bạn cần phải điền đầy đủ các thông tin dưới đây. Các bạn thông cảm vì sự phiền phức này!
+
+        span(style='color: #f00; padding: 3px; font-size: 14px;') *
+          span(style='color: #AAAAAA; padding: 3px;') Các thông tin này là bắt buộc giúp cho nhà tuyển dụng nắm được thông tin của bạn và chỉ được chia sẻ với các nhà tuyển dụng.
       form(action='/users/create', method='post', class='column')
         div(class='formFields')
           fieldset(id='usernameField')
             div(class='input')
-              label(for='username') Tên tài khoản
-              input(class='required',id='username',type='text',value=username,placeholder='Nhập tên tài khoản',name='username')
+              label(for='username') Email
+                span(style='color: #f00; padding: 3px; font-size: 14px;') *
+              input(class='required',id='username',type='text',value=username,placeholder='Nhập email',name='username')
             div(class='inputStatus')
               if errorInput === 'username'
                 img(class='statusIcon warning' src='/images/warning.svg')
           fieldset(id='passwordField')
             div(class='input')
               label(for='password') Mật khẩu
+                span(style='color: #f00; padding: 3px; font-size: 14px;') *
               input(class='required',id='password',type='password',value=password,placeholder='Nhập mật khẩu',name='password')
             div(class='inputStatus')
               if errorInput === 'password'
@@ -33,10 +38,56 @@ block content
           fieldset(id='password2Field')
             div(class='input')
               label(for='passwordVerification') Nhập lại mật khẩu
+                span(style='color: #f00; padding: 3px; font-size: 14px;') *
               input(class='required', id='passwordVerification',type='password',value=password2,placeholder='Xác nhận mật khẩu',name='password2')
             div(class='inputStatus')
               if errorInput === 'password2'
                 img(class='statusIcon warning' src='/images/warning.svg')
+
+          fieldset(id='nameField')
+            div(class='input')
+              label(for='name') Họ và tên
+                span(style='color: #f00; padding: 3px; font-size: 14px;') *
+              input(class='required',id='name',type='text',value=name,placeholder='Nhập họ và tên',name='name')
+            div(class='inputStatus')
+              if errorInput === 'name'
+                img(class='statusIcon warning' src='/images/warning.svg')
+
+          fieldset(id='phoneField')
+            div(class='input')
+              label(for='phone') Số điện thoại
+                span(style='color: #f00; padding: 3px; font-size: 14px;') *
+              input(class='required',id='phone',type='text',value=phone,placeholder='Nhập số điện thoại',name='phone')
+            div(class='inputStatus')
+              if errorInput === 'phone'
+                img(class='statusIcon warning' src='/images/warning.svg')
+
+          fieldset(id='addressField')
+            div(class='input')
+              label(for='address') Địa chỉ
+                span(style='color: #f00; padding: 3px; font-size: 14px;') *
+              input(class='required',id='address',type='text',value=address,placeholder='Nhập địa chỉ',name='address')
+            div(class='inputStatus')
+              if errorInput === 'address'
+                img(class='statusIcon warning' src='/images/warning.svg')
+          //- Jobs
+          fieldset(id='jobsField')
+            div(class='input')
+              label(for='jobs') Công việc mong muốn
+                span(style='color: #f00; padding: 3px; font-size: 14px;') *
+              input(class='required',id='jobs',type='text',value=jobs,placeholder='Chọn công viêc mong muốn',name='jobs')
+            div(class='inputStatus')
+              if errorInput === 'jobs'
+                img(class='statusIcon warning' src='/images/warning.svg')
+          //- Avatar
+          fieldset(id='avatarField')
+            div(class='input')
+              label(for='avatar') Hình đại diện
+              input(class='required',id='avatar',type='text',value=avatar,placeholder='Hình đại diện',name='avatar')
+            div(class='inputStatus')
+              if errorInput === 'avatar'
+                img(class='statusIcon warning' src='/images/warning.svg')
+
           input(type='hidden' name='accountLinkingToken' value='#{accountLinkingToken}')
           input(type='hidden' name='redirectURI' value='#{redirectURI}')
         div(id='error')
