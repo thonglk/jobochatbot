@@ -191,9 +191,9 @@ export function receivedPostback(event) {
   // let them know it was successful
 
   sendTextMessage(senderID, "Xin chào, cám ơn bạn đã sử dụng Jobo,")
-  setTimeout(function () {
-    sendQuickReply_DangKy(senderID);
-  }, 500)
+  // setTimeout(function () {
+  //   sendQuickReply_DangKy(senderID);
+  // }, 500)
 }
 
 function sendQuickReply_DangKy(recipientId) {
