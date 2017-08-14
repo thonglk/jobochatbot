@@ -64,8 +64,8 @@ const sendLoggedOutWelcomeMessage = (recipientId) => {
   sendMessage(
     recipientId, [
       {
-        text: 'Hi! 👋 Welcome to Jasper’s Market!'
-          + ' (Messenger Platform Account Linking demo)',
+        text: 'Xin chào! 👋 Mừng bạn đến với ứng dụng hỗ trợ tìm việc làm Jobo!'
+          + ' https://joboapp.com',
       },
       messages.createAccountMessage,
     ]

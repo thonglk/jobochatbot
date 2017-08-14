@@ -38,7 +38,7 @@ router.route('/create')
         password,
         password2,
         redirectURI,
-        errorMessage: `Sorry! '${username}' has already been taken.`,
+        errorMessage: `Xin lỗi! 'Tài khoản ${username}' đã tồn tại.`,
         errorInput: 'username',
       },
     );
@@ -71,8 +71,8 @@ router.route('/login')
       username,
       password,
       errorMessage: !userLogin
-        ? 'Uh oh. That username doesn’t exist. Please use the demo account or try again.' // eslint-disable-line max-len
-        : 'Oops. Incorrect password',
+        ? 'Tên tài khoản bạn vừa nhập chưa đúng, vui lòng nhập lại' // eslint-disable-line max-len
+        : 'Mật khẩu chưa đúng, vui lòng thử lại',
       errorInput: !userLogin ? 'username' : 'password',
     });
   } else {
