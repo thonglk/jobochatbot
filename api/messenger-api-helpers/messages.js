@@ -8,7 +8,8 @@
 /* eslint-disable camelcase */
 /* eslint-disable max-len */
 
-const SERVER_URL = process.env.SERVER_URL; // eslint-disable-line
+// ===== APP CONFIG ============================================================
+import { SERVER_URL } from 'app-config.js';
 
 /**
  * Account Link Button
