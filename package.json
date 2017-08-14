@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "babel -w code/ -d build -s",
-    "start-prod": "better-npm-run start-prod-api",
+    "start": "better-npm-run start-prod-api",
     "start-dev": "better-npm-run start-dev-api",
     "lint": "jshint --exclude node_modules .",
     "test": "echo \"Error: no test specified\" && exit 1"
