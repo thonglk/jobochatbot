@@ -33,7 +33,7 @@ const createAccountMessage = {
     type: 'template',
     payload: {
       template_type: 'button',
-      text: 'Ready to do this? You’ll need to log in to your Jasper’s account so I can access your past orders.',
+      text: 'Để sử dụng ứng dụng của JOBO bạn cần phải đăng nhập.',
       buttons: [signInButton],
     },
   },
@@ -47,7 +47,7 @@ const createAccountMessage = {
  */
 const signInGreetingMessage = (username) => {
   return {
-    text: `Welcome back, ${username}!`,
+    text: `Xin chào ${username}!`,
   };
 };
 
@@ -62,7 +62,7 @@ const signInSuccessMessage = {
     type: 'template',
     payload: {
       template_type: 'button',
-      text: 'Now you’ll have full access to your order history and shopping list.',
+      text: 'Bây giờ bạn có thể tham gia tìm kiếm các việc làm bạn muốn.',
       buttons: [signOutButton],
     },
   },
@@ -76,7 +76,7 @@ const signOutSuccessMessage = {
     type: 'template',
     payload: {
       template_type: 'button',
-      text: 'You’ve been logged out of your Jasper’s account.',
+      text: 'Bạn đã đăng nhâp vào ứng dụng JOBO.',
       buttons: [signInButton],
     },
   },
@@ -94,7 +94,7 @@ const loggedInMessage = (username) => {
       type: 'template',
       payload: {
         template_type: 'button',
-        text: `You’re still logged in as ${username}.`,
+        text: `Bạn đang đăng nhập với tên ${username}.`,
         buttons: [signOutButton],
       },
     },
@@ -105,7 +105,7 @@ const loggedInMessage = (username) => {
  * Fun message for saying hello to a signed in user.
  */
 const napMessage = {
-  text: 'Oh hey there! I was just napping while you were gone 😴. But I’m awake now!',
+  text: 'Cám ơn bạn đã gọi tôi dậy, bạn vui lòng chờ trong giây lát!',
 };
 
 /**
