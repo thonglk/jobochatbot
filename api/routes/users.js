@@ -26,13 +26,13 @@ router.route('/create')
   const accountLinkingToken = req.query.account_linking_token;
   const redirectURI = req.query.redirect_uri;
 
-  res.render('create-account', {accountLinkingToken, redirectURI});
+  res.render('users/create-account', {accountLinkingToken, redirectURI});
 })
 .post(function(req, res) {
   const {username, password, password2, redirectURI} = req.body;
   if (UserStore.has(username)) {
     res.render(
-      'create-account',
+      'users/create-account',
       {
         username,
         password,
@@ -48,7 +48,7 @@ router.route('/create')
     if (redirectURI) {
       linkAccountToMessenger(res, username, redirectURI);
     } else {
-      res.render('create-account-success', {username});
+      res.render('users/create-account-success', {username});
     }
   }
 });
@@ -60,13 +60,13 @@ router.route('/login')
 
   const redirectURI = req.query.redirect_uri;
 
-  res.render('login', {accountLinkingToken, redirectURI});
+  res.render('users/login', {accountLinkingToken, redirectURI});
 })
 .post(function(req, res) {
   const {username, password, redirectURI} = req.body;
   const userLogin = UserStore.get(username);
   if (!userLogin || userLogin.password !== password) {
-    res.render('login', {
+    res.render('users/login', {
       redirectURI,
       username,
       password,

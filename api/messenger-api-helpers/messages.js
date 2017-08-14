@@ -1,13 +1,3 @@
-/**
- * Copyright 2017-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-/* eslint-disable camelcase */
-/* eslint-disable max-len */
-
 // ===== APP CONFIG ============================================================
 import { SERVER_URL } from 'app-config.js';
 
@@ -76,7 +66,7 @@ const signOutSuccessMessage = {
     type: 'template',
     payload: {
       template_type: 'button',
-      text: 'Bạn đã đăng nhâp vào ứng dụng JOBO.',
+      text: 'Bạn đã đăng xuất khỏi ứng dụng Jobo.',
       buttons: [signInButton],
     },
   },
