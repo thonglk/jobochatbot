@@ -1,4 +1,4 @@
-import firebase, { database, auth } from 'firebase';
+import firebase, { database, auth } from 'firebase-admin';
 /**
  * Base store class built around ES6 Weak Map
  * @export
@@ -69,7 +69,15 @@ export default class Store {
   set({ username, password, displayName, phone, birth, messengerId }) {
     return new Promise((resolve, reject) => {
       let id = '';
-      auth().createUserWithEmailAndPassword(username, password)
+      // auth().createUserWithEmailAndPassword(username, password)
+      console.log(phone);
+      auth().createUser({
+          email: username,
+          emailVerified: false,
+          password,
+          displayName,
+          disabled: false
+        })
         .then(createdUser => {
           id = createdUser.uid;
           return this.ref.child(id)

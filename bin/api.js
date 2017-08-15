@@ -10,12 +10,13 @@ import express from 'express';
 import https from 'https';
 import request from 'request';
 import firebase from 'firebase';
+import firebaseAdmin from 'firebase-admin';
 import favicon from 'serve-favicon';
 import PrettyError from 'pretty-error';
 // ===== MESSENGER =============================================================
 import ThreadSetup from 'messenger-api-helpers/thread-setup';
 // ===== APP CONFIG ============================================================
-import { APP_SECRET, FIRE_BASE } from 'app-config.js';
+import { APP_SECRET, FIRE_BASE, FIRE_BASE_ADMIN } from 'app-config.js';
 // ===== CONFIG PRETTY ERROR ===================================================
 const pretty = new PrettyError();
 const app = express();
@@ -27,6 +28,11 @@ const firebaseApp = firebase.initializeApp(FIRE_BASE);
 if (firebaseApp.options.apiKey === FIRE_BASE.apiKey) {
   console.log('==> 🛢 Firebase is connected 😉');
 }
+// ===== FIRE BASE ADMIN INIT ========================================================
+const firebaseAdApp = firebaseAdmin.initializeApp({
+  credential: firebaseAdmin.credential.cert(FIRE_BASE_ADMIN),
+  databaseURL: FIRE_BASE.databaseURL
+});
 
 /* ----------  Views  ---------- */
 
