@@ -38,18 +38,18 @@ const handleReceiveAccountLink = (event) => {
       .catch(err => {
         console.log(err);
         sendMessage(
-          senderId, {
+          senderId, [{
             text: 'Đăng nhập không thành công. Vui lòng thử lại!'
-          });
+          }]);
       });
     break;
   case 'unlinked':
     UserStore.unlinkMessengerAccount(senderId)
       .then(status => {
         status ? sendApi.sendSignOutSuccessMessage(senderId) : sendMessage(
-          senderId, {
+          senderId, [{
             text: 'Đăng xuất không thành công. Vui lòng thử lại!'
-          });
+          }]);
       });
     break;
   default:

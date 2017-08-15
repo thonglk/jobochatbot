@@ -29,6 +29,7 @@ class UserStore extends Store {
     return new Promise((resolve, reject) => {
       this.getByMessenger(messengerId)
         .then(userId => {
+          console.log(userId);
           return this.get(userId);
         })
         .then(user => resolve(user));

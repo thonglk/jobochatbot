@@ -19,7 +19,7 @@ export default class Store {
       if (!id) resolve(null);
       this.ref.child(id).once('value')
         .then(user => {
-          console.log(user.val());
+          // console.log(user.val());
           resolve(user.val());
         })
         .catch(err => {
@@ -46,7 +46,7 @@ export default class Store {
 
   getByMessenger(messengerId) {
     return new Promise((resolve, reject) => {
-      this.bot.child(messengerId)
+      this.bot.child(messengerId).once('value')
         .then(userId => resolve(userId.val()))
         .catch(err => {
           console.log(err);
