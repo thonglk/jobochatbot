@@ -26,11 +26,13 @@ class UserStore extends Store {
   }
 
   getByMessengerId(messengerId) {
-    return this.getByMessenger(messengerId)
-      .then(userId => {
-        return this.get(userId);
-      })
-      .then(user => user);
+    return new Promise((resolve, reject) => {
+      this.getByMessenger(messengerId)
+        .then(userId => {
+          return this.get(userId);
+        })
+        .then(user => resolve(user));
+    });
   }
 
   linkMessengerAccount(id, messengerId) {

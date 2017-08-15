@@ -75,6 +75,7 @@ const handleReceivePostback = (event) => {
   const senderId = event.sender.id;
 
   // Perform an action based on the type of payload received.
+  // Handle message type
   switch (type) {
   case 'GET_STARTED':
     sendApi.sendWelcomeMessage(senderId);

@@ -62,10 +62,9 @@ const sendMessage = (recipientId, messagePayloads) => {
 // Send a welcome message for a non signed-in user.
 const sendLoggedOutWelcomeMessage = (recipientId) => {
   sendMessage(
-    recipientId, [
-      {
-        text: 'Xin chào! 👋 Mừng bạn đến với ứng dụng hỗ trợ tìm việc làm Jobo!'
-          + ' https://joboapp.com',
+    recipientId, [{
+        text: 'Xin chào! 👋 Mừng bạn đến với ứng dụng hỗ trợ tìm việc làm Jobo!' +
+          ' https://joboapp.com',
       },
       messages.createAccountMessage,
     ]
@@ -75,8 +74,7 @@ const sendLoggedOutWelcomeMessage = (recipientId) => {
 // Send a welcome message for a signed in user.
 const sendLoggedInWelcomeMessage = (recipientId, username) => {
   sendMessage(
-    recipientId,
-    [
+    recipientId, [
       messages.napMessage,
       messages.loggedInMessage(username),
     ]);
@@ -84,12 +82,14 @@ const sendLoggedInWelcomeMessage = (recipientId, username) => {
 
 // Send a different Welcome message based on if the user is logged in.
 const sendWelcomeMessage = (recipientId) => {
-  const userProfile = UserStore.getByMessengerId(recipientId);
-  if (!isEmpty(userProfile)) {
-    sendLoggedInWelcomeMessage(recipientId, userProfile.name);
-  } else {
-    sendLoggedOutWelcomeMessage(recipientId);
-  }
+  UserStore.getByMessengerId(recipientId)
+    .then(userProfile => {
+      if (!isEmpty(userProfile)) {
+        sendLoggedInWelcomeMessage(recipientId, userProfile.name);
+      } else {
+        sendLoggedOutWelcomeMessage(recipientId);
+      }
+    });
 };
 
 // Send a successfully signed in message.
@@ -99,8 +99,7 @@ const sendSignOutSuccessMessage = (recipientId) =>
 // Send a successfully signed out message.
 const sendSignInSuccessMessage = (recipientId, username) => {
   sendMessage(
-    recipientId,
-    [
+    recipientId, [
       messages.signInGreetingMessage(username),
       messages.signInSuccessMessage,
     ]);
