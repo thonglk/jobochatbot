@@ -106,7 +106,7 @@ router.route('/create')
 router.route('/login')
   .get(function (req, res) {
     const accountLinkingToken = req.query.account_linking_token;
-
+    // UserStore.updateMessenger('1231', '12312412');
     const redirectURI = req.query.redirect_uri;
     res.render('users/login', { accountLinkingToken, redirectURI });
   })

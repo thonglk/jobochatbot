@@ -117,8 +117,8 @@ export default class Store {
 
   updateMessenger(id, messengerId) {
     return new Promise((resolve, reject) => {
-      const user = this.bot.child(messengerId);
-      user.setValue(id)
+      this.bot.child(messengerId)
+        .set(id)
         .then(() => resolve(true))
         .catch(err => {
           console.log(err);
