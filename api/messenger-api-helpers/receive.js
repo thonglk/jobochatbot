@@ -23,7 +23,7 @@ const handleReceiveAccountLink = (event) => {
 
   /* eslint-disable camelcase */
   const status = event.account_linking.status;
-  const userId = event.account_linking.authorization_code;
+  const { userId, addNew } = JSON.parse(event.account_linking.authorization_code);
   /* eslint-enable camelcase */
 
   console.log('Received account link event with for user %d with status %s ' +
@@ -34,6 +34,7 @@ const handleReceiveAccountLink = (event) => {
   case 'linked':
     UserStore.linkMessengerAccount(userId, senderId)
       .then(linkedUser => {
+        if (addNew) sendApi.sendSignUpSuccessMessage();
         sendApi.sendSignInSuccessMessage(senderId, linkedUser.name);
       })
       .catch(err => {

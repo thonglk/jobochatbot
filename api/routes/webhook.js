@@ -47,8 +47,7 @@ router.route('/')
             receiveApi.handleReceiveMessage(messagingEvent);
           } else if (messagingEvent.account_linking) { // eslint-disable-line camelcase, max-len
             receiveApi.handleReceiveAccountLink(messagingEvent);
-          }
-          if (messagingEvent.postback) {
+          } else if (messagingEvent.postback) {
             receiveApi.handleReceivePostback(messagingEvent);
           } else {
             console.error(

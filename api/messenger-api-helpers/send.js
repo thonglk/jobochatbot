@@ -112,7 +112,13 @@ const sendSignInSuccessMessage = (recipientId, username) => {
       messages.signInSuccessMessage,
     ]);
 };
-
+// Send a successfully signed up message.
+const sendSignUpSuccessMessage = () => {
+  sendMessage(
+    recipientId, [
+      messages.signUpSuccessMessage,
+    ]);
+};
 // Send a read receipt to indicate the message has been read
 const sendReadReceipt = (recipientId) => {
   const messageData = {
