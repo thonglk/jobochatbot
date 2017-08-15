@@ -9,11 +9,14 @@ const router = express.Router({
 }); // eslint-disable-line
 
 const linkAccountToMessenger = (res, userId, redirectURI, addNew = false) => {
-  const authCode = uuid();
+  const authCode = {
+    userId,
+    addNew
+  };
 
   // UserStore.linkMessengerAccount(userId, authCode);
 
-  const redirectURISuccess = `${redirectURI}&authorization_code=${JSON.stringify({userId, addNew })}`;
+  const redirectURISuccess = `${redirectURI}&authorization_code=${JSON.stringify(authCode)}`;
 
   res.redirect(redirectURISuccess);
 };
