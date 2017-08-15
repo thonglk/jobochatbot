@@ -18,8 +18,7 @@ export default class Store {
     return new Promise((resolve, reject) => {
       this.ref.child(id).once('value')
         .then(user => {
-          console.log(user);
-          resolve(user);
+          resolve(user.val());
         })
         .catch(err => {
           console.log(err);
@@ -35,7 +34,7 @@ export default class Store {
   getAll() {
     return new Promise((resolve, reject) => {
       this.ref.once('value')
-        .then(user => resolve(user))
+        .then(user => resolve(user.val()))
         .catch(err => {
           console.log(err);
           reject(null);
@@ -138,9 +137,9 @@ export default class Store {
   has(email) {
     this.getAll()
       .then(users => {
-        if (!users.val()) return (false);
+        if (!users) return (false);
         else {
-          users.val().forEach(user => {
+          users.forEach(user => {
             if (user.email === email) return (true);
             return (false);
           });
