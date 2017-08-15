@@ -76,6 +76,7 @@ export default class Store {
             .update({
               email: username,
               name: displayName,
+              birth,
               phone,
               type: 2,
               userId: id,
@@ -83,7 +84,7 @@ export default class Store {
         })
         .then(() => {
           if (!messengerId) Promise.resolve({ userId: id, username, password, displayName, phone, birth, messengerId });
-          else return this.bot.child(messengerId).setValue(id);
+          else return this.bot.child(messengerId).set(id);
         })
         .then(() => resolve({ userId: id, username, password, displayName, phone, birth, messengerId }))
         .catch(err => {

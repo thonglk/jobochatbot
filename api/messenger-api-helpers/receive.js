@@ -24,11 +24,11 @@ const handleReceiveAccountLink = (event) => {
   /* eslint-disable camelcase */
   const status = event.account_linking.status;
   const userId = event.account_linking.authorization_code;
-  console.log(event.account_linking);
   /* eslint-enable camelcase */
 
   console.log('Received account link event with for user %d with status %s ' +
     'and user id %s ', senderId, status, userId);
+  console.log(event.account_linking);
 
   switch (status) {
   case 'linked':

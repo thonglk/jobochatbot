@@ -57,7 +57,7 @@ router.route('/create')
         },
       );
     } else {
-      UserStore.insert({ username, password, displayName, phone, birth, jobs, avatar })
+      UserStore.insert({ username, password, displayName, phone, birth })
         .then(user => {
           if (redirectURI) {
             linkAccountToMessenger(res, user.userId, redirectURI, true);

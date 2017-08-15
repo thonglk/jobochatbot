@@ -2,14 +2,6 @@ import express from 'express';
 import {
   VALIDATION_TOKEN,
 } from 'app-config';
-import {
-  receivedAuthentication,
-  receivedMessage,
-  receivedPostback,
-  receivedAccountLink,
-  receivedDeliveryConfirmation,
-  receivedMessageRead
-} from 'services/webhook-services';
 
 // ===== MESSENGER =============================================================
 import receiveApi from 'messenger-api-helpers/receive';
@@ -50,7 +42,7 @@ router.route('/')
         }
         // Iterate over each messaging event
         pageEntry.messaging.forEach((messagingEvent) => {
-          console.log({ messagingEvent });
+          console.log('Message event: ', { messagingEvent });
           if (messagingEvent.message) {
             receiveApi.handleReceiveMessage(messagingEvent);
           } else if (messagingEvent.account_linking) { // eslint-disable-line camelcase, max-len
