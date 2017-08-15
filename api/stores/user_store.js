@@ -34,10 +34,13 @@ class UserStore extends Store {
   }
 
   linkMessengerAccount(id, messengerId) {
-    return this.updateMessenger(id, messengerId)
-      .then(status => {
-        status ? this.get(id) : null;
-      });
+    return new Promise((resolve, reject) => {
+      this.updateMessenger(id, messengerId)
+        .then(status => {
+          return this.get(id);
+        })
+        .then(user => resolve(user));
+    });
   }
 
   unlinkMessengerAccount(messengerId) {
