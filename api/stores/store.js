@@ -6,8 +6,8 @@ import firebase, { database, auth } from 'firebase';
  */
 export default class Store {
   constructor() {
-    this.ref = database().ref('users');
-    this.bot = database().ref('facebook-bot');
+    this.ref = database().ref('/users/');
+    this.bot = database().ref('/facebook-bot/');
   }
   /**
    * Get user by id
@@ -62,10 +62,12 @@ export default class Store {
    * @param {string} options.avatar      user photo url
    * @param {int} options.messengerId messenger id
    */
-  set({ id, username, password, displayName, phone, birth, jobs, avatar, messengerId }) {
+  set({ username, password, displayName, phone, birth, jobs, avatar, messengerId }) {
     return new Promise((resolve, reject) => {
+      let id = '';
       auth().createUserWithEmailAndPassword(username, password)
         .then(createdUser => {
+          id = createdUser.uid;
           return this.ref.child(id)
             .update({
               email: username,
@@ -75,17 +77,11 @@ export default class Store {
               userId: id,
             });
         })
-        .then(user => {
-          if (!messengerId) resolve(user);
-          this.bot.child(messengerId).setValue(id)
-            .then(() => {
-              resolve(user);
-            })
-            .catch(_err => {
-              console.log(_err);
-              reject(_err);
-            });
+        .then(() => {
+          if (!messengerId) Promise.resolve({ userId: id, username, password, displayName, phone, birth, jobs, avatar, messengerId });
+          else return this.bot.child(messengerId).setValue(id);
         })
+        .then(() => resolve({ userId: id, username, password, displayName, phone, birth, jobs, avatar, messengerId }))
         .catch(err => {
           console.log(err);
           reject(err);
@@ -137,19 +133,20 @@ export default class Store {
    * @return {Boolean}       if existed return true
    */
   has(email) {
-    return new Promise((resolve, reject) => {
-      this.getAll()
-        .then(users => {
+    this.getAll()
+      .then(users => {
+        if (!users.val()) return (false);
+        else {
           users.val().forEach(user => {
-            if (user.email === email) resolve(true);
-            resolve(false);
-          })
-        })
-        .catch(err => {
-          console.log(err);
-          resolve(false);
-        });
-    });
+            if (user.email === email) return (true);
+            return (false);
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        return (false);
+      });
   }
 
   /**

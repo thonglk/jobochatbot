@@ -66,22 +66,39 @@ router.route('/create')
           }
         })
         .catch(err => {
-          console.log(err);
-          res.render(
-            'users/create-account', {
-              username,
-              password,
-              password2,
-              displayName,
-              phone,
-              birth,
-              jobs,
-              avatar,
-              redirectURI,
-              errorMessage: `Xin lỗi! 'Tài khoản ${username}' đã tồn tại.`,
-              errorInput: 'username',
-            },
-          );
+          if (err.code === 'auth/email-already-in-use') {
+            res.render(
+              'users/create-account', {
+                username,
+                password,
+                password2,
+                displayName,
+                phone,
+                birth,
+                jobs,
+                avatar,
+                redirectURI,
+                errorMessage: `Xin lỗi! 'Tài khoản ${username}' đã tồn tại.`,
+                errorInput: 'username',
+              },
+            );
+          } else {
+            res.render(
+              'users/create-account', {
+                username,
+                password,
+                password2,
+                displayName,
+                phone,
+                birth,
+                jobs,
+                avatar,
+                redirectURI,
+                errorMessage: err.message,
+                errorInput: 'username',
+              },
+            );
+          }
         });
     }
   });
