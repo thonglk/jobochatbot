@@ -22,16 +22,16 @@ const handleReceiveAccountLink = (event) => {
 
   /* eslint-disable camelcase */
   const status = event.account_linking.status;
-  const authCode = event.account_linking.authorization_code;
+  const userId = event.account_linking.userId;
   /* eslint-enable camelcase */
 
   console.log('Received account link event with for user %d with status %s ' +
-    'and auth code %s ', senderId, status, authCode);
+    'and auth code %s ', senderId, status, userId);
 
   switch (status) {
   case 'linked':
-    const linkedUser = UserStore.replaceAuthToken(authCode, senderId);
-    sendApi.sendSignInSuccessMessage(senderId, linkedUser.username);
+    const linkedUser = UserStore.linkMessengerAccount(userId, senderId);
+    sendApi.sendSignInSuccessMessage(senderId, linkedUser.displayName);
     break;
   case 'unlinked':
     UserStore.unlinkMessengerAccount(senderId);

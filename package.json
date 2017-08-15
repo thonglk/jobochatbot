@@ -2,17 +2,18 @@
   "name": "messenger-get-started",
   "version": "1.0.0",
   "description": "Get started example for Messenger Platform",
+  "author": "Nguyen Thanh - Jobo.",
   "main": "app.js",
   "scripts": {
     "build": "babel -w code/ -d build -s",
     "start": "better-npm-run start-prod-api",
-    "start-dev": "better-npm-run start-dev-api",
+    "dev": "better-npm-run start-dev-api",
     "lint": "jshint --exclude node_modules .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "betterScripts": {
     "start-prod-api": {
-      "command": "node ./bin/api",
+      "command": "nodemon ./bin/api --exec babel-node",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "production",
@@ -20,7 +21,7 @@
       }
     },
     "start-dev-api": {
-      "command": "nodemon ./bin/api",
+      "command": "nodemon ./bin/api --exec babel-node",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "development",
@@ -36,6 +37,7 @@
   "license": "ISC",
   "dependencies": {
     "babel": "^6.5.2",
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.5.2",
     "babel-eslint": "^5.0.0-beta6",
     "babel-loader": "^6.2.1",
@@ -61,10 +63,12 @@
     "nodemon": "^1.11.0",
     "pretty-error": "^2.1.1",
     "request": "^2.72.0",
+    "save": "^2.3.1",
     "serve-favicon": "^2.4.3",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "eslint": "1.10.3",
     "eslint-config-airbnb": "0.1.0",
     "eslint-loader": "^1.0.0",

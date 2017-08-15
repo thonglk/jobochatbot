@@ -1,10 +1,4 @@
-/**
- * Copyright 2017-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
+import firebase, { database, auth } from 'firebase';
 /**
  * Base store class built around ES6 Weak Map
  * @export
@@ -12,59 +6,168 @@
  */
 export default class Store {
   constructor() {
-    this.data = new Map();
+    this.ref = database().ref('users');
+    this.bot = database().ref('facebook-bot');
   }
-
   /**
-   * Get item in store by case insensitive id
-   *
-   * @param {String} id Unique key for retrieval
-   * @returns {Object} Value found in store
+   * Get user by id
+   * @param  {firebase key} id user's firebase key
+   * @return {promise}    firebase promise
    */
   get(id) {
-    return this.data.get(id.toLowerCase());
+    return new Promise((resolve, reject) => {
+      this.ref.child(id).once('value')
+        .then(user => resolve(user))
+        .catch(err => {
+          console.log(err);
+          reject(null);
+        });
+    });
   }
 
   /**
-   * Set item in store by case insensitive id
-   *
-   * @param {String} id Unique key for retrieval
-   * @param {Object} value Object to add to store
-   * @returns {Object} Value set in store
+   * Get all user
+   * @return {promise} firebase promise
    */
-  set(id, value) {
-    return this.data.set(id.toLowerCase(), value);
+  getAll() {
+    return new Promise((resolve, reject) => {
+      this.ref.once('value')
+        .then(user => resolve(user))
+        .catch(err => {
+          console.log(err);
+          reject(null);
+        });
+    });
   }
 
+  getByMessenger(messengerId) {
+    return new Promise((resolve, reject) => {
+      this.bot.child(messengerId)
+        .then(userId => resolve(userId))
+        .catch(err => {
+          console.log(err);
+          reject(null);
+        });
+    });
+  }
   /**
-   * Check if item in store by case insensitive id
-   *
-   * @param {String} id Unique key for retrieval
-   * @returns {Boolean} true found in store
+   * Set new user
+   * @param {firebase key} options.id          firebase key
+   * @param {string} options.username    user email
+   * @param {string} options.password    user password
+   * @param {string} options.displayName user display name
+   * @param {string} options.phone       phone number
+   * @param {date} options.birth       user birthday
+   * @param {array} options.jobs        user jobs
+   * @param {string} options.avatar      user photo url
+   * @param {int} options.messengerId messenger id
    */
-  has(id) {
-    return this.data.has(id.toLowerCase());
+  set({ id, username, password, displayName, phone, birth, jobs, avatar, messengerId }) {
+    return new Promise((resolve, reject) => {
+      auth().createUserWithEmailAndPassword(username, password)
+        .then(createdUser => {
+          return this.ref.child(id)
+            .update({
+              email: username,
+              name: displayName,
+              phone,
+              type: 2,
+              userId: id,
+            });
+        })
+        .then(user => {
+          if (!messengerId) resolve(user);
+          this.bot.child(messengerId).setValue(id)
+            .then(() => {
+              resolve(user);
+            })
+            .catch(_err => {
+              console.log(_err);
+              reject(_err);
+            });
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
+    });
   }
 
   /**
-   * Delete item in store by case insensitive id
-   *
-   * @param {String} id Unique key for retrieval
-   * @returns {Object} deleted object
+   * Update user
+   * @param  {[type]} options.id          [description]
+   * @param  {[type]} options.displayName [description]
+   * @param  {[type]} options.phone       [description]
+   * @param  {[type]} options.birth       [description]
+   * @param  {[type]} options.jobs        [description]
+   * @param  {[type]} options.avatar      [description]
+   * @return {[type]}                     [description]
+   */
+  update({ id, displayName, phone, birth, jobs, avatar }) {
+    return new Promise((resolve, reject) => {
+      const user = this.ref.child(id);
+      user.set({
+          name: displayName || user.name,
+          phone: phone || user.phone,
+          birth: birth || user.birth
+        })
+        .then(() => resolve(true))
+        .catch(err => {
+          console.log(err);
+          resolve(false);
+        });
+    });
+  }
+
+  updateMessenger(id, messengerId) {
+    return new Promise((resolve, reject) => {
+      const user = this.bot.child(messengerId);
+      user.setValue(id)
+        .then(() => resolve(true))
+        .catch(err => {
+          console.log(err);
+          resolve(false);
+        });
+    });
+  }
+
+  /**
+   * check existed user
+   * @param  {string}  email email
+   * @return {Boolean}       if existed return true
+   */
+  has(email) {
+    return new Promise((resolve, reject) => {
+      this.getAll()
+        .then(users => {
+          users.val().forEach(user => {
+            if (user.email === email) resolve(true);
+            resolve(false);
+          })
+        })
+        .catch(err => {
+          console.log(err);
+          resolve(false);
+        });
+    });
+  }
+
+  /**
+   * Delete a user
+   * @param  {firebase key} id user id
+   * @return {Boolean}    if deleted return true
    */
   delete(id) {
-    const deleted = this.get(id);
-    this.data.delete(id);
-    return {deleted};
+    return new Promise((resolve, reject) => {
+      this.ref.child(id).remove()
+        .then(() => auth().currentUser)
+        .then(() => resolve(true))
+        .catch(err => {
+          console.log(err);
+          resolve(false);
+        });
+    });
   }
-
-  /**
-   * Check if item in store by case insensitive id
-   *
-   * @returns {Object} instance of class
-   */
-  reset() {
-    this.data.clear();
-    return this;
-  }
+  //Storage firebase...
+  ////.....
 }

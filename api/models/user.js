@@ -1,18 +1,18 @@
-/**
- * Copyright 2017-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
+import firebase, { database } from 'firebase';
 /**
  * User Model
  * @class User
  */
 export default class User {
-  constructor(username, password, messengerId) {
+  constructor({username, password, displayName, phone, birth, jobs, avatar, messengerId}) {
+    this.id = database().ref().child('users').push().key;
     this.username = username;
     this.password = password;
+    this.displayName = displayName;
+    this.phone = phone;
+    this.birth = birth;
+    this.jobs = jobs;
+    this.avatar = avatar;
     this.messengerId = messengerId;
   }
 }

@@ -1,5 +1,6 @@
 import express from 'express';
 import uuid from 'uuid';
+import firebase, { auth, database } from 'firebase';
 // ===== STORES ================================================================
 import UserStore from 'stores/user_store';
 
@@ -7,12 +8,12 @@ const router = express.Router({
   mergeParams: true
 }); // eslint-disable-line
 
-const linkAccountToMessenger = (res, username, redirectURI) => {
+const linkAccountToMessenger = (res, userId, redirectURI) => {
   const authCode = uuid();
 
-  UserStore.linkMessengerAccount(username, authCode);
+  UserStore.linkMessengerAccount(userId, authCode);
 
-  const redirectURISuccess = `${redirectURI}&authorization_code=${authCode}`;
+  const redirectURISuccess = `${redirectURI}&authorization_code=${authCode}&userId=${userId}`;
 
   res.redirect(redirectURISuccess);
 };
@@ -21,62 +22,92 @@ const linkAccountToMessenger = (res, username, redirectURI) => {
  * GET Create user account view
  */
 router.route('/create')
-.get(function(req, res) {
-  const accountLinkingToken = req.query.account_linking_token;
-  const redirectURI = req.query.redirect_uri;
+  .get(function (req, res) {
+    const accountLinkingToken = req.query.account_linking_token;
+    const redirectURI = req.query.redirect_uri;
 
-  res.render('users/create-account', {accountLinkingToken, redirectURI});
-})
-.post(function(req, res) {
-  const {username, password, password2, redirectURI} = req.body;
-  if (UserStore.has(username)) {
-    res.render(
-      'users/create-account',
-      {
-        username,
-        password,
-        password2,
-        redirectURI,
-        errorMessage: `Xin lỗi! 'Tài khoản ${username}' đã tồn tại.`,
-        errorInput: 'username',
-      },
-    );
-  } else {
-    UserStore.insert(username, password);
-
-    if (redirectURI) {
-      linkAccountToMessenger(res, username, redirectURI);
-    } else {
-      res.render('users/create-account-success', {username});
-    }
-  }
-});
-
-router.route('/login')
-.get(function(req, res) {
-
-  const accountLinkingToken = req.query.account_linking_token;
-
-  const redirectURI = req.query.redirect_uri;
-
-  res.render('users/login', {accountLinkingToken, redirectURI});
-})
-.post(function(req, res) {
-  const {username, password, redirectURI} = req.body;
-  const userLogin = UserStore.get(username);
-  if (!userLogin || userLogin.password !== password) {
-    res.render('users/login', {
-      redirectURI,
+    res.render('users/create-account', { accountLinkingToken, redirectURI });
+  })
+  .post(function (req, res) {
+    const {
       username,
       password,
-      errorMessage: !userLogin
-        ? 'Tên tài khoản bạn vừa nhập chưa đúng, vui lòng nhập lại'
-        : 'Mật khẩu chưa đúng, vui lòng thử lại',
-      errorInput: !userLogin ? 'username' : 'password',
-    });
-  } else {
-    linkAccountToMessenger(res, userLogin.username, redirectURI);
-  }
-});
+      password2,
+      displayName,
+      phone,
+      birth,
+      jobs,
+      avatar,
+      redirectURI
+    } = req.body;
+    if (UserStore.has(username)) {
+      res.render(
+        'users/create-account', {
+          username,
+          password,
+          password2,
+          displayName,
+          phone,
+          birth,
+          jobs,
+          avatar,
+          redirectURI,
+          errorMessage: `Xin lỗi! 'Tài khoản ${username}' đã tồn tại.`,
+          errorInput: 'username',
+        },
+      );
+    } else {
+      UserStore.insert({ username, password, displayName, phone, birth, jobs, avatar })
+        .then(user => {
+          if (redirectURI) {
+            linkAccountToMessenger(res, user.userId, redirectURI);
+          } else {
+            res.render('users/create-account-success', { displayName });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          res.render(
+            'users/create-account', {
+              username,
+              password,
+              password2,
+              displayName,
+              phone,
+              birth,
+              jobs,
+              avatar,
+              redirectURI,
+              errorMessage: `Xin lỗi! 'Tài khoản ${username}' đã tồn tại.`,
+              errorInput: 'username',
+            },
+          );
+        });
+    }
+  });
+
+router.route('/login')
+  .get(function (req, res) {
+    const accountLinkingToken = req.query.account_linking_token;
+
+    const redirectURI = req.query.redirect_uri;
+    res.render('users/login', { accountLinkingToken, redirectURI });
+  })
+  .post(function (req, res) {
+    const { username, password, redirectURI } = req.body;
+    auth().signInWithEmailAndPassword(username, password)
+      .then(userLogin => {
+        linkAccountToMessenger(res, userLogin.userId, redirectURI);
+      })
+      .catch(err => {
+        res.render('users/login', {
+          redirectURI,
+          username,
+          password,
+          errorMessage: 'Tên tài khoản hoặc mật khẩu chưa đúng!',
+          errorInput: 'username',
+        });
+      });
+  });
 
 export default router;

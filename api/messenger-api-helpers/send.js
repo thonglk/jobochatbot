@@ -14,7 +14,7 @@ import api from './api';
 import messages from './messages';
 
 // ===== STORES ================================================================
-import UserStore from '../stores/user_store';
+import UserStore from 'stores/user_store';
 
 // Turns typing indicator on.
 const typingOn = (recipientId) => {

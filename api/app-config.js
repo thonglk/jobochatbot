@@ -1,5 +1,46 @@
 import config from 'config';
 
+const FIRE_BASE = {
+  "apiKey": "AIzaSyC1UNLtAqU5uwOMjHEQnCdvw4K0A93hfsA",
+  "authDomain": "jobo-app.firebaseapp.com",
+  "databaseURL": "https://jobo-app.firebaseio.com",
+  "projectId": "jobo-app",
+  "storageBucket": "jobo-app.appspot.com",
+  "messagingSenderId": "484089476261"
+}
+
+/*
+ * Be sure to setup your config values before running this code. You can
+ * set them using environment variables or modifying the config file in /config.
+ *
+ */
+
+// App Secret can be retrieved from the App Dashboard
+const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ?
+    process.env.MESSENGER_APP_SECRET :
+    config.get('appSecret');
+
+// Arbitrary value used to validate a webhook
+const VALIDATION_TOKEN = (process.env.MESSENGER_VALIDATION_TOKEN) ?
+    (process.env.MESSENGER_VALIDATION_TOKEN) :
+    config.get('validationToken');
+
+// Generate a page access token for your page from the App Dashboard
+const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
+    (process.env.MESSENGER_PAGE_ACCESS_TOKEN) :
+    config.get('pageAccessToken');
+
+// URL where the app is running (include protocol). Used to point to scripts and
+// assets located at this address.
+const SERVER_URL = (process.env.SERVER_URL) ?
+    (process.env.SERVER_URL) :
+    config.get('serverURL');
+
+if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
+    console.error("Missing config values");
+    process.exit(1);
+}
+
 const CONFIG = {
     'UpdateAt': "2017-04-10T04:44:21.253Z",
     'Location': false,
@@ -223,46 +264,6 @@ const CONFIG = {
             "price": "1.000.000 đ/tháng"
         }
     }
-}
-const FIRE_BASE = {
-  "apiKey": "AIzaSyC1UNLtAqU5uwOMjHEQnCdvw4K0A93hfsA",
-  "authDomain": "jobo-app.firebaseapp.com",
-  "databaseURL": "https://jobo-app.firebaseio.com",
-  "projectId": "jobo-app",
-  "storageBucket": "jobo-app.appspot.com",
-  "messagingSenderId": "484089476261"
-}
-
-/*
- * Be sure to setup your config values before running this code. You can
- * set them using environment variables or modifying the config file in /config.
- *
- */
-
-// App Secret can be retrieved from the App Dashboard
-const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ?
-    process.env.MESSENGER_APP_SECRET :
-    config.get('appSecret');
-
-// Arbitrary value used to validate a webhook
-const VALIDATION_TOKEN = (process.env.MESSENGER_VALIDATION_TOKEN) ?
-    (process.env.MESSENGER_VALIDATION_TOKEN) :
-    config.get('validationToken');
-
-// Generate a page access token for your page from the App Dashboard
-const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
-    (process.env.MESSENGER_PAGE_ACCESS_TOKEN) :
-    config.get('pageAccessToken');
-
-// URL where the app is running (include protocol). Used to point to scripts and
-// assets located at this address.
-const SERVER_URL = (process.env.SERVER_URL) ?
-    (process.env.SERVER_URL) :
-    config.get('serverURL');
-
-if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
-    console.error("Missing config values");
-    process.exit(1);
 }
 
 module.exports = { CONFIG, APP_SECRET, VALIDATION_TOKEN, PAGE_ACCESS_TOKEN, SERVER_URL, FIRE_BASE };
