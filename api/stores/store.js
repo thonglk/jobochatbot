@@ -47,7 +47,7 @@ export default class Store {
   getByMessenger(messengerId) {
     return new Promise((resolve, reject) => {
       this.bot.child(messengerId)
-        .then(userId => resolve(userId))
+        .then(userId => resolve(userId.val()))
         .catch(err => {
           console.log(err);
           resolve(null);

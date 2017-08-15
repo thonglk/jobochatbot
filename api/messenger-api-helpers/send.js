@@ -75,13 +75,16 @@ const sendLoggedOutWelcomeMessage = (recipientId) => {
 const sendLoggedInWelcomeMessage = (recipientId, username) => {
   sendMessage(
     recipientId, [
-      messages.napMessage,
       messages.loggedInMessage(username),
     ]);
 };
 
 // Send a different Welcome message based on if the user is logged in.
 const sendWelcomeMessage = (recipientId) => {
+  sendMessage(
+    recipientId, [
+      messages.napMessage
+    ]);
   UserStore.getByMessengerId(recipientId)
     .then(userProfile => {
       if (!isEmpty(userProfile)) {
