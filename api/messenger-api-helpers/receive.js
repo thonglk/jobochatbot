@@ -10,6 +10,7 @@ import sendApi from './send';
 
 // ===== STORES ================================================================
 import UserStore from 'stores/user_store';
+import textMessage from 'stores/text-messages';
 
 /*
  * Account Link Event - This event is called when the Link Account
@@ -39,7 +40,7 @@ const handleReceiveAccountLink = (event) => {
         console.log(err);
         sendMessage(
           senderId, [{
-            text: 'Đăng nhập không thành công. Vui lòng thử lại!'
+            text: textMessage.loginFail
           }]);
       });
     break;
@@ -48,7 +49,7 @@ const handleReceiveAccountLink = (event) => {
       .then(status => {
         status ? sendApi.sendSignOutSuccessMessage(senderId) : sendMessage(
           senderId, [{
-            text: 'Đăng xuất không thành công. Vui lòng thử lại!'
+            text: textMessage.logoutFail
           }]);
       });
     break;

@@ -1,5 +1,6 @@
 // ===== APP CONFIG ============================================================
 import { SERVER_URL } from 'app-config.js';
+import textMessage from 'stores/text-messages';
 
 /**
  * Account Link Button
@@ -23,7 +24,7 @@ const createAccountMessage = {
     type: 'template',
     payload: {
       template_type: 'button',
-      text: 'Để sử dụng ứng dụng của Jobo bạn cần phải đăng nhập.',
+      text: textMessage.createAccount,
       buttons: [signInButton],
     },
   },
@@ -37,7 +38,7 @@ const createAccountMessage = {
  */
 const signInGreetingMessage = (username) => {
   return {
-    text: `Xin chào ${username}!`,
+    text: textMessage.hello(username),
   };
 };
 
@@ -52,7 +53,7 @@ const signInSuccessMessage = {
     type: 'template',
     payload: {
       template_type: 'button',
-      text: 'Bây giờ bạn có thể tham gia tìm kiếm các việc làm bạn muốn.',
+      text: textMessage.signInSuccess,
       buttons: [signOutButton],
     },
   },
@@ -66,7 +67,7 @@ const signOutSuccessMessage = {
     type: 'template',
     payload: {
       template_type: 'button',
-      text: 'Bạn đã đăng xuất khỏi ứng dụng Jobo.',
+      text: textMessage.signOutSuccess,
       buttons: [signInButton],
     },
   },
@@ -84,7 +85,7 @@ const loggedInMessage = (username) => {
       type: 'template',
       payload: {
         template_type: 'button',
-        text: `Bạn đang đăng nhập với tên ${username}.`,
+        text: textMessage.loggedIn(username),
         buttons: [signOutButton],
       },
     },
@@ -95,7 +96,7 @@ const loggedInMessage = (username) => {
  * Fun message for saying hello to a signed in user.
  */
 const napMessage = {
-  text: 'Cám ơn bạn đã gọi tôi dậy, bạn vui lòng chờ trong giây lát!',
+  text: textMessage.napMessage,
 };
 
 /**
