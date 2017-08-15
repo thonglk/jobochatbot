@@ -24,7 +24,7 @@ const createAccountMessage = {
     type: 'template',
     payload: {
       template_type: 'button',
-      text: 'textMessages.createAccount',
+      text: textMessages.createAccount,
       buttons: [signInButton],
     },
   },

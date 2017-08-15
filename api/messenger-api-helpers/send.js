@@ -68,7 +68,7 @@ const sendGetStartWelcomeMessage = (recipientId) => {
     recipientId, [{
         text: textMessages.welcome,
       },
-      message.createAccountMessage,
+      messages.createAccountMessage,
     ]
   );
 };
