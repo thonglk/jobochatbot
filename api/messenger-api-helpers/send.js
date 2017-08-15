@@ -62,15 +62,22 @@ const sendMessage = (recipientId, messagePayloads) => {
 // Send a welcome message for a non signed-in user.
 const sendLoggedOutWelcomeMessage = (recipientId) => {
   sendMessage(
-    recipientId, [{
-        text: 'Xin chào! 👋 Mừng bạn đến với ứng dụng hỗ trợ tìm việc làm Jobo!' +
-          ' https://joboapp.com',
-      },
-      messages.createAccountMessage,
+    recipientId, [
+      messages.signOutSuccessMessage,
     ]
   );
 };
 
+// Send a welcome message for a non signed-in user.
+const sendGetStartWelcomeMessage = (recipientId) => {
+  sendMessage(
+    recipientId, [{
+        text: 'Xin chào! 👋 Mừng bạn đến với ứng dụng hỗ trợ tìm việc làm Jobo!' +
+          ' https://joboapp.com',
+      }
+    ]
+  );
+};
 // Send a welcome message for a signed in user.
 const sendLoggedInWelcomeMessage = (recipientId, username) => {
   sendMessage(
@@ -80,7 +87,7 @@ const sendLoggedInWelcomeMessage = (recipientId, username) => {
 };
 
 // Send a different Welcome message based on if the user is logged in.
-const sendWelcomeMessage = (recipientId) => {
+const sendReturnMessage = (recipientId) => {
   sendMessage(
     recipientId, [
       messages.napMessage
@@ -93,6 +100,10 @@ const sendWelcomeMessage = (recipientId) => {
         sendLoggedOutWelcomeMessage(recipientId);
       }
     });
+};
+
+const sendWelcomeMessage = (recipientId) => {
+  sendGetStartWelcomeMessage(recipientId);
 };
 
 // Send a successfully signed in message.
