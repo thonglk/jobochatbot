@@ -33,7 +33,7 @@ const handleReceiveAccountLink = (event) => {
   case 'linked':
     UserStore.linkMessengerAccount(userId, senderId)
       .then(linkedUser => {
-        sendApi.sendSignInSuccessMessage(senderId, linkedUser.displayName);
+        sendApi.sendSignInSuccessMessage(senderId, linkedUser.name);
       })
       .catch(err => {
         console.log(err);
