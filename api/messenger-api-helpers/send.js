@@ -74,7 +74,8 @@ const sendGetStartWelcomeMessage = (recipientId) => {
     recipientId, [{
         text: 'Xin chào! 👋 Mừng bạn đến với ứng dụng hỗ trợ tìm việc làm Jobo!' +
           ' https://joboapp.com',
-      }
+      },
+      message.createAccountMessage,
     ]
   );
 };
