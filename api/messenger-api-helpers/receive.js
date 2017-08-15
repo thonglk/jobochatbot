@@ -22,7 +22,7 @@ const handleReceiveAccountLink = (event) => {
 
   /* eslint-disable camelcase */
   const status = event.account_linking.status;
-  const userId = event.account_linking.userId;
+  const userId = event.account_linking.authorization_code;
   console.log(event);
   /* eslint-enable camelcase */
 

@@ -13,7 +13,7 @@ const linkAccountToMessenger = (res, userId, redirectURI) => {
 
   UserStore.linkMessengerAccount(userId, authCode);
 
-  const redirectURISuccess = `${redirectURI}&authorization_code=${authCode}&userId=${userId}`;
+  const redirectURISuccess = `${redirectURI}&authorization_code=${userId}&userId=${userId}`;
 
   res.redirect(redirectURISuccess);
 };
