@@ -30,12 +30,26 @@ const handleReceiveAccountLink = (event) => {
 
   switch (status) {
   case 'linked':
-    const linkedUser = UserStore.linkMessengerAccount(userId, senderId);
-    sendApi.sendSignInSuccessMessage(senderId, linkedUser.displayName);
+    UserStore.linkMessengerAccount(userId, senderId)
+      .then(linkedUser => {
+        sendApi.sendSignInSuccessMessage(senderId, linkedUser.displayName);
+      })
+      .catch(err => {
+        console.log(err);
+        sendMessage(
+          senderId, {
+            text: 'Đăng nhập không thành công. Vui lòng thử lại!'
+          });
+      });
     break;
   case 'unlinked':
-    UserStore.unlinkMessengerAccount(senderId);
-    sendApi.sendSignOutSuccessMessage(senderId);
+    UserStore.unlinkMessengerAccount(senderId)
+      .then(status => {
+        status ? sendApi.sendSignOutSuccessMessage(senderId) : sendMessage(
+          senderId, {
+            text: 'Đăng xuất không thành công. Vui lòng thử lại!'
+          });
+      });
     break;
   default:
     break;
@@ -56,7 +70,7 @@ const handleReceivePostback = (event) => {
    * actions to be a string that represents a JSON object
    * containing `type` and `data` properties. EG:
    */
-  const {type} = JSON.parse(event.postback.payload);
+  const { type } = JSON.parse(event.postback.payload);
   const senderId = event.sender.id;
 
   // Perform an action based on the type of payload received.
