@@ -134,6 +134,7 @@ const sendReadReceipt = (recipientId) => {
 export default {
   sendMessage,
   sendWelcomeMessage,
+  sendReturnMessage,
   sendSignOutSuccessMessage,
   sendSignInSuccessMessage,
   sendReadReceipt,
