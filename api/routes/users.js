@@ -16,7 +16,7 @@ const linkAccountToMessenger = (res, userId, redirectURI, addNew = false) => {
 
   // UserStore.linkMessengerAccount(userId, authCode);
 
-  const redirectURISuccess = `${redirectURI}&authorization_code=${JSON.stringify(authCode)}`;
+  const redirectURISuccess = `${redirectURI}&authorization_code=${userId}`;
 
   res.redirect(redirectURISuccess);
 };
