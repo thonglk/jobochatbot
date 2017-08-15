@@ -1,6 +1,6 @@
 // ===== APP CONFIG ============================================================
 import { SERVER_URL } from 'app-config.js';
-import textMessage from 'stores/text-messages';
+import textMessages from 'stores/text-messages';
 
 /**
  * Account Link Button
@@ -24,7 +24,7 @@ const createAccountMessage = {
     type: 'template',
     payload: {
       template_type: 'button',
-      text: textMessage.createAccount,
+      text: 'textMessages.createAccount',
       buttons: [signInButton],
     },
   },
@@ -38,7 +38,7 @@ const createAccountMessage = {
  */
 const signInGreetingMessage = (username) => {
   return {
-    text: textMessage.hello(username),
+    text: textMessages.hello(username),
   };
 };
 
@@ -53,7 +53,7 @@ const signInSuccessMessage = {
     type: 'template',
     payload: {
       template_type: 'button',
-      text: textMessage.signInSuccess,
+      text: textMessages.signInSuccess,
       buttons: [signOutButton],
     },
   },
@@ -67,7 +67,7 @@ const signOutSuccessMessage = {
     type: 'template',
     payload: {
       template_type: 'button',
-      text: textMessage.signOutSuccess,
+      text: textMessages.signOutSuccess,
       buttons: [signInButton],
     },
   },
@@ -85,7 +85,7 @@ const loggedInMessage = (username) => {
       type: 'template',
       payload: {
         template_type: 'button',
-        text: textMessage.loggedIn(username),
+        text: textMessages.loggedIn(username),
         buttons: [signOutButton],
       },
     },
@@ -96,7 +96,7 @@ const loggedInMessage = (username) => {
  * Fun message for saying hello to a signed in user.
  */
 const napMessage = {
-  text: textMessage.napMessage,
+  text: textMessages.napMessage,
 };
 
 /**

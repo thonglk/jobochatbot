@@ -1,6 +1,7 @@
 import express from 'express';
 import uuid from 'uuid';
 import firebase, { auth, database } from 'firebase';
+import textMessage from 'stores/text-messages';
 // ===== STORES ================================================================
 import UserStore from 'stores/user_store';
 
@@ -107,6 +108,7 @@ router.route('/login')
   .get(function (req, res) {
     const accountLinkingToken = req.query.account_linking_token;
     // UserStore.getByMessengerId(1747394891967196).then(user => console.log(user));
+    console.log(textMessage.welcome);
     const redirectURI = req.query.redirect_uri;
     res.render('users/login', { accountLinkingToken, redirectURI });
   })

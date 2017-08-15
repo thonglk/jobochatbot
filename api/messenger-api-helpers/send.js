@@ -1,7 +1,7 @@
 // ===== LODASH ================================================================
 import castArray from 'lodash/castArray';
 import isEmpty from 'lodash/isEmpty';
-import textMessage from 'stores/text-messages';
+import textMessages from 'stores/text-messages';
 
 // ===== MESSENGER =============================================================
 import api from './api';
@@ -66,7 +66,7 @@ const sendLoggedOutWelcomeMessage = (recipientId) => {
 const sendGetStartWelcomeMessage = (recipientId) => {
   sendMessage(
     recipientId, [{
-        text: textMessage.welcome,
+        text: textMessages.welcome,
       },
       message.createAccountMessage,
     ]
