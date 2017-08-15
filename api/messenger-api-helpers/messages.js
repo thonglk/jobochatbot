@@ -59,6 +59,9 @@ const signInSuccessMessage = {
   },
 };
 
+const signUpSuccessMessage = {
+  text: textMessages.signUpSuccess
+}
 /**
  * Message that informs the user they've been succesfully logged out.
  */

@@ -53,6 +53,15 @@ block content
               if errorInput === 'displayName'
                 img(class='statusIcon warning' src='/images/warning.svg')
 
+          fieldset(id='birthField')
+            div(class='input')
+              label(for='birth') Ngày sinh
+                span(style='color: #f00; padding: 3px; font-size: 14px;') *
+              input(class='required',id='birth',type='date',value=name,placeholder='Nhập ngày sinh',name='birth')
+            div(class='inputStatus')
+              if errorInput === 'birth'
+                img(class='statusIcon warning' src='/images/warning.svg')
+
           fieldset(id='phoneField')
             div(class='input')
               label(for='phone') Số điện thoại
@@ -69,23 +78,6 @@ block content
               input(class='required',id='address',type='text',value=address,placeholder='Nhập địa chỉ',name='address')
             div(class='inputStatus')
               if errorInput === 'address'
-                img(class='statusIcon warning' src='/images/warning.svg')
-          //- Jobs
-          fieldset(id='jobsField')
-            div(class='input')
-              label(for='jobs') Công việc mong muốn
-                span(style='color: #f00; padding: 3px; font-size: 14px;') *
-              input(class='required',id='jobs',type='text',value=jobs,placeholder='Chọn công viêc mong muốn',name='jobs')
-            div(class='inputStatus')
-              if errorInput === 'jobs'
-                img(class='statusIcon warning' src='/images/warning.svg')
-          //- Avatar
-          fieldset(id='avatarField')
-            div(class='input')
-              label(for='avatar') Hình đại diện
-              input(class='',id='avatar',type='text',value=avatar,placeholder='Hình đại diện',name='avatar')
-            div(class='inputStatus')
-              if errorInput === 'avatar'
                 img(class='statusIcon warning' src='/images/warning.svg')
 
           input(type='hidden' name='accountLinkingToken' value='#{accountLinkingToken}')

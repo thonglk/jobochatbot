@@ -1,7 +1,6 @@
 import express from 'express';
 import uuid from 'uuid';
 import firebase, { auth, database } from 'firebase';
-import textMessage from 'stores/text-messages';
 // ===== STORES ================================================================
 import UserStore from 'stores/user_store';
 
@@ -9,7 +8,7 @@ const router = express.Router({
   mergeParams: true
 }); // eslint-disable-line
 
-const linkAccountToMessenger = (res, userId, redirectURI) => {
+const linkAccountToMessenger = (res, userId, redirectURI, addNew = false) => {
   const authCode = uuid();
 
   // UserStore.linkMessengerAccount(userId, authCode);
@@ -61,7 +60,7 @@ router.route('/create')
       UserStore.insert({ username, password, displayName, phone, birth, jobs, avatar })
         .then(user => {
           if (redirectURI) {
-            linkAccountToMessenger(res, user.userId, redirectURI);
+            linkAccountToMessenger(res, user.userId, redirectURI, true);
           } else {
             res.render('users/create-account-success', { displayName });
           }
@@ -108,7 +107,6 @@ router.route('/login')
   .get(function (req, res) {
     const accountLinkingToken = req.query.account_linking_token;
     // UserStore.getByMessengerId(1747394891967196).then(user => console.log(user));
-    console.log(textMessage.welcome);
     const redirectURI = req.query.redirect_uri;
     res.render('users/login', { accountLinkingToken, redirectURI });
   })

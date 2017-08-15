@@ -11,15 +11,13 @@ import User from 'models/user';
  * Stores User data
  */
 class UserStore extends Store {
-  insert({ username, password, displayName, phone, birth, jobs, avatar, messengerId }) {
+  insert({ username, password, displayName, phone, birth, messengerId }) {
     const user = new User({
       username,
       password,
       displayName,
       phone,
       birth,
-      jobs,
-      avatar,
       messengerId,
     });
     return this.set(user);

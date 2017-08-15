@@ -66,7 +66,7 @@ export default class Store {
    * @param {string} options.avatar      user photo url
    * @param {int} options.messengerId messenger id
    */
-  set({ username, password, displayName, phone, birth, jobs, avatar, messengerId }) {
+  set({ username, password, displayName, phone, birth, messengerId }) {
     return new Promise((resolve, reject) => {
       let id = '';
       auth().createUserWithEmailAndPassword(username, password)
@@ -82,10 +82,10 @@ export default class Store {
             });
         })
         .then(() => {
-          if (!messengerId) Promise.resolve({ userId: id, username, password, displayName, phone, birth, jobs, avatar, messengerId });
+          if (!messengerId) Promise.resolve({ userId: id, username, password, displayName, phone, birth, messengerId });
           else return this.bot.child(messengerId).setValue(id);
         })
-        .then(() => resolve({ userId: id, username, password, displayName, phone, birth, jobs, avatar, messengerId }))
+        .then(() => resolve({ userId: id, username, password, displayName, phone, birth, messengerId }))
         .catch(err => {
           console.log(err);
           reject(err);
@@ -103,7 +103,7 @@ export default class Store {
    * @param  {[type]} options.avatar      [description]
    * @return {[type]}                     [description]
    */
-  update({ id, displayName, phone, birth, jobs, avatar }) {
+  update({ id, displayName, phone, birth }) {
     return new Promise((resolve, reject) => {
       const user = this.ref.child(id);
       user.set({
