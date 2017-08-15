@@ -16,6 +16,7 @@ export default class Store {
    */
   get(id) {
     return new Promise((resolve, reject) => {
+      if (!id) resolve(null);
       this.ref.child(id).once('value')
         .then(user => {
           console.log(user.val());
@@ -49,7 +50,7 @@ export default class Store {
         .then(userId => resolve(userId))
         .catch(err => {
           console.log(err);
-          reject(null);
+          resolve(null);
         });
     });
   }

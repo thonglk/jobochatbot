@@ -25,11 +25,19 @@ class UserStore extends Store {
     return this.set(user);
   }
 
+  getByMessengerId(messengerId) {
+    return this.getByMessenger(messengerId)
+      .then(userId => {
+        return this.get(userId);
+      })
+      .then(user => user);
+  }
+
   linkMessengerAccount(id, messengerId) {
     return this.updateMessenger(id, messengerId)
-    .then(status => {
-      status ? this.get(id) : null;
-    });
+      .then(status => {
+        status ? this.get(id) : null;
+      });
   }
 
   unlinkMessengerAccount(messengerId) {

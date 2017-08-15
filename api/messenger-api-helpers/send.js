@@ -86,7 +86,7 @@ const sendLoggedInWelcomeMessage = (recipientId, username) => {
 const sendWelcomeMessage = (recipientId) => {
   const userProfile = UserStore.getByMessengerId(recipientId);
   if (!isEmpty(userProfile)) {
-    sendLoggedInWelcomeMessage(recipientId, userProfile.username);
+    sendLoggedInWelcomeMessage(recipientId, userProfile.name);
   } else {
     sendLoggedOutWelcomeMessage(recipientId);
   }
