@@ -25,10 +25,10 @@ const handleReceiveAccountLink = (event) => {
   const status = event.account_linking.status;
   // const { userId, addNew } = JSON.parse(event.account_linking.authorization_code);
   /* eslint-enable camelcase */
+  console.log(event.account_linking.authorization_code);
 
   console.log('Received account link event with for user %d with status %s ' +
     'and user id %s ', senderId, status, userId);
-  console.log(event.account_linking.authorization_code);
 
   switch (status) {
   case 'linked':
