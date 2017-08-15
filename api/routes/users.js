@@ -114,7 +114,7 @@ router.route('/login')
     const { username, password, redirectURI } = req.body;
     auth().signInWithEmailAndPassword(username, password)
       .then(userLogin => {
-        linkAccountToMessenger(res, userLogin.userId, redirectURI);
+        linkAccountToMessenger(res, userLogin.uid, redirectURI);
       })
       .catch(err => {
         res.render('users/login', {

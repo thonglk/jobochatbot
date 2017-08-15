@@ -17,7 +17,10 @@ export default class Store {
   get(id) {
     return new Promise((resolve, reject) => {
       this.ref.child(id).once('value')
-        .then(user => resolve(user))
+        .then(user => {
+          console.log(user);
+          resolve(user);
+        })
         .catch(err => {
           console.log(err);
           reject(null);
