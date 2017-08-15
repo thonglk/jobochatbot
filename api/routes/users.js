@@ -11,7 +11,7 @@ const router = express.Router({
 const linkAccountToMessenger = (res, userId, redirectURI) => {
   const authCode = uuid();
 
-  UserStore.linkMessengerAccount(userId, authCode);
+  // UserStore.linkMessengerAccount(userId, authCode);
 
   const redirectURISuccess = `${redirectURI}&authorization_code=${userId}&userId=${userId}`;
 
