@@ -80,9 +80,9 @@ const sendGetStartWelcomeMessage = (recipientId) => {
         // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
         sendQuickReplyAddress(recipientId);
       } else {
-        sendMessage(recipientId, [{
-          messages.createAccountMessage,
-        }])
+        sendMessage(recipientId, [
+          messages.createAccountMessage
+        ])
       }
     });
 };
