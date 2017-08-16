@@ -1,10 +1,3 @@
-/**
- * Copyright 2017-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 // ===== LODASH ================================================================
 import castArray from 'lodash/castArray';
 import isEmpty from 'lodash/isEmpty';
@@ -12,8 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 // ===== MODULES ===============================================================
 import request from 'request';
 
-// ===== APP CONFIG ============================================================
-import { PAGE_ACCESS_TOKEN } from 'app-config.js';
+import { PAGE_ACCESS_TOKEN } from 'app-config';
 
 /**
  * Send messages in order to the Facebook graph API.

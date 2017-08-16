@@ -167,6 +167,17 @@ const attachmentMessage = (type, url) => {
 }
 
 /**
+ * Button for displaying the job type menu inside a webview
+ */
+const setJobsButton = {
+  type: 'web_url',
+  title: 'Chọn công việc',
+  url: `http://petershats.parseapp.com/hat-news/`,
+  webview_height_ratio: 'tall',
+  messenger_extensions: true,
+};
+
+/**
  * The persistent menu for users to use.
  */
 const persistentMenu = {
@@ -177,17 +188,6 @@ const persistentMenu = {
   call_to_actions: [
     setJobsButton,
   ],
-};
-
-/**
- * Button for displaying the job type menu inside a webview
- */
-const setJobsButton = {
-  type: 'web_url',
-  title: 'Chọn công việc',
-  url: `http://petershats.parseapp.com/hat-news/`,
-  webview_height_ratio: 'tall',
-  messenger_extensions: true,
 };
 
 export default {
