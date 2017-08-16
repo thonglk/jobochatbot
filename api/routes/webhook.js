@@ -43,8 +43,14 @@ router.route('/')
         // Iterate over each messaging event
         pageEntry.messaging.forEach((messagingEvent) => {
           console.log('Message event: ', { messagingEvent });
-          if (messagingEvent.message) {
+          if (messagingEvent.optin) {
+            receiveApi.handleReceivedAuthentication(messagingEvent);
+          } else if (messagingEvent.message) {
             receiveApi.handleReceiveMessage(messagingEvent);
+          } else if (messagingEvent.delivery) {
+            receiveApi.handleReceivedDeliveryConfirmation(messagingEvent);
+          } else if (messagingEvent.read) {
+            receiveApi.handleReceivedMessageRead(messagingEvent);
           } else if (messagingEvent.account_linking) { // eslint-disable-line camelcase, max-len
             receiveApi.handleReceiveAccountLink(messagingEvent);
           } else if (messagingEvent.postback) {

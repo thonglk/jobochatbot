@@ -82,9 +82,10 @@ export default class Store {
           id = createdUser.uid;
           return this.ref.child(id)
             .update({
+              createdAt: firebase.database.ServerValue.TIMESTAMP,
               email: username,
+              mobileToken: id,
               name: displayName,
-              birth,
               phone,
               type: 2,
               userId: id,
