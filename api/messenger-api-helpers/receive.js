@@ -205,7 +205,7 @@ const handleReceiveMessage = (event) => {
         response.on('data', function (chunk) {
           body += chunk;
         });
-
+        console.log('asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', body);
         response.on('end', function () {
           const res = JSON.parse(body)
           console.log('body', res.data)
