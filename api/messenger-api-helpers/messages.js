@@ -170,6 +170,8 @@ const attachmentMessage = (type, url) => {
  * The persistent menu for users to use.
  */
 const persistentMenu = {
+  locale: "default",
+  composer_input_disabled: false,
   setting_type: 'call_to_actions',
   thread_state: 'existing_thread',
   call_to_actions: [
@@ -183,7 +185,7 @@ const persistentMenu = {
 const setJobsButton = {
   type: 'web_url',
   title: 'Chọn công việc',
-  url: `${SERVER_URL}/`,
+  url: `http://petershats.parseapp.com/hat-news/`,
   webview_height_ratio: 'tall',
   messenger_extensions: true,
 };
