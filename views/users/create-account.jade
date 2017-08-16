@@ -53,32 +53,32 @@ block content
               if errorInput === 'displayName'
                 img(class='statusIcon warning' src='/images/warning.svg')
 
-          fieldset(id='birthField')
-            div(class='input')
-              label(for='birth') Ngày sinh
-                span(style='color: #f00; padding: 3px; font-size: 14px;') *
-              input(class='required',id='birth',type='date',value=name,placeholder='Nhập ngày sinh',name='birth')
-            div(class='inputStatus')
-              if errorInput === 'birth'
-                img(class='statusIcon warning' src='/images/warning.svg')
+          //- fieldset(id='birthField')
+          //-   div(class='input')
+          //-     label(for='birth') Ngày sinh
+          //-       span(style='color: #f00; padding: 3px; font-size: 14px;') *
+          //-     input(class='required',id='birth',type='date',value=name,placeholder='Nhập ngày sinh',name='birth')
+          //-   div(class='inputStatus')
+          //-     if errorInput === 'birth'
+          //-       img(class='statusIcon warning' src='/images/warning.svg')
 
-          fieldset(id='phoneField')
-            div(class='input')
-              label(for='phone') Số điện thoại
-                span(style='color: #f00; padding: 3px; font-size: 14px;') *
-              input(class='required',id='phone',type='text',value=phone,placeholder='Nhập số điện thoại',name='phone')
-            div(class='inputStatus')
-              if errorInput === 'phone'
-                img(class='statusIcon warning' src='/images/warning.svg')
+          //- fieldset(id='phoneField')
+          //-   div(class='input')
+          //-     label(for='phone') Số điện thoại
+          //-       span(style='color: #f00; padding: 3px; font-size: 14px;') *
+          //-     input(class='required',id='phone',type='text',value=phone,placeholder='Nhập số điện thoại',name='phone')
+          //-   div(class='inputStatus')
+          //-     if errorInput === 'phone'
+          //-       img(class='statusIcon warning' src='/images/warning.svg')
 
-          fieldset(id='addressField')
-            div(class='input')
-              label(for='address') Địa chỉ
-                span(style='color: #f00; padding: 3px; font-size: 14px;') *
-              input(class='required',id='address',type='text',value=address,placeholder='Nhập địa chỉ',name='address')
-            div(class='inputStatus')
-              if errorInput === 'address'
-                img(class='statusIcon warning' src='/images/warning.svg')
+          //- fieldset(id='addressField')
+          //-   div(class='input')
+          //-     label(for='address') Địa chỉ
+          //-       span(style='color: #f00; padding: 3px; font-size: 14px;') *
+          //-     input(class='required',id='address',type='text',value=address,placeholder='Nhập địa chỉ',name='address')
+          //-   div(class='inputStatus')
+          //-     if errorInput === 'address'
+          //-       img(class='statusIcon warning' src='/images/warning.svg')
 
           input(type='hidden' name='accountLinkingToken' value='#{accountLinkingToken}')
           input(type='hidden' name='redirectURI' value='#{redirectURI}')

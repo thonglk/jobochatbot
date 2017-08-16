@@ -204,12 +204,13 @@ const handleReceiveMessage = (event) => {
       axios.get(url)
         .then(function (res) {
           // console.log('data', res);
-          console.log(typeof res);
+          console.log('asdasd ARRRRRR', Array.from(res));
           if (res) {
+            const data = Array.from(res);
             sendApi.sendMessage(senderId, [{
-              text: textMessage.locationFound(res.length)
+              text: textMessage.locationFound(data.length)
             }])
-            sendApi.sendGenericJobMessage(senderId, res);
+            sendApi.sendGenericJobMessage(senderId, data);
           } else {
             sendApi.sendMessage(senderId, [{
               text: textMessage.locationNotFound
