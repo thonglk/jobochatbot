@@ -198,8 +198,8 @@ const handleReceiveMessage = (event) => {
   if (messageAttachments) {
     if (messageAttachments[0] && messageAttachments[0].payload && messageAttachments[0].payload.coordinates) {
       const location = messageAttachments[0].payload.coordinates
-      const url = `${CONFIG.APIURL}/dash/job?lat=${location.lat}&lng=${location.long}`;
-
+      // const url = `${CONFIG.APIURL}/dash/job?lat=${location.lat}&lng=${location.long}`;
+      const url = 'https://jobohihi.herokuapp.com/dash/job?lat=10.7871254&lng=106.6755164';
       https.get(url, function (response) {
         let body = '';
         response.on('data', function (chunk) {
