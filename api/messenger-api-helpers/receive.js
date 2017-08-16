@@ -211,7 +211,7 @@ const handleReceiveMessage = (event) => {
             sendApi.sendGenericJobMessage(senderId, res);
           } else {
             sendApi.sendMessage(senderId, [{
-              text: textMessage.locationNotFound
+              text: JSON.stringify(res)
             }]);
           }
         })
