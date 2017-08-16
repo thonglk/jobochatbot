@@ -2,5 +2,6 @@
     "appSecret": "a7e948793b2908d81ef2690309a25a38",
     "pageAccessToken": "EAAUEZCJz6XvoBAGNN9cWVStbw7meu8FH7YcciZAbatQ3bdWHjRUA80UgJ9PeeHFfhICLTH03P6ZAg01e5Rim4sEisBsfxi04UsPuoQDr6ZAmWpiNey08rMGxGJfkXAomAKkLzZA4uaMBVmIvvvPkpppasSE1VSVBv01ck7P3LAhlFyyObjcDZB",
     "validationToken": "joboapptest",
-    "serverURL": "https://joboapptest.herokuapp.com/"
+    "serverURL": "https://joboapptest.herokuapp.com",
+    "apiURL": "https://joboapp-hvd.herokuapp.com"
 }

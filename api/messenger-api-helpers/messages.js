@@ -148,6 +148,13 @@ const findJobs = {
   }),
 }
 
+const locationMessage = {
+  text: textMessages.location,
+  quick_replies: [{
+    content_type: "location"
+  }]
+}
+
 const attachmentMessage = (type, url) => {
   return {
     attachment: {
@@ -159,8 +166,31 @@ const attachmentMessage = (type, url) => {
   }
 }
 
+/**
+ * The persistent menu for users to use.
+ */
+const persistentMenu = {
+  setting_type: 'call_to_actions',
+  thread_state: 'existing_thread',
+  call_to_actions: [
+    setJobsButton,
+  ],
+};
+
+/**
+ * Button for displaying the job type menu inside a webview
+ */
+const setJobsButton = {
+  type: 'web_url',
+  title: 'Chọn công việc',
+  url: `${SERVER_URL}/`,
+  webview_height_ratio: 'tall',
+  messenger_extensions: true,
+};
+
 export default {
   vietnameseDecode,
+  persistentMenu,
   createAccountMessage,
   signInGreetingMessage,
   signInSuccessMessage,
@@ -168,6 +198,7 @@ export default {
   loggedInMessage,
   napMessage,
   attachmentMessage,
+  locationMessage,
   getStarted,
   findJobs,
 };

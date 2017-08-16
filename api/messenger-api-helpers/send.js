@@ -91,12 +91,24 @@ const sendReturnMessage = (recipientId) => {
   UserStore.getByMessengerId(recipientId)
     .then(userProfile => {
       if (!isEmpty(userProfile)) {
-        sendLoggedInWelcomeMessage(recipientId, userProfile.name);
+        // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
+        sendQuickReplyAddress(recipientId);
       } else {
         sendLoggedOutWelcomeMessage(recipientId);
       }
     });
 };
+
+/**
+ * Tìm việc xung quanh
+ * @param  {[type]} recipientId [description]
+ * @return {[type]}             [description]
+ */
+const sendQuickReplyAddress = (recipientId) => {
+  sendMessage(recipientId, [
+    messages.locationMessage,
+  ]);
+}
 
 const sendWelcomeMessage = (recipientId) => {
   sendGetStartWelcomeMessage(recipientId);
@@ -104,7 +116,9 @@ const sendWelcomeMessage = (recipientId) => {
 
 // Send a successfully signed in message.
 const sendSignOutSuccessMessage = (recipientId) =>
-  sendMessage(recipientId, messages.signOutSuccessMessage);
+  sendMessage(recipientId, [
+    messages.signOutSuccessMessage,
+  ]);
 
 // Send a successfully signed out message.
 const sendSignInSuccessMessage = (recipientId, username) => {
@@ -144,93 +158,93 @@ const sendQuickReplyFindJobs = (recipientId) => {
 
 
 const sendGenericMessage_Job = (recipientId, data) => {
-    // const messageData = {
-    //     recipient: {
-    //         id: recipientId
-    //     },
-    //     message: {
-    //         attachment: {
-    //             type: "template",
-    //             payload: {
-    //                 template_type: "generic",
-    //                 elements: [{
-    //                     title: CONFIG.data.job[data[0].job] + ' ' + CONFIG.data.working_type[data[0].working_type],
-    //                     subtitle: data[0].storeName + " - " + data[0].distance + " km",
-    //                     item_url: "https://www.joboapp.com/view/store/" + data[0].storeId,
-    //                     image_url: data[0].avatar,
-    //                     buttons: [{
-    //                         type: "web_url",
-    //                         url: "https://www.joboapp.com/view/store/" + data[0].storeId,
-    //                         title: "Xem chi tiết để ứng tuyển"
-    //                     }]
-    //                 }, {
-    //                     title: CONFIG.data.job[data[1].job] + ' ' + CONFIG.data.working_type[data[1].working_type],
-    //                     subtitle: data[1].storeName + " - " + data[1].distance + " km",
-    //                     item_url: "https://www.joboapp.com/view/store/" + data[1].storeId,
-    //                     image_url: data[1].avatar,
-    //                     buttons: [{
-    //                         type: "web_url",
-    //                         url: "https://www.joboapp.com/view/store/" + data[1].storeId,
-    //                         title: "Chi tiết"
-    //                     }]
-    //                 }, {
-    //                     title: CONFIG.data.job[data[2].job] + ' ' + CONFIG.data.working_type[data[2].working_type],
-    //                     subtitle: data[2].storeName + " - " + data[2].distance + " km",
-    //                     item_url: "https://www.joboapp.com/view/store/" + data[2].storeId,
-    //                     image_url: data[2].avatar,
-    //                     buttons: [{
-    //                         type: "web_url",
-    //                         url: "https://www.joboapp.com/view/store/" + data[2].storeId,
-    //                         title: "Chi tiết"
-    //                     }]
-    //                 }, {
-    //                     title: CONFIG.data.job[data[3].job] + ' ' + CONFIG.data.working_type[data[3].working_type],
-    //                     subtitle: data[3].storeName + " - " + data[3].distance + " km",
-    //                     item_url: "https://www.joboapp.com/view/store/" + data[3].storeId,
-    //                     image_url: data[3].avatar,
-    //                     buttons: [{
-    //                         type: "web_url",
-    //                         url: "https://www.joboapp.com/view/store/" + data[3].storeId,
-    //                         title: "Chi tiết"
-    //                     }]
-    //                 }, {
-    //                     title: CONFIG.data.job[data[4].job] + ' ' + CONFIG.data.working_type[data[4].working_type],
-    //                     subtitle: data[4].storeName + " - " + data[4].distance + " km",
-    //                     item_url: "https://www.joboapp.com/view/store/" + data[4].storeId,
-    //                     image_url: data[4].avatar,
-    //                     buttons: [{
-    //                         type: "web_url",
-    //                         url: "https://www.joboapp.com/view/store/" + data[4].storeId,
-    //                         title: "Chi tiết"
-    //                     }]
-    //                 }, {
-    //                     title: CONFIG.data.job[data[5].job] + ' ' + CONFIG.data.working_type[data[5].working_type],
-    //                     subtitle: data[5].storeName + " - " + data[5].distance + " km",
-    //                     item_url: "https://www.joboapp.com/view/store/" + data[5].storeId,
-    //                     image_url: data[5].avatar,
-    //                     buttons: [{
-    //                         type: "web_url",
-    //                         url: "https://www.joboapp.com/view/store/" + data[5].storeId,
-    //                         title: "Chi tiết"
-    //                     }]
-    //                 }, {
-    //                     title: "Xem thêm tại Joboapp.com",
-    //                     item_url: "https://www.joboapp.com/",
-    //                     image_url: SERVER_URL + '/public/assets/like.png',
-    //                     buttons: [{
-    //                         type: "web_url",
-    //                         url: "https://www.joboapp.com",
-    //                         title: "Xem chi tiết"
-    //                     }]
+  // const messageData = {
+  //     recipient: {
+  //         id: recipientId
+  //     },
+  //     message: {
+  //         attachment: {
+  //             type: "template",
+  //             payload: {
+  //                 template_type: "generic",
+  //                 elements: [{
+  //                     title: CONFIG.data.job[data[0].job] + ' ' + CONFIG.data.working_type[data[0].working_type],
+  //                     subtitle: data[0].storeName + " - " + data[0].distance + " km",
+  //                     item_url: "https://www.joboapp.com/view/store/" + data[0].storeId,
+  //                     image_url: data[0].avatar,
+  //                     buttons: [{
+  //                         type: "web_url",
+  //                         url: "https://www.joboapp.com/view/store/" + data[0].storeId,
+  //                         title: "Xem chi tiết để ứng tuyển"
+  //                     }]
+  //                 }, {
+  //                     title: CONFIG.data.job[data[1].job] + ' ' + CONFIG.data.working_type[data[1].working_type],
+  //                     subtitle: data[1].storeName + " - " + data[1].distance + " km",
+  //                     item_url: "https://www.joboapp.com/view/store/" + data[1].storeId,
+  //                     image_url: data[1].avatar,
+  //                     buttons: [{
+  //                         type: "web_url",
+  //                         url: "https://www.joboapp.com/view/store/" + data[1].storeId,
+  //                         title: "Chi tiết"
+  //                     }]
+  //                 }, {
+  //                     title: CONFIG.data.job[data[2].job] + ' ' + CONFIG.data.working_type[data[2].working_type],
+  //                     subtitle: data[2].storeName + " - " + data[2].distance + " km",
+  //                     item_url: "https://www.joboapp.com/view/store/" + data[2].storeId,
+  //                     image_url: data[2].avatar,
+  //                     buttons: [{
+  //                         type: "web_url",
+  //                         url: "https://www.joboapp.com/view/store/" + data[2].storeId,
+  //                         title: "Chi tiết"
+  //                     }]
+  //                 }, {
+  //                     title: CONFIG.data.job[data[3].job] + ' ' + CONFIG.data.working_type[data[3].working_type],
+  //                     subtitle: data[3].storeName + " - " + data[3].distance + " km",
+  //                     item_url: "https://www.joboapp.com/view/store/" + data[3].storeId,
+  //                     image_url: data[3].avatar,
+  //                     buttons: [{
+  //                         type: "web_url",
+  //                         url: "https://www.joboapp.com/view/store/" + data[3].storeId,
+  //                         title: "Chi tiết"
+  //                     }]
+  //                 }, {
+  //                     title: CONFIG.data.job[data[4].job] + ' ' + CONFIG.data.working_type[data[4].working_type],
+  //                     subtitle: data[4].storeName + " - " + data[4].distance + " km",
+  //                     item_url: "https://www.joboapp.com/view/store/" + data[4].storeId,
+  //                     image_url: data[4].avatar,
+  //                     buttons: [{
+  //                         type: "web_url",
+  //                         url: "https://www.joboapp.com/view/store/" + data[4].storeId,
+  //                         title: "Chi tiết"
+  //                     }]
+  //                 }, {
+  //                     title: CONFIG.data.job[data[5].job] + ' ' + CONFIG.data.working_type[data[5].working_type],
+  //                     subtitle: data[5].storeName + " - " + data[5].distance + " km",
+  //                     item_url: "https://www.joboapp.com/view/store/" + data[5].storeId,
+  //                     image_url: data[5].avatar,
+  //                     buttons: [{
+  //                         type: "web_url",
+  //                         url: "https://www.joboapp.com/view/store/" + data[5].storeId,
+  //                         title: "Chi tiết"
+  //                     }]
+  //                 }, {
+  //                     title: "Xem thêm tại Joboapp.com",
+  //                     item_url: "https://www.joboapp.com/",
+  //                     image_url: SERVER_URL + '/public/assets/like.png',
+  //                     buttons: [{
+  //                         type: "web_url",
+  //                         url: "https://www.joboapp.com",
+  //                         title: "Xem chi tiết"
+  //                     }]
 
-    //                 }]
+  //                 }]
 
-    //             }
-    //         }
-    //     }
-    // };
+  //             }
+  //         }
+  //     }
+  // };
 
-    // callSendAPI(messageData);
+  // callSendAPI(messageData);
 }
 
 export default {
@@ -242,4 +256,5 @@ export default {
   sendSignInSuccessMessage,
   sendReadReceipt,
   sendQuickReplyFindJobs,
+  sendQuickReplyAddress,
 };
