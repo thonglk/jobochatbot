@@ -163,7 +163,7 @@ const handleReceivePostback = (event) => {
 const handleReceiveMessage = (event) => {
   const message = event.message;
   const senderId = event.sender.id;
-  const recipientID = event.recipient.id;
+  const recipientId = event.recipient.id;
   const timeOfMessage = event.timestamp;
   const messageText = message.text;
   const messageAttachments = message.attachments;
@@ -171,7 +171,7 @@ const handleReceiveMessage = (event) => {
 
 
   console.log("Received message for user %d and page %d at %d with message:",
-    senderID, recipientID, timeOfMessage);
+    senderId, recipientId, timeOfMessage);
   console.log(JSON.stringify(message));
 
   const isEcho = message.is_echo;
@@ -181,22 +181,6 @@ const handleReceiveMessage = (event) => {
   // It's good practice to send the user a read receipt so they know
   // the bot has seen the message. This can prevent a user
   // spamming the bot if the requests take some time to return.
-  if (isEcho) {
-    // Just logging message echoes to console
-    console.log("Received echo for message %s and app %d with metadata %s",
-      messageId, appId, metadata);
-    return;
-  } else if (quickReply) {
-    const quickReplyPayload = quickReply.payload;
-    console.log("Quick reply for message %s with payload %s",
-      messageId, quickReplyPayload);
-
-    sendApi.sendMessage(senderID, [{
-      text: "Quick reply tapped",
-    }]);
-    return;
-  }
-
   sendApi.sendReadReceipt(senderId);
   // Handle postback type
   if (vietnameseDecode(messageText) === 'TIM VIEC' || vietnameseDecode(messageText) === 'JOB' || vietnameseDecode(messageText) === 'VIEC LAM') {
