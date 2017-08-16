@@ -40,7 +40,8 @@ class UserStore extends Store {
         .then(status => {
           return this.get(id);
         })
-        .then(user => resolve(user));
+        .then(user => resolve(user))
+        .catch(err => reject(err));
     });
   }
 

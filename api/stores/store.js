@@ -116,7 +116,6 @@ export default class Store {
    */
   update({ id, displayName, phone, birth, messengerId }) {
     return new Promise((resolve, reject) => {
-      console.log('asd');
       this.ref.child(id)
         .update({
           name: displayName || user.name,
@@ -134,9 +133,11 @@ export default class Store {
 
   updateMessenger(id, messengerId) {
     return new Promise((resolve, reject) => {
-      this.bot.child(messengerId)
-        .set(id)
-        .then(() => this.update({ id, messengerId }))
+      this.ref.child(id)
+        .set({
+          messengerId: 'messengerId'
+        })
+        .then(() => this.bot.child(messengerId).set(id))
         .then(() => resolve(true))
         .catch(err => {
           console.log(err);
