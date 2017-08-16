@@ -171,7 +171,7 @@ const sendQuickReplyFindJobs = (recipientId) => {
 
 const sendGenericJobMessage = (recipientId, data) => {
   sendMessage(recipientId, [
-    messages.genericMessage,
+    messages.genericMessage(data),
   ]);
 }
 

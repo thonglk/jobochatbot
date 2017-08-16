@@ -197,70 +197,70 @@ const genericMessage = (data) => {
         elements: [{
           title: CONFIG.data.job[data[0].job] + ' ' + CONFIG.data.working_type[data[0].working_type],
           subtitle: data[0].storeName + " - " + data[0].distance + " km",
-          item_url: "https://www.joboapp.com/view/store/" + data[0].storeId,
+          item_url: `${CONFIG.WEBURL}/view/store/${data[0].storeId}`,
           image_url: data[0].avatar,
           buttons: [{
             type: "web_url",
-            url: "https://www.joboapp.com/view/store/" + data[0].storeId,
+            url: `${CONFIG.WEBURL}/view/store/${data[0].storeId}`,
             title: textMessages.genericBtnTitle
           }]
         }, {
           title: CONFIG.data.job[data[1].job] + ' ' + CONFIG.data.working_type[data[1].working_type],
           subtitle: data[1].storeName + " - " + data[1].distance + " km",
-          item_url: "https://www.joboapp.com/view/store/" + data[1].storeId,
+          item_url: `${CONFIG.WEBURL}/view/store/${data[1].storeId}`,
           image_url: data[1].avatar,
           buttons: [{
             type: "web_url",
-            url: "https://www.joboapp.com/view/store/" + data[1].storeId,
+            url: `${CONFIG.WEBURL}/view/store/${data[1].storeId}`,
             title: textMessages.genericBtnTitle
           }]
         }, {
           title: CONFIG.data.job[data[2].job] + ' ' + CONFIG.data.working_type[data[2].working_type],
           subtitle: data[2].storeName + " - " + data[2].distance + " km",
-          item_url: "https://www.joboapp.com/view/store/" + data[2].storeId,
+          item_url: `${CONFIG.WEBURL}/view/store/${data[2].storeId}`,
           image_url: data[2].avatar,
           buttons: [{
             type: "web_url",
-            url: "https://www.joboapp.com/view/store/" + data[2].storeId,
+            url: `${CONFIG.WEBURL}/view/store/${data[2].storeId}`,
             title: textMessages.genericBtnTitle
           }]
         }, {
           title: CONFIG.data.job[data[3].job] + ' ' + CONFIG.data.working_type[data[3].working_type],
           subtitle: data[3].storeName + " - " + data[3].distance + " km",
-          item_url: "https://www.joboapp.com/view/store/" + data[3].storeId,
+          item_url: `${CONFIG.WEBURL}/view/store/${data[3].storeId}`,
           image_url: data[3].avatar,
           buttons: [{
             type: "web_url",
-            url: "https://www.joboapp.com/view/store/" + data[3].storeId,
+            url: `${CONFIG.WEBURL}/view/store/${data[3].storeId}`,
             title: textMessages.genericBtnTitle
           }]
         }, {
           title: CONFIG.data.job[data[4].job] + ' ' + CONFIG.data.working_type[data[4].working_type],
           subtitle: data[4].storeName + " - " + data[4].distance + " km",
-          item_url: "https://www.joboapp.com/view/store/" + data[4].storeId,
+          item_url: `${CONFIG.WEBURL}/view/store/${data[4].storeId}`,
           image_url: data[4].avatar,
           buttons: [{
             type: "web_url",
-            url: "https://www.joboapp.com/view/store/" + data[4].storeId,
+            url: `${CONFIG.WEBURL}/view/store/${data[4].storeId}`,
             title: textMessages.genericBtnTitle
           }]
         }, {
           title: CONFIG.data.job[data[5].job] + ' ' + CONFIG.data.working_type[data[5].working_type],
           subtitle: data[5].storeName + " - " + data[5].distance + " km",
-          item_url: "https://www.joboapp.com/view/store/" + data[5].storeId,
+          item_url: `${CONFIG.WEBURL}/view/store/${data[5].storeId}`,
           image_url: data[5].avatar,
           buttons: [{
             type: "web_url",
-            url: "https://www.joboapp.com/view/store/" + data[5].storeId,
+            url: `${CONFIG.WEBURL}/view/store/${data[5].storeId}`,
             title: textMessages.genericBtnTitle
           }]
         }, {
           title: textMessages.viewMore,
-          item_url: "https://www.joboapp.com/",
+          item_url: `${CONFIG.WEBURL}/`,
           image_url: SERVER_URL + '/public/assets/like.png',
           buttons: [{
             type: "web_url",
-            url: "https://www.joboapp.com",
+            url: `${CONFIG.WEBURL}`,
             title: textMessages.appViewMore
           }]
         }]
