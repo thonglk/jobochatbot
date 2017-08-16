@@ -11,6 +11,7 @@ import sendApi from './send';
 // ===== STORES ================================================================
 import UserStore from 'stores/user_store';
 import textMessage from 'stores/text-messages';
+import https from 'https';
 import { CONFIG } from 'app-config';
 
 const handleReceivedAuthentication = (event) => {
