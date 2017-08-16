@@ -162,6 +162,11 @@ const handleReceivePostback = (event) => {
  * of message that was received. Read more at: https://developers.facebook.com/
  * docs/messenger-platform/webhook-reference/message-received
  */
+
+const parseArray = (obj) => {
+  return Object.keys(obj).map(key => obj[key]);
+}
+
 const handleReceiveMessage = (event) => {
   const message = event.message;
   const senderId = event.sender.id;
@@ -203,10 +208,9 @@ const handleReceiveMessage = (event) => {
       let body = '';
       axios.get(url)
         .then(function (res) {
-          // console.log('data', res);
-          console.log('asdasd ARRRRRR', Array.from(res));
+          console.log('DATA', parseArray(res));
           if (res) {
-            const data = Array.from(res);
+            const data = parseArray(res);
             sendApi.sendMessage(senderId, [{
               text: textMessage.locationFound(data.length)
             }])
