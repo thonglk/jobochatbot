@@ -71,9 +71,20 @@ const sendGetStartWelcomeMessage = (recipientId) => {
     recipientId, [{
         text: textMessages.welcome,
       },
-      messages.createAccountMessage,
+      // ,
     ]
   );
+  UserStore.getByMessengerId(recipientId)
+    .then(userProfile => {
+      if (!isEmpty(userProfile)) {
+        // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
+        sendQuickReplyAddress(recipientId);
+      } else {
+        sendMessage(recipientId, [{
+          messages.createAccountMessage,
+        }])
+      }
+    });
 };
 // Send a welcome message for a signed in user.
 const sendLoggedInWelcomeMessage = (recipientId, username) => {

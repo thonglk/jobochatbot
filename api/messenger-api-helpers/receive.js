@@ -166,7 +166,7 @@ const handleReceiveMessage = (event) => {
   const senderId = event.sender.id;
   const recipientId = event.recipient.id;
   const timeOfMessage = event.timestamp;
-  const messageText = sendApi.vietnameseDecode(message.text);
+  const messageText = message.text ? sendApi.vietnameseDecode(message.text) : message.text;
   const messageAttachments = message.attachments;
   const quickReply = message.quick_reply;
 
