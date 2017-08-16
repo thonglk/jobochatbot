@@ -185,8 +185,32 @@ const persistentMenu = {
   composer_input_disabled: false,
   setting_type: 'call_to_actions',
   thread_state: 'existing_thread',
-  call_to_actions: [
-    setJobsButton,
+  call_to_actions: [{
+      "title": "My Account",
+      "type": "nested",
+      "call_to_actions": [{
+          "title": "Pay Bill",
+          "type": "postback",
+          "payload": "PAYBILL_PAYLOAD"
+        },
+        {
+          "title": "History",
+          "type": "postback",
+          "payload": "HISTORY_PAYLOAD"
+        },
+        {
+          "title": "Contact Info",
+          "type": "postback",
+          "payload": "CONTACT_INFO_PAYLOAD"
+        }
+      ]
+    },
+    {
+      "type": "web_url",
+      "title": "Latest News",
+      "url": "http://petershats.parseapp.com/hat-news",
+      "webview_height_ratio": "full"
+    }
   ],
 };
 
