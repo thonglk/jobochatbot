@@ -208,16 +208,16 @@ const handleReceiveMessage = (event) => {
         response.on('end', function () {
           const res = JSON.parse(body)
           console.log('body', res.data)
-          if (res.total > 0) {
+          // if (res.total > 0) {
             sendApi.sendMessage(senderId, [{
               text: textMessage.locationFound(res.total)
             }])
             sendApi.sendGenericJobMessage(senderId, res.data);
-          } else {
-            sendApi.sendMessage(senderId, [{
-              text: textMessage.locationNotFound
-            }]);
-          }
+          // } else {
+          //   sendApi.sendMessage(senderId, [{
+          //     text: textMessage.locationNotFound
+          //   }]);
+          // }
 
         });
 
