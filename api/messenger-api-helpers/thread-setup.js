@@ -22,7 +22,7 @@ const setDomainWhitelisting = () => {
   api.callThreadAPI(
     {
       setting_type: 'domain_whitelisting',
-      whitelisted_domains: [SERVER_URL, 'https://joboapp.com/', 'http://localhost:3030/'],
+      whitelisted_domains: [SERVER_URL, 'https://joboapp.com/', 'http://localhost:3030/', 'https://jobohihi.herokuapp.com'],
       domain_action_type: 'add',
     },
     {
