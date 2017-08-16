@@ -205,7 +205,6 @@ const handleReceiveMessage = (event) => {
         response.on('data', function (chunk) {
           body += chunk;
         });
-        console.log('asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', body);
         response.on('end', function () {
           const res = JSON.parse(body)
           console.log('body', res.data)
@@ -213,7 +212,7 @@ const handleReceiveMessage = (event) => {
             sendApi.sendMessage(senderId, [{
               text: textMessage.locationFound(res.total)
             }])
-            sendGenericJobMessage(senderId, res.data);
+            sendApi.sendGenericJobMessage(senderId, res.data);
           } else {
             sendApi.sendMessage(senderId, [{
               text: textMessage.locationNotFound
