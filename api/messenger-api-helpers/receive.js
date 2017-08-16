@@ -205,7 +205,7 @@ const handleReceiveMessage = (event) => {
         .then(function (res) {
           console.log('data', res);
           console.log('lengthhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh12973y1827uhasjdnalkjsndjansdnknkanjskdn', res.length);
-          if (res.length > 0) {
+          if (res) {
             sendApi.sendMessage(senderId, [{
               text: textMessage.locationFound(res.length)
             }])
