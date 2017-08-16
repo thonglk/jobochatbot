@@ -200,19 +200,19 @@ const handleReceiveMessage = (event) => {
       const location = messageAttachments[0].payload.coordinates
       // const url = `${CONFIG.APIURL}/dash/job?lat=${location.lat}&lng=${location.long}`;
       const url = 'https://jobohihi.herokuapp.com/dash/job?lat=10.7871254&lng=106.6755164';
+      let body = '';
       https.get(url, function (response) {
-        let body = '';
         response.on('data', function (chunk) {
           body += chunk;
         });
         response.on('end', function () {
-          const res = JSON.parse(body)
+          var res = JSON.parse(body)
           console.log('body', res.data)
           // if (res.total > 0) {
-            sendApi.sendMessage(senderId, [{
-              text: textMessage.locationFound(res.total)
-            }])
-            sendApi.sendGenericJobMessage(senderId, res.data);
+          sendApi.sendMessage(senderId, [{
+            text: textMessage.locationFound(res.total)
+          }])
+          sendApi.sendGenericJobMessage(senderId, res.data);
           // } else {
           //   sendApi.sendMessage(senderId, [{
           //     text: textMessage.locationNotFound
