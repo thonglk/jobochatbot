@@ -1,7 +1,7 @@
 {
-    "appSecret": "a7e948793b2908d81ef2690309a25a38",
-    "pageAccessToken": "EAAZAsqUIyieIBAI1xFFFFlyBSsPZCbflEqTYsTWdNZA89TFEBF4ODZA7kdNR56RSH7NAwuYlZC6NqWXXnDBo73YTYbVZC4GOsSjb5zbVdLdmGTvj7r6vrntiz8l4ery1uGy8TXtSxyS3fZA3pEpW6YHihsJBcmlIZAMNSuZBeC8pq02jGietxwfrz",
-    "validationToken": "EAAUEZCJz6XvoBAIjVFrF4HZCtfhAOmHc0QyrgznW0OaZAJJ1NoOcHQOBa2LEuCfUZAerbT7wZCR7kF3UX5YASSqvRvE5EUFFALTad9XduDx6QoZATRs5VZCIg7P0t1TVN2tArqnRkOm8hhRCNr4lTMsi8a2k5oFExcnPHeoT6GMatomUGVVOPTW",
+    "appSecret": "22d0cd4f4a7c5f7bd68324cab4139228",
+    "pageAccessToken": "EAAZAsqUIyieIBAJ9oToMT2BteWPEu4CawrcjEmSTpZCdIIKwJ8lepuc3yewwfyRm8nBm8NEvhcrUl5y8XeZBj1teTJGVs6z6ZBUDRiBjKhvt6VQkcYr8YMqzZAuZAAVqmMJSQYaN1sTDSlucWubMHIHi09hHi9bnHgTZBnnZAwcwAgODqbM3p54l",
+    "validationToken": "jobobot",
     "serverURL": "https://jobo-bot.herokuapp.com/",
     "apiURL": "https://joboapp-hvd.herokuapp.com"
 }
