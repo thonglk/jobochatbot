@@ -13,4 +13,5 @@ module.exports = {
   logoutFail: 'Đăng xuất không thành công. Vui lòng thử lại!',
   findJobs: 'Bạn muốn tìm việc gì?',
   jobs: ['PG', 'Phục vụ', 'Lễ tân'],
+  jobsMessage: 'Danh sách việc làm',
 }

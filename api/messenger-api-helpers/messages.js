@@ -171,8 +171,8 @@ const attachmentMessage = (type, url) => {
  */
 const setJobsButton = {
   type: 'web_url',
-  title: 'Chọn công việc',
-  url: `http://petershats.parseapp.com/hat-news/`,
+  title: textMessages.jobsMessage,
+  url: `https://joboapp.com/`,
   webview_height_ratio: 'tall',
   messenger_extensions: true,
 };
@@ -181,15 +181,11 @@ const setJobsButton = {
  * The persistent menu for users to use.
  */
 const persistentMenu = {
-  "persistent_menu": [{
-    locale: "default",
-    composer_input_disabled: false,
-    setting_type: 'call_to_actions',
-    thread_state: 'existing_thread',
-    call_to_actions: [
-      setJobsButton,
-    ],
-  }]
+  setting_type: 'call_to_actions',
+  thread_state: 'existing_thread',
+  call_to_actions: [
+    setJobsButton,
+  ],
 };
 
 export default {
