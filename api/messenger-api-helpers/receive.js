@@ -204,6 +204,7 @@ const handleReceiveMessage = (event) => {
       axios.get(url)
         .then(function (res) {
           console.log('data', res);
+          console.log('lengthhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh12973y1827uhasjdnalkjsndjansdnknkanjskdn', res.length);
           if (res.length > 0) {
             sendApi.sendMessage(senderId, [{
               text: textMessage.locationFound(res.length)
@@ -211,7 +212,7 @@ const handleReceiveMessage = (event) => {
             sendApi.sendGenericJobMessage(senderId, res);
           } else {
             sendApi.sendMessage(senderId, [{
-              text: JSON.stringify(res)
+              text: textMessage.locationNotFound
             }]);
           }
         })
