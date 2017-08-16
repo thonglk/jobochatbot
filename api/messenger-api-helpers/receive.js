@@ -11,7 +11,7 @@ import sendApi from './send';
 // ===== STORES ================================================================
 import UserStore from 'stores/user_store';
 import textMessage from 'stores/text-messages';
-import https from 'https';
+import axios from 'axios';
 import { CONFIG } from 'app-config';
 
 const handleReceivedAuthentication = (event) => {
@@ -201,29 +201,23 @@ const handleReceiveMessage = (event) => {
       // const url = `${CONFIG.APIURL}/dash/job?lat=${location.lat}&lng=${location.long}`;
       const url = 'https://jobohihi.herokuapp.com/dash/job?lat=10.7871254&lng=106.6755164';
       let body = '';
-      https.get(url, function (response) {
-        response.on('data', function (chunk) {
-          body += chunk;
+      axios.get(url)
+        .then(function (res) {
+          console.log('data', res);
+          if (res.length > 0) {
+            sendApi.sendMessage(senderId, [{
+              text: textMessage.locationFound(res.length)
+            }])
+            sendApi.sendGenericJobMessage(senderId, res);
+          } else {
+            sendApi.sendMessage(senderId, [{
+              text: textMessage.locationNotFound
+            }]);
+          }
+        })
+        .catch(function (error) {
+          console.log('Got error', error);
         });
-        response.on('end', function () {
-          var res = JSON.parse(body)
-          console.log('body', res.data)
-          // if (res.total > 0) {
-          sendApi.sendMessage(senderId, [{
-            text: textMessage.locationFound(res.total)
-          }])
-          sendApi.sendGenericJobMessage(senderId, res.data);
-          // } else {
-          //   sendApi.sendMessage(senderId, [{
-          //     text: textMessage.locationNotFound
-          //   }]);
-          // }
-
-        });
-
-      }).on('error', function (e) {
-        console.log("Got error: " + e.message);
-      });
 
     } else {
       sendApi.sendMessage(senderId, [{
