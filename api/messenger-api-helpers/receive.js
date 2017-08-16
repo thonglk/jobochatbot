@@ -11,6 +11,7 @@ import sendApi from './send';
 // ===== STORES ================================================================
 import UserStore from 'stores/user_store';
 import textMessage from 'stores/text-messages';
+import { CONFIG } from 'app-config';
 
 const handleReceivedAuthentication = (event) => {
   const senderID = event.sender.id;
@@ -165,7 +166,7 @@ const handleReceiveMessage = (event) => {
   const senderId = event.sender.id;
   const recipientId = event.recipient.id;
   const timeOfMessage = event.timestamp;
-  const messageText = message.text;
+  const messageText = sendApi.vietnameseDecode(message.text);
   const messageAttachments = message.attachments;
   const quickReply = message.quick_reply;
 
@@ -182,10 +183,52 @@ const handleReceiveMessage = (event) => {
   // the bot has seen the message. This can prevent a user
   // spamming the bot if the requests take some time to return.
   sendApi.sendReadReceipt(senderId);
-  // Handle postback type
-  if (sendApi.vietnameseDecode(messageText) === 'TIM VIEC' || sendApi.vietnameseDecode(messageText) === 'JOB' || sendApi.vietnameseDecode(messageText) === 'VIEC LAM') {
+  // Handle text message
+  if (messageText === 'TIM VIEC' || messageText === 'JOB' || messageText === 'VIEC LAM' || messageText === 'CONG VIEC') {
     sendApi.sendQuickReplyFindJobs(senderId);
-  } else { sendApi.sendReturnMessage(senderId); }
+  } else if (messageText === 'DIA CHI' || messageText === 'LOCATION' || messageText === 'VI TRI' || messageText === 'ADDRESS') {
+    sendApi.sendQuickReplyAddress(senderId);
+  } else {
+    sendApi.sendReturnMessage(senderId);
+  }
+  // Handle attachment message
+  if (messageAttachments) {
+    if (messageAttachments[0] && messageAttachments[0].payload && messageAttachments[0].payload.coordinates) {
+      const location = messageAttachments[0].payload.coordinates
+      const url = `${CONFIG.APIURL}/dash/job?lat=${location.lat}&lng=${location.long}`;
+
+      https.get(url, function (response) {
+        let body = '';
+        response.on('data', function (chunk) {
+          body += chunk;
+        });
+
+        response.on('end', function () {
+          const res = JSON.parse(body)
+          console.log('body', res.data)
+          if (res.total > 0) {
+            sendApi.sendMessage(senderID, [{
+              text: textMessage.locationFound(res.total)
+            }])
+            sendGenericJobMessage(senderID, res.data);
+          } else {
+            sendApi.sendMessage(senderID, [{
+              text: textMessage.locationNotFound
+            }]);
+          }
+
+        });
+
+      }).on('error', function (e) {
+        console.log("Got error: " + e.message);
+      });
+
+    } else {
+      sendApi.sendMessage(senderID, [{
+        text: textMessage.unknowAttachment
+      }]);
+    }
+  }
 };
 
 export default {
