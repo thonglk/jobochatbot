@@ -184,7 +184,6 @@ const persistentMenu = {
   setting_type: 'call_to_actions',
   thread_state: 'existing_thread',
   call_to_actions: [
-    signInButton,
     setJobsButton,
   ],
 };
