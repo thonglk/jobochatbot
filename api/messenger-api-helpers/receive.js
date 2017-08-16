@@ -183,7 +183,7 @@ const handleReceiveMessage = (event) => {
   // spamming the bot if the requests take some time to return.
   sendApi.sendReadReceipt(senderId);
   // Handle postback type
-  if (vietnameseDecode(messageText) === 'TIM VIEC' || vietnameseDecode(messageText) === 'JOB' || vietnameseDecode(messageText) === 'VIEC LAM') {
+  if (sendApi.vietnameseDecode(messageText) === 'TIM VIEC' || sendApi.vietnameseDecode(messageText) === 'JOB' || sendApi.vietnameseDecode(messageText) === 'VIEC LAM') {
     sendApi.sendQuickReplyFindJobs(senderId);
   } else { sendApi.sendReturnMessage(senderId); }
 };
