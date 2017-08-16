@@ -129,7 +129,7 @@ const napMessage = {
  */
 const getStarted = {
   setting_type: 'call_to_actions',
-  thread_state: 'new_thread',
+  // thread_state: 'new_thread',
   call_to_actions: [{
     payload: JSON.stringify({
       type: 'GET_STARTED',
@@ -184,7 +184,7 @@ const persistentMenu = {
   locale: "default",
   composer_input_disabled: false,
   setting_type: 'call_to_actions',
-  thread_state: 'existing_thread',
+  // thread_state: 'existing_thread',
   call_to_actions: [{
       "title": "My Account",
       "type": "nested",
