@@ -181,13 +181,15 @@ const setJobsButton = {
  * The persistent menu for users to use.
  */
 const persistentMenu = {
-  locale: "default",
-  composer_input_disabled: false,
-  setting_type: 'call_to_actions',
-  thread_state: 'existing_thread',
-  call_to_actions: [
-    setJobsButton,
-  ],
+  "persistent_menu": [{
+    locale: "default",
+    composer_input_disabled: false,
+    setting_type: 'call_to_actions',
+    thread_state: 'existing_thread',
+    call_to_actions: [
+      setJobsButton,
+    ],
+  }]
 };
 
 export default {
