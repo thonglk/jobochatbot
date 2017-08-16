@@ -4,7 +4,7 @@ module.exports = {
   createAccount: 'Để sử dụng ứng dụng của Jobo bạn cần phải đăng nhập.',
   hello: (username) => `Xin chào ${username}!`,
   signInSuccess: 'Bây giờ bạn có thể tham gia tìm kiếm các việc làm bạn muốn.\nĐể có thể tìm việc tốt hơn, bạn vui lòng cập nhật thông tin cá nhân tại địa chỉ http://joboapp.com/',
-  signOutSuccess: 'Bạn đăng nhập để sử dụng ứng dụng Jobo.',
+  signOutSuccess: 'Bạn cần đăng nhập để sử dụng ứng dụng Jobo.',
   loggedIn: (username) => `Bạn đang đăng nhập với tên ${username}.`,
   napMessage: 'Hiu hiu! Thật ra mình chưa được thông minh cho lắm\nnhưng mình có thể tìm việc xung quanh bạn đó.',
   location: 'Hãy gửi địa chỉ của bạn, mình sẽ tìm việc xung quanh đó cho bạn',
