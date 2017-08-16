@@ -135,7 +135,7 @@ export default class Store {
     return new Promise((resolve, reject) => {
       this.ref.child(id)
         .set({
-          messengerId: 'messengerId'
+          messengerId: messengerId
         })
         .then(() => this.bot.child(messengerId).set(id))
         .then(() => resolve(true))
