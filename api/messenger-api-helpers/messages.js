@@ -173,7 +173,7 @@ const setJobsButton = {
   type: 'web_url',
   title: textMessages.jobsMessage,
   url: `https://joboapp.com/`,
-  webview_height_ratio: 'tall',
+  webview_height_ratio: 'full',
   messenger_extensions: true,
 };
 
