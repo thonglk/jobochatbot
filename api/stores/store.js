@@ -89,12 +89,13 @@ export default class Store {
               phone,
               type: 2,
               userId: id,
+              messengerId: 'null',
             });
         })
-        .then(() => {
-          if (!messengerId) Promise.resolve({ userId: id, username, password, displayName, phone, birth, messengerId });
-          else return this.bot.child(messengerId).set(id);
-        })
+        // .then(() => {
+        //   if (!messengerId) Promise.resolve({ userId: id, username, password, displayName, phone, birth, messengerId });
+        //   else return this.bot.child(messengerId).set(id);
+        // })
         .then(() => resolve({ userId: id, username, password, displayName, phone, birth, messengerId }))
         .catch(err => {
           console.log(err);
@@ -113,13 +114,15 @@ export default class Store {
    * @param  {[type]} options.avatar      [description]
    * @return {[type]}                     [description]
    */
-  update({ id, displayName, phone, birth }) {
+  update({ id, displayName, phone, birth, messengerId }) {
     return new Promise((resolve, reject) => {
-      const user = this.ref.child(id);
-      user.set({
+      console.log('asd');
+      this.ref.child(id)
+        .update({
           name: displayName || user.name,
           phone: phone || user.phone,
-          birth: birth || user.birth
+          birth: birth || user.birth,
+          messengerId: messengerId || user.messengerId
         })
         .then(() => resolve(true))
         .catch(err => {
@@ -133,6 +136,7 @@ export default class Store {
     return new Promise((resolve, reject) => {
       this.bot.child(messengerId)
         .set(id)
+        .then(() => this.update({ id, messengerId }))
         .then(() => resolve(true))
         .catch(err => {
           console.log(err);
