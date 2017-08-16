@@ -198,13 +198,13 @@ const handleReceiveMessage = (event) => {
   if (messageAttachments) {
     if (messageAttachments[0] && messageAttachments[0].payload && messageAttachments[0].payload.coordinates) {
       const location = messageAttachments[0].payload.coordinates
-      // const url = `${CONFIG.APIURL}/dash/job?lat=${location.lat}&lng=${location.long}`;
-      const url = 'https://jobohihi.herokuapp.com/dash/job?lat=10.7871254&lng=106.6755164';
+      const url = `${CONFIG.APIURL}/dash/job?lat=${location.lat}&lng=${location.long}`;
+      // const url = 'https://jobohihi.herokuapp.com/dash/job?lat=10.7871254&lng=106.6755164';
       let body = '';
       axios.get(url)
         .then(function (res) {
-          console.log('data', res);
-          console.log('lengthhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh12973y1827uhasjdnalkjsndjansdnknkanjskdn', res.length);
+          // console.log('data', res);
+          console.log(typeof res);
           if (res) {
             sendApi.sendMessage(senderId, [{
               text: textMessage.locationFound(res.length)
