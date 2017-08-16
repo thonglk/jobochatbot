@@ -105,7 +105,7 @@ app.use(function (err, req, res) {
 
 /* ----------  Messenger setup  ---------- */
 // ThreadSetup.setDomainWhitelisting();
-ThreadSetup.setPersistentMenu();
+// ThreadSetup.setPersistentMenu();
 ThreadSetup.setGetStarted();
 
 app.listen(app.get('port'), () => {
