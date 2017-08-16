@@ -15,7 +15,7 @@ import https from 'https';
 import { CONFIG } from 'app-config';
 
 const handleReceivedAuthentication = (event) => {
-  const senderID = event.sender.id;
+  const senderId = event.sender.id;
   const recipientID = event.recipient.id;
   const timeOfAuth = event.timestamp;
 
@@ -27,12 +27,12 @@ const handleReceivedAuthentication = (event) => {
   const passThroughParam = event.optin.ref;
 
   console.log("Received authentication for user %d and page %d with pass " +
-    "through param '%s' at %d", senderID, recipientID, passThroughParam,
+    "through param '%s' at %d", senderId, recipientID, passThroughParam,
     timeOfAuth);
 
   // When an authentication is received, we'll send a message back to the sender
   // to let them know it was successful.
-  sendApi.sendMessage(senderID, [{
+  sendApi.sendMessage(senderId, [{
     text: textMessage.authentication
   }]);
 }
@@ -45,7 +45,7 @@ const handleReceivedAuthentication = (event) => {
  *
  */
 const handleReceivedDeliveryConfirmation = (event) => {
-  const senderID = event.sender.id;
+  const senderId = event.sender.id;
   const recipientID = event.recipient.id;
   const delivery = event.delivery;
   const messageIDs = delivery.mids;
@@ -70,7 +70,7 @@ const handleReceivedDeliveryConfirmation = (event) => {
  *
  */
 const handleReceivedMessageRead = (event) => {
-  const senderID = event.sender.id;
+  const senderId = event.sender.id;
   const recipientID = event.recipient.id;
 
   // All messages before watermark (a timestamp) or sequence have been seen.
@@ -210,12 +210,12 @@ const handleReceiveMessage = (event) => {
           const res = JSON.parse(body)
           console.log('body', res.data)
           if (res.total > 0) {
-            sendApi.sendMessage(senderID, [{
+            sendApi.sendMessage(senderId, [{
               text: textMessage.locationFound(res.total)
             }])
-            sendGenericJobMessage(senderID, res.data);
+            sendGenericJobMessage(senderId, res.data);
           } else {
-            sendApi.sendMessage(senderID, [{
+            sendApi.sendMessage(senderId, [{
               text: textMessage.locationNotFound
             }]);
           }
@@ -227,7 +227,7 @@ const handleReceiveMessage = (event) => {
       });
 
     } else {
-      sendApi.sendMessage(senderID, [{
+      sendApi.sendMessage(senderId, [{
         text: textMessage.unknowAttachment
       }]);
     }
