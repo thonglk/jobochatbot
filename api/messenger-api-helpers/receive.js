@@ -184,12 +184,14 @@ const handleReceiveMessage = (event) => {
   // spamming the bot if the requests take some time to return.
   sendApi.sendReadReceipt(senderId);
   // Handle text message
-  if (messageText === 'TIM VIEC' || messageText === 'JOB' || messageText === 'VIEC LAM' || messageText === 'CONG VIEC') {
-    sendApi.sendQuickReplyFindJobs(senderId);
-  } else if (messageText === 'DIA CHI' || messageText === 'LOCATION' || messageText === 'VI TRI' || messageText === 'ADDRESS') {
-    sendApi.sendQuickReplyAddress(senderId);
-  } else {
-    sendApi.sendReturnMessage(senderId);
+  if (messageText) {
+    if (messageText === 'TIM VIEC' || messageText === 'JOB' || messageText === 'VIEC LAM' || messageText === 'CONG VIEC') {
+      sendApi.sendQuickReplyFindJobs(senderId);
+    } else if (messageText === 'DIA CHI' || messageText === 'LOCATION' || messageText === 'VI TRI' || messageText === 'ADDRESS') {
+      sendApi.sendQuickReplyAddress(senderId);
+    } else {
+      sendApi.sendReturnMessage(senderId);
+    }
   }
   // Handle attachment message
   if (messageAttachments) {
