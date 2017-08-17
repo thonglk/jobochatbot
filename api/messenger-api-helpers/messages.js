@@ -191,6 +191,28 @@ const logOutButton = {
   // }],
 };
 
+const findJobsButton = {
+  "title": "Tìm việc",
+  "type": "nested",
+  "call_to_actions": [{
+      "title": "Hướng dẫn",
+      "type": "web_url",
+      "url": `${SERVER_URL}/help`,
+      "webview_height_ratio": 'full',
+      "messenger_extensions": true,
+    },
+    {
+      "title": "Chọn ngành nghề",
+      "type": "postback",
+      "payload": "JOBTYPE_PAYLOAD"
+    },
+    {
+      "title": "Việc ở gần",
+      "type": "postback",
+      "payload": "JOBLOCATION_PAYLOAD"
+    }
+  ]
+}
 /**
  * The persistent menu for users to use.
  */
@@ -198,10 +220,13 @@ const persistentMenu = {
   setting_type: 'call_to_actions',
   thread_state: 'existing_thread',
   call_to_actions: [
+    findJobsButton,
     setJobsButton,
     logOutButton,
   ],
 };
+
+console.log(persistentMenu);
 
 const genericMessage = (data) => {
   return {
