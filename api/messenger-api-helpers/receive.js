@@ -197,6 +197,8 @@ const handleReceivePostback = (event) => {
     console.log("DAAAAAAAAAAAAAAAAAAAA", phone);
     axios.get(`${APIURL}/checkUser?q=${phone}`)
       .then(users => {
+        console.log('USERSSSSSSSSSSSSSSSSSSS', users);
+        console.log('LENGTHHHHHHHHHHHH', users.length);
         if (users.length > 0) {
           UserStore.updateMessengerByPhone(senderId, phone).then(() => sendApi.sendWelcomeByPhone(senderId, users[0].name));
         } else sendApi.sendNotFoundPhone(senderId);
@@ -212,7 +214,7 @@ const handleReceivePostback = (event) => {
     axios.get(`${APIURL}/checkUser?q=${email}`)
       .then(users => {
         if (users.length > 0) {
-          UserStore.updateMessengerByEmail(senderId, email).then(() => sendApi.sendWelcomeByEmail(senderId, users[0].name));
+          UserStore.updateMessengerByPhone(senderId, email).then(() => sendApi.sendWelcomeByEmail(senderId, users[0].name));
         } else sendApi.sendNotFoundEmail(senderId);
       })
       .catch(err => console.log(err));
