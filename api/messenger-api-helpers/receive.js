@@ -216,7 +216,7 @@ const handleReceivePostback = (event) => {
         console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
         console.log('LENGTHHHHHHHHHHHH', users.data.length);
         if (users.data.length > 0) {
-          UserStore.updateMessengerByPhone(senderId, email).then(() => sendApi.sendWelcomeByEmail(senderId, users.data[0].name));
+          UserStore.updateMessengerByPhone(senderId, email).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name));
         } else sendApi.sendNotFoundEmail(senderId);
       })
       .catch(err => console.log(err));

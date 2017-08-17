@@ -179,28 +179,68 @@ const sendComfirmEmail = (recipientId) => {
 };
 
 const sendWelcomeByPhone = (recipientId, displayName) => {
+
   sendMessage(recipientId, [{
-    text: `Xin chào ${displayName}\nTôi có thể giúp gì cho bạn?`
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "button",
+        "text": `Xin chào ${displayName}\nTôi có thể giúp gì cho bạn?`,
+        "buttons": [{
+            type: 'postback',
+            title: 'Chọn công việc',
+            payload: JSON.stringify({
+              type: 'CHOSE_JOB',
+            }),
+          },
+          {
+            type: 'postback',
+            title: 'Tìm theo vị trí',
+            payload: JSON.stringify({
+              type: 'LOCATION',
+            }),
+          }
+        ]
+      }
+    }
   }]);
 };
 
 const sendNotFoundPhone = (recipientId) => {
   sendMessage(recipientId, [{
-    type: 'web_url',
-    title: 'Bạn chưa đăng ký tài khoản với số điện thoại này, vui lòng đăng ký!',
-    url: 'https://joboapp.com/signup/2',
-    webview_height_ratio: 'tall',
-    messenger_extensions: true,
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "button",
+        "text": "Bạn chưa đăng ký tài khoản với số điện thoại này, vui lòng đăng ký!",
+        "buttons": [{
+          type: 'web_url',
+          title: 'Đăng ký',
+          url: 'https://joboapp.com/signup/2',
+          webview_height_ratio: 'tall',
+          messenger_extensions: true,
+        }]
+      }
+    }
   }]);
 }
 
 const sendNotFoundEmail = (recipientId) => {
   sendMessage(recipientId, [{
-    type: 'web_url',
-    title: 'Bạn chưa đăng ký tài khoản với email này, vui lòng đăng ký!',
-    url: 'https://joboapp.com/signup/2',
-    webview_height_ratio: 'tall',
-    messenger_extensions: true,
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "button",
+        "text": "Bạn chưa đăng ký tài khoản với email này, vui lòng đăng ký!",
+        "buttons": [{
+          type: 'web_url',
+          title: 'Đăng ký',
+          url: 'https://joboapp.com/signup/2',
+          webview_height_ratio: 'tall',
+          messenger_extensions: true,
+        }]
+      }
+    }
   }]);
 }
 // Send a different Welcome message based on if the user is logged in.
