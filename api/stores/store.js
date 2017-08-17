@@ -138,9 +138,7 @@ export default class Store {
           messengerId: messengerId
         })
         .then(() => this.bot.child(messengerId).set(id))
-        .then(() => {
-          return resolve(true);
-        })
+        .then(() =>  resolve(true))
         // .then(() => resolve(true))
         .catch(err => {
           console.log(err);
