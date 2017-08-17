@@ -160,6 +160,7 @@ const handleReceivePostback = (event) => {
   // Handle postback type
   switch (type) {
   case 'GET_STARTED':
+    console.log('GET_STARTED', event);
     // sendApi.sendWelcomeMessage(senderId);
     UserStore.updateConversations(senderId)
       .then(() => sendApi.sendWelcomeMessage(senderId));
