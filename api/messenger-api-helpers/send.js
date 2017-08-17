@@ -102,7 +102,7 @@ const sendLoggedInWelcomeMessage = (recipientId, username) => {
 const sendAcceptPhone = (recipientId, phone) => {
   console.log('SENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd');
   sendMessage(recipientId, [{
-    text: 'Số điện thoại của bạn là ' + phone,
+    title: 'Số điện thoại của bạn là ' + phone,
     buttons: [{
         type: 'postback',
         title: 'Đúng',
@@ -129,7 +129,7 @@ const sendAcceptPhone = (recipientId, phone) => {
 
 const sendAcceptEmail = (recipientId, email) => {
   sendMessage(recipientId, [{
-    text: 'Email của bạn là ' + email,
+    title: 'Email của bạn là ' + email,
     buttons: [{
         type: 'postback',
         title: 'Đúng',
