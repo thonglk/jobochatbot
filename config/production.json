@@ -5,5 +5,5 @@
     "serverURL": "https://jobobot.herokuapp.com",
     "apiURL": "https://jobohihi.herokuapp.com",
     "webURL": "https://joboapp.com",
-    "whiteListDomains": ["https://jobo-bot.herokuapp.com/", "https://joboapp.com/", "http://localhost:3030/", "https://jobohihi.herokuapp.com"]
+    "whiteListDomains": ["https://jobo-bot.herokuapp.com/", "https://joboapp.com/", "http://localhost:3030/", "https://jobohihi.herokuapp.com", "http://localhost:63342", "http://localhost:8080","https://jobobot.herokuapp.com"]
 }
