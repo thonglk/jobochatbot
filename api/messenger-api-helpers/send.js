@@ -100,6 +100,7 @@ const sendLoggedInWelcomeMessage = (recipientId, username) => {
 };
 
 const sendAcceptPhone = (recipientId, phone) => {
+  console.log('SENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd');
   sendMessage(recipientId, [{
     text: 'Số điện thoại của bạn là ' + phone,
     buttons: [{

@@ -257,11 +257,11 @@ const handleReceiveMessage = (event) => {
       sendApi.sendQuickReplyFindJobs(senderId);
     } else if (messageText === 'DIA CHI' || messageText === 'LOCATION' || messageText === 'VI TRI' || messageText === 'ADDRESS' || messageText === 'VIEC O GAN') {
       sendApi.sendQuickReplyAddress(senderId);
-    } else if (messageText.match(/[0-9]{10,11}/g)) {
+    } else if (messageText.match(/[0-9]{0,13}/g)) {
       console.log('12731y2736172377812y873yh127he1827he8172he87h182eh8172he87h', messageText);
-      sendApi.sendAcceptPhone(senderId, messageText.match(/[0-9]{10,11}/g)[0].replace(/^0/g, ''));
+      sendApi.sendAcceptPhone(senderId, messageText.replace(/^0/g, ''));
     } else if (messageText.match(/.*@.*\..*/g)) {
-      sendApi.sendAcceptEmail(senderId, messageText.match(/.*@.*\..*/g)[0]);
+      sendApi.sendAcceptEmail(senderId, messageText);
     } else {
       sendApi.sendReturnMessage(senderId);
     }
