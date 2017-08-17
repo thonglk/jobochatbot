@@ -32,8 +32,8 @@ if (firebaseApp.options.apiKey === FIRE_BASE[process.env.NODE_ENV].apiKey) {
 }
 // ===== FIRE BASE ADMIN INIT ========================================================
 const firebaseAdApp = firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(FIRE_BASE_ADMIN[process.env.NODE_ENV].cert),
-  databaseURL: FIRE_BASE_ADMIN[process.env.NODE_ENV].databaseURL
+  credential: firebaseAdmin.credential.cert(FIRE_BASE_ADMIN['development'].cert),
+  databaseURL: FIRE_BASE_ADMIN['development'].databaseURL
 });
 
 /* ----------  Views  ---------- */

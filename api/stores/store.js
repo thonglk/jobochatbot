@@ -1,4 +1,6 @@
 import firebase, { database, auth } from 'firebase-admin';
+import axios from 'axios';
+import { APIURL } from 'config/app-config';
 /**
  * Base store class built around ES6 Weak Map
  * @export
@@ -133,6 +135,18 @@ export default class Store {
 
   updateMessenger(id, messengerId) {
     return new Promise((resolve, reject) => {
+      if (id) {
+        const data = JSON.stringify({
+          messengerId
+        });
+        axios.get(`${APIURL}/update/user?userId=${id}&user=${data}`)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
       this.bot.child(messengerId).set(id)
         .then(() => {
           if (id) return this.ref.child(id).update({ messengerId });
