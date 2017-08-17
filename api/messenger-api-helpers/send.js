@@ -106,12 +106,12 @@ const sendAcceptPhone = (recipientId, phone) => {
       "type": "template",
       "payload": {
         "template_type": "button",
-        "text": "Số điện thoại của bạn là " + phone,
+        "text": "Số điện thoại của bạn là 0" + phone,
         "buttons": [{
             type: 'postback',
             title: 'Đúng',
             payload: JSON.stringify({
-              type: 'PHONE_FALSE',
+              type: 'PHONE_TRUE',
               data: {
                 phone: phone,
               },
@@ -121,7 +121,7 @@ const sendAcceptPhone = (recipientId, phone) => {
             type: 'postback',
             title: 'Sai',
             payload: JSON.stringify({
-              type: 'PHONE_TRUE',
+              type: 'PHONE_FALSE',
               data: {
                 phone: phone,
               },
@@ -144,7 +144,7 @@ const sendAcceptEmail = (recipientId, email) => {
             type: 'postback',
             title: 'Đúng',
             payload: JSON.stringify({
-              type: 'EMAIL_FALSE',
+              type: 'EMAIL_TRUE',
               data: {
                 email: email,
               },
@@ -154,7 +154,7 @@ const sendAcceptEmail = (recipientId, email) => {
             type: 'postback',
             title: 'Sai',
             payload: JSON.stringify({
-              type: 'EMAIL_TRUE',
+              type: 'EMAIL_FALSE',
               data: {
                 email: email,
               },
