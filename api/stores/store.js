@@ -145,6 +145,7 @@ export default class Store {
       //     resolve(false);
       //   });
       this.bot.child(messengerId).set(id)
+      .then(() => this.ref.child(id).update({messengerId}))
       .then(() => resolve(true))
       .catch(err => resolve(false));
     });
