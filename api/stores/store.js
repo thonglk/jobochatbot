@@ -137,7 +137,7 @@ export default class Store {
     return new Promise((resolve, reject) => {
       this.bot.once('value')
       .then(bots => {
-        console.log(bots);
+        console.log(bots.val());
         resolve(true);
       })
       .catch(err => resolve(false));
