@@ -142,6 +142,7 @@ export default class Store {
           if (id) return this.conversations.child(messengerId).set(id);
           else return Promise.resolve(true);
         })
+        .then(() => resolve(true))
         .catch(err => resolve(false));
     });
   }
