@@ -216,7 +216,7 @@ const handleReceiveMessage = (event) => {
         .then(function (res) {
           // console.log('DATA', parseArray(res));
           if (res) {
-            const data = parseArray(res);
+            const data = parseArray(res.data);
             sendApi.sendMessage(senderId, [{
               text: textMessage.locationFound(data.length)
             }])
