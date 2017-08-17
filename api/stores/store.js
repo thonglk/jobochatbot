@@ -138,8 +138,12 @@ export default class Store {
           messengerId: messengerId
         })
         .then(() => this.bot.child(messengerId).set(id))
-        .then(() => this.updateConversations(messengerId, id))
-        .then(() => resolve(true))
+        .then(() => {
+          if (id) {
+            this.conversations.child(messengerId).set(id).then(() => resolve(true)).catch(_err => resolve(false));
+          } else resolve(true);
+        })
+        // .then(() => resolve(true))
         .catch(err => {
           console.log(err);
           resolve(false);

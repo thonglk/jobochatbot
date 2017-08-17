@@ -224,9 +224,9 @@ const handleReceiveMessage = (event) => {
   sendApi.sendReadReceipt(senderId);
   // Handle text message
   if (messageText) {
-    if (messageText === 'TIM VIEC' || messageText === 'JOB' || messageText === 'VIEC LAM' || messageText === 'CONG VIEC') {
+    if (messageText === 'TIM VIEC' || messageText === 'JOB' || messageText === 'VIEC LAM' || messageText === 'CONG VIEC' || messageText === 'CHON NGANH NGHE') {
       sendApi.sendQuickReplyFindJobs(senderId);
-    } else if (messageText === 'DIA CHI' || messageText === 'LOCATION' || messageText === 'VI TRI' || messageText === 'ADDRESS') {
+    } else if (messageText === 'DIA CHI' || messageText === 'LOCATION' || messageText === 'VI TRI' || messageText === 'ADDRESS' || messageText === 'VIEC O GAN') {
       sendApi.sendQuickReplyAddress(senderId);
     } else {
       sendApi.sendReturnMessage(senderId);
