@@ -136,6 +136,9 @@ const getStarted = {
       type: 'GET_STARTED',
     }),
   }, ],
+  // "get_started":{
+  //   "payload":"GET_STARTED"
+  // }
 };
 
 const findJobs = {
@@ -183,12 +186,7 @@ const logOutButton = {
   title: 'Đăng xuất',
   payload: JSON.stringify({
     type: 'LOG_OUT'
-  }),
-  // call_to_actions: [{
-  //   payload: JSON.stringify({
-  //     type: 'LOG_OUT',
-  //   }),
-  // }],
+  })
 };
 
 const findJobsButton = {
@@ -204,12 +202,16 @@ const findJobsButton = {
     {
       "title": "Chọn ngành nghề",
       "type": "postback",
-      "payload": "JOBTYPE_PAYLOAD"
+      "payload": JSON.stringify({
+        type: 'CHOSE_JOB'
+      })
     },
     {
       "title": "Việc ở gần",
       "type": "postback",
-      "payload": "JOBLOCATION_PAYLOAD"
+      "payload": JSON.stringify({
+        type: 'LOCATION'
+      })
     }
   ]
 }
@@ -217,16 +219,16 @@ const findJobsButton = {
  * The persistent menu for users to use.
  */
 const persistentMenu = {
-  setting_type: 'call_to_actions',
-  thread_state: 'existing_thread',
-  call_to_actions: [
-    findJobsButton,
-    setJobsButton,
-    logOutButton,
-  ],
+  "persistent_menu": [{
+    locale: "default",
+    composer_input_disabled: false,
+    call_to_actions: [
+      findJobsButton,
+      setJobsButton,
+      logOutButton,
+    ],
+  }]
 };
-
-console.log(persistentMenu);
 
 const genericMessage = (data) => {
   return {

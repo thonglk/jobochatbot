@@ -165,18 +165,27 @@ const handleReceivePostback = (event) => {
       .then(() => sendApi.sendWelcomeMessage(senderId));
     break;
   case 'LOG_OUT':
-    UserStore.linkMessengerAccount(userId, senderId)
-      .then(linkedUser => {
-        // if (addNew) sendApi.sendSignUpSuccessMessage(senderId);
-        sendApi.sendSignInSuccessMessage(senderId, linkedUser.name);
-      })
-      .catch(err => {
-        console.log(err);
-        sendApi.sendMessage(
-          senderId, [{
-            text: textMessage.loginFail
+    UserStore.unlinkMessengerAccount(senderId)
+      .then(status => {
+        if (status) {
+          auth()
+            .signOut()
+            .then(() => {
+              return sendSignOutSuccessMessage(senderId);
+            })
+            .catch(err => console.log(err));
+        } else {
+          sendApi.sendMessage(senderId, [{
+            text: textMessage.logoutFail
           }]);
+        }
       });
+    break;
+  case 'CHOSE_JOB':
+    sendApi.sendQuickReplyFindJobs(senderId);
+    break;
+  case 'LOCATION':
+    sendApi.sendQuickReplyAddress(senderId);
     break;
   default:
     console.error(`Unknown Postback called: ${type}`);

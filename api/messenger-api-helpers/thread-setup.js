@@ -37,7 +37,7 @@ const setDomainWhitelisting = () => {
  * @returns {undefined}
  */
 const setPersistentMenu = () => {
-  api.callThreadAPI(messages.persistentMenu);
+  api.callMenuAPI(messages.persistentMenu);
 };
 
 /**
