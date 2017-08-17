@@ -178,6 +178,16 @@ const setJobsButton = {
   messenger_extensions: true,
 };
 
+const logOutButton = {
+  type: 'postback',
+  title: 'Đăng xuất',
+  call_to_actions: [{
+    payload: JSON.stringify({
+      type: 'LOG_OUT',
+    }),
+  }],
+};
+
 /**
  * The persistent menu for users to use.
  */
@@ -186,6 +196,7 @@ const persistentMenu = {
   thread_state: 'existing_thread',
   call_to_actions: [
     setJobsButton,
+    logOutButton,
   ],
 };
 
