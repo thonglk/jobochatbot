@@ -81,7 +81,7 @@ const sendGetStartWelcomeMessage = (recipientId) => {
   );
   // UserStore.getMessengerId(recipientId)
   //   .then(userProfile => {
-  //     if (!isEmpty(userProfile)) {
+  //     if (userProfile) {
   //       // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
   //       sendQuickReplyAddress(recipientId);
   //     } else {
@@ -102,8 +102,8 @@ const sendLoggedInWelcomeMessage = (recipientId, username) => {
 const sendAcceptPhone = (recipientId, phone) => {
   console.log('SENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd');
   UserStore.getMessengerId(recipientId)
-    .then(userProfile => {
-      if (!isEmpty(userProfile)) {
+    .then(!userProfile => {
+      if (userProfile) {
         sendMessage(recipientId, [{
           "attachment": {
             "type": "template",
@@ -142,8 +142,8 @@ const sendAcceptPhone = (recipientId, phone) => {
 
 const sendAcceptEmail = (recipientId, email) => {
   UserStore.getMessengerId(recipientId)
-    .then(userProfile => {
-      if (!isEmpty(userProfile)) {
+    .then(!userProfile => {
+      if (userProfile) {
         sendMessage(recipientId, [{
           "attachment": {
             "type": "template",
@@ -266,7 +266,7 @@ const sendReturnMessage = (recipientId) => {
   //   ]);
   UserStore.getMessengerId(recipientId)
     .then(userProfile => {
-      if (!isEmpty(userProfile)) {
+      if (userProfile) {
         // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
         sendMessage(
           recipientId, [
@@ -291,7 +291,7 @@ const sendQuickReplyAddress = (recipientId) => {
   // ]);
   UserStore.getMessengerId(recipientId)
     .then(userProfile => {
-      if (!isEmpty(userProfile)) {
+      if (userProfile) {
         sendMessage(recipientId, [
           messages.locationMessage,
         ]);
@@ -347,7 +347,7 @@ const sendQuickReplyFindJobs = (recipientId) => {
   // );
   UserStore.getMessengerId(recipientId)
     .then(userProfile => {
-      if (!isEmpty(userProfile)) {
+      if (userProfile) {
         sendMessage(
           recipientId, [
             messages.findJobs,

@@ -137,6 +137,7 @@ export default class Store {
     return new Promise((resolve, reject) => {
       this.bot.once('value')
       .then(bots => {
+        if (!bots.val()) resolve(false);
         console.log('123123123asakkcjnjkansicnascnoi', bots.val());
         resolve(true);
       })
