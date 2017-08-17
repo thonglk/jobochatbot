@@ -1,7 +1,7 @@
 import express from 'express';
 import {
   VALIDATION_TOKEN,
-} from 'app-config';
+} from 'config/app-config';
 
 // ===== MESSENGER =============================================================
 import receiveApi from 'messenger-api-helpers/receive';

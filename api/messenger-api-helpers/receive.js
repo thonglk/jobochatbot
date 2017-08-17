@@ -12,7 +12,10 @@ import sendApi from './send';
 import UserStore from 'stores/user_store';
 import textMessage from 'stores/text-messages';
 import axios from 'axios';
-import { CONFIG } from 'app-config';
+
+// ==== CONFIG ============================================================
+import DATA from 'config/data-config';
+import { APIURL } from 'config/app-config';
 
 const handleReceivedAuthentication = (event) => {
   const senderId = event.sender.id;
@@ -164,7 +167,10 @@ const handleReceivePostback = (event) => {
  */
 
 const parseArray = (obj) => {
-  return Object.keys(obj).map(key => obj[key]);
+  const array = Object.keys(obj).map(key => {
+    console.log('PARSINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG', key);
+    return obj[key];
+  });
 }
 
 const handleReceiveMessage = (event) => {
@@ -203,12 +209,12 @@ const handleReceiveMessage = (event) => {
   if (messageAttachments) {
     if (messageAttachments[0] && messageAttachments[0].payload && messageAttachments[0].payload.coordinates) {
       const location = messageAttachments[0].payload.coordinates
-      const url = `${CONFIG.APIURL}/dash/job?lat=${location.lat}&lng=${location.long}`;
+      const url = `${APIURL}/dash/job?lat=${location.lat}&lng=${location.long}`;
       // const url = 'https://jobohihi.herokuapp.com/dash/job?lat=10.7871254&lng=106.6755164';
       let body = '';
       axios.get(url)
         .then(function (res) {
-          console.log('DATA', parseArray(res));
+          // console.log('DATA', parseArray(res));
           if (res) {
             const data = parseArray(res);
             sendApi.sendMessage(senderId, [{

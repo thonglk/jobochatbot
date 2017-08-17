@@ -16,22 +16,24 @@ import PrettyError from 'pretty-error';
 // ===== MESSENGER =============================================================
 import ThreadSetup from 'messenger-api-helpers/thread-setup';
 // ===== APP CONFIG ============================================================
-import { APP_SECRET, FIRE_BASE, FIRE_BASE_ADMIN } from 'app-config.js';
+import { APP_SECRET, FIRE_BASE, FIRE_BASE_ADMIN } from 'config/app-config.js';
 // ===== CONFIG PRETTY ERROR ===================================================
+import config from 'config';
 const pretty = new PrettyError();
 const app = express();
 
 app.set('port', process.env.PORT || process.env.APIPORT || 5000);
+// console.log(FIRE_BASE[process.env.NODE_ENV]);
 // ===== FIRE BASE INIT ========================================================
-const firebaseApp = firebase.initializeApp(FIRE_BASE);
+const firebaseApp = firebase.initializeApp(FIRE_BASE[process.env.NODE_ENV]);
 
-if (firebaseApp.options.apiKey === FIRE_BASE.apiKey) {
+if (firebaseApp.options.apiKey === FIRE_BASE[process.env.NODE_ENV].apiKey) {
   console.log('==> 🛢 Firebase is connected 😉');
 }
 // ===== FIRE BASE ADMIN INIT ========================================================
 const firebaseAdApp = firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(FIRE_BASE_ADMIN),
-  databaseURL: FIRE_BASE.databaseURL
+  credential: firebaseAdmin.credential.cert(FIRE_BASE_ADMIN[process.env.NODE_ENV].cert),
+  databaseURL: FIRE_BASE_ADMIN[process.env.NODE_ENV].databaseURL
 });
 
 /* ----------  Views  ---------- */
@@ -104,7 +106,7 @@ app.use(function (err, req, res) {
 });
 
 /* ----------  Messenger setup  ---------- */
-ThreadSetup.setDomainWhitelisting();
+if (process.env.NODE_ENV !== 'development') ThreadSetup.setDomainWhitelisting();
 ThreadSetup.setPersistentMenu();
 ThreadSetup.setGetStarted();
 
@@ -112,4 +114,5 @@ app.listen(app.get('port'), () => {
   console.log('Node app is running on port', app.get('port')); // eslint-disable-line
 });
 
+// console.log(config.webURL);
 export default app;

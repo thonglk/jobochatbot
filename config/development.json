@@ -3,5 +3,7 @@
     "pageAccessToken": "EAAZAsqUIyieIBAJ9oToMT2BteWPEu4CawrcjEmSTpZCdIIKwJ8lepuc3yewwfyRm8nBm8NEvhcrUl5y8XeZBj1teTJGVs6z6ZBUDRiBjKhvt6VQkcYr8YMqzZAuZAAVqmMJSQYaN1sTDSlucWubMHIHi09hHi9bnHgTZBnnZAwcwAgODqbM3p54l",
     "validationToken": "jobobot",
     "serverURL": "https://jobo-bot.herokuapp.com/",
-    "apiURL": "https://joboapp-hvd.herokuapp.com"
+    "apiURL": "https://joboapp-hvd.herokuapp.com",
+    "webURL": "https://joboapp.com",
+    "whiteListDomains": ["https://jobo-bot.herokuapp.com/", "https://joboapp.com/", "http://localhost:3030/", "https://jobohihi.herokuapp.com"]
 }

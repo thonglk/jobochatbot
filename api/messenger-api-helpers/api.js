@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 // ===== MODULES ===============================================================
 import request from 'request';
 
-import { PAGE_ACCESS_TOKEN } from 'app-config';
+import { PAGE_ACCESS_TOKEN } from 'config/app-config';
 
 /**
  * Send messages in order to the Facebook graph API.

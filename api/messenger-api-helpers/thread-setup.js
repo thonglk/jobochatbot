@@ -8,7 +8,7 @@
 // ===== MESSENGER =============================================================
 import messages from './messages';
 import api from './api';
-import { SERVER_URL } from 'app-config';
+import { SERVER_URL, WHITE_LIST_DOMAINS } from 'config/app-config';
 
 /**
  * Adds the server url to the Messenger App's whitelist.
@@ -22,7 +22,7 @@ const setDomainWhitelisting = () => {
   api.callThreadAPI(
     {
       setting_type: 'domain_whitelisting',
-      whitelisted_domains: [SERVER_URL, 'https://joboapp.com/', 'http://localhost:3030/', 'https://jobohihi.herokuapp.com'],
+      whitelisted_domains: WHITE_LIST_DOMAINS,
       domain_action_type: 'add',
     },
     {

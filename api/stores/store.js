@@ -184,6 +184,26 @@ export default class Store {
         });
     });
   }
+
+  authenticate(email, password) {
+    return new Promise((resolve, reject) => {
+      auth().getUserByEmail(email)
+      .then(_user => {
+        const user = _user.toJSON();
+        console.log(user);
+        if (user.password === password) resolve(user);
+        else {
+          let error = new Error('Authentication failed');
+          error.code = 403;
+          reject(error);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+    });
+  }
   //Storage firebase...
   ////.....
 }
