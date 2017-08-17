@@ -139,6 +139,7 @@ export default class Store {
         const data = JSON.stringify({
           messengerId
         });
+        console.log('LSDJLSJDLKJSNSNCJSNCJNSJn1982y31n 189hasiudhasnd7yh 1', data);
         axios.get(`${APIURL}/update/user?userId=${id}&user=${data}`)
           .then(function (response) {
             console.log(response);
