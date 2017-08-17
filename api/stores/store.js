@@ -133,23 +133,17 @@ export default class Store {
 
   updateMessenger(id, messengerId) {
     return new Promise((resolve, reject) => {
-      this.bot.child(messengerId).set(id)
-      .then(() => resolve(true))
-      .catch(err => {
-        console.log(err);
-        resolve(false);
-      });
-    //   this.ref.child(id)
-    //     .update({
-    //       messengerId: messengerId
-    //     })
-    //     .then(() => this.bot.child(messengerId).set(id))
-    //     .then(() =>  resolve(true))
-    //     // .then(() => resolve(true))
-    //     .catch(err => {
-    //       console.log(err);
-    //       resolve(false);
-    //     });
+      this.ref.child(id)
+        .update({
+          messengerId: messengerId
+        })
+        // .then(() => this.bot.child(messengerId).set(id))
+        .then(() => resolve(true))
+        // .then(() => resolve(true))
+        .catch(err => {
+          console.log(err);
+          resolve(false);
+        });
     });
   }
 
