@@ -8,12 +8,11 @@ const FIRE_BASE = {
     "messagingSenderId": "484089476261"
   },
   production: {
-    apiKey: "AIzaSyBmGitstHLBeb5-Y4HzQYkm0OnmyHjLm-4",
-    authDomain: "jobfast-359da.firebaseapp.com",
-    databaseURL: "https://jobfast-359da.firebaseio.com",
-    projectId: "jobfast-359da",
-    storageBucket: "jobfast-359da.appspot.com",
-    messagingSenderId: "1075962129210"
+    apiKey: "AIzaSyAjXzJb9LI2_4hpp9NMwuqFr1CWLavwDPA",
+    authDomain: "jobo-b8204.firebaseapp.com",
+    databaseURL: "https://jobo-b8204.firebaseio.com",
+    storageBucket: "jobo-b8204.appspot.com",
+    messagingSenderId: "748631498782"
   }
 }
 

@@ -12,6 +12,7 @@ import sendApi from './send';
 import UserStore from 'stores/user_store';
 import textMessage from 'stores/text-messages';
 import axios from 'axios';
+import firebase, { auth } from 'firebase';
 
 // ==== CONFIG ============================================================
 import DATA from 'config/data-config';
@@ -119,10 +120,18 @@ const handleReceiveAccountLink = (event) => {
   case 'unlinked':
     UserStore.unlinkMessengerAccount(senderId)
       .then(status => {
-        status ? sendApi.sendSignOutSuccessMessage(senderId) : sendApi.sendMessage(
-          senderId, [{
+        if (status) {
+          auth()
+            .signOut()
+            .then(() => {
+              return sendSignOutSuccessMessage(senderId);
+            })
+            .catch(err => console.log(err));
+        } else {
+          sendApi.sendMessage(senderId, [{
             text: textMessage.logoutFail
           }]);
+        }
       });
     break;
   default:
@@ -151,7 +160,23 @@ const handleReceivePostback = (event) => {
   // Handle postback type
   switch (type) {
   case 'GET_STARTED':
-    sendApi.sendWelcomeMessage(senderId);
+    // sendApi.sendWelcomeMessage(senderId);
+    UserStore.updateConversations(senderId)
+      .then(() => sendApi.sendWelcomeMessage(senderId));
+    break;
+  case 'LOG_OUT':
+    UserStore.linkMessengerAccount(userId, senderId)
+      .then(linkedUser => {
+        // if (addNew) sendApi.sendSignUpSuccessMessage(senderId);
+        sendApi.sendSignInSuccessMessage(senderId, linkedUser.name);
+      })
+      .catch(err => {
+        console.log(err);
+        sendApi.sendMessage(
+          senderId, [{
+            text: textMessage.loginFail
+          }]);
+      });
     break;
   default:
     console.error(`Unknown Postback called: ${type}`);

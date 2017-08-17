@@ -120,6 +120,7 @@ router.route('/login')
         linkAccountToMessenger(res, userLogin.uid, redirectURI);
       })
       .catch(err => {
+        console.log(err);
         res.render('users/login', {
           redirectURI,
           username,

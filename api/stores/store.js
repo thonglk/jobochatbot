@@ -8,6 +8,7 @@ export default class Store {
   constructor() {
     this.ref = database().ref('/users/');
     this.bot = database().ref('/facebook-bot/');
+    this.conversations = database().ref('/conversations/');
   }
   /**
    * Get user by id
@@ -19,7 +20,6 @@ export default class Store {
       if (!id) resolve(null);
       this.ref.child(id).once('value')
         .then(user => {
-          // console.log(user.val());
           resolve(user.val());
         })
         .catch(err => {
@@ -143,6 +143,19 @@ export default class Store {
           console.log(err);
           resolve(false);
         });
+    });
+  }
+
+  updateConversations(messengerId, userId) {
+    return new Promise((resolve, reject) => {
+      const id = userId || "null";
+      this.conversations.child(messengerId)
+      .set(id)
+      .then(() => resolve(true))
+      .catch(err => {
+        console.log(err);
+        resolve(false);
+      });
     });
   }
 

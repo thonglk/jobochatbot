@@ -106,7 +106,7 @@ app.use(function (err, req, res) {
 });
 
 /* ----------  Messenger setup  ---------- */
-if (process.env.NODE_ENV !== 'development') ThreadSetup.setDomainWhitelisting();
+// if (process.env.NODE_ENV !== 'development') ThreadSetup.setDomainWhitelisting();
 ThreadSetup.setPersistentMenu();
 ThreadSetup.setGetStarted();
 
