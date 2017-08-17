@@ -166,13 +166,6 @@ const handleReceivePostback = (event) => {
  * docs/messenger-platform/webhook-reference/message-received
  */
 
-const parseArray = (obj) => {
-  const array = Object.keys(obj).map(key => {
-    console.log('PARSINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG', key);
-    return obj[key];
-  });
-}
-
 const handleReceiveMessage = (event) => {
   const message = event.message;
   const senderId = event.sender.id;
@@ -216,7 +209,7 @@ const handleReceiveMessage = (event) => {
         .then(function (res) {
           // console.log('DATA', parseArray(res));
           if (res) {
-            const data = parseArray(res.data);
+            const data = res.data;
             sendApi.sendMessage(senderId, [{
               text: textMessage.locationFound(data.length)
             }])
