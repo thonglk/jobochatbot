@@ -124,7 +124,7 @@ const handleReceiveAccountLink = (event) => {
           auth()
             .signOut()
             .then(() => {
-              return sendSignOutSuccessMessage(senderId);
+              return sendApi.sendSignOutSuccessMessage(senderId);
             })
             .catch(err => console.log(err));
         } else {
@@ -171,7 +171,7 @@ const handleReceivePostback = (event) => {
           auth()
             .signOut()
             .then(() => {
-              return sendSignOutSuccessMessage(senderId);
+              return sendApi.sendSignOutSuccessMessage(senderId);
             })
             .catch(err => console.log(err));
         } else {

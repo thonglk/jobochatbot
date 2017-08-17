@@ -225,7 +225,7 @@ const persistentMenu = {
     call_to_actions: [
       findJobsButton,
       setJobsButton,
-      logOutButton,
+      // logOutButton,
     ],
   }]
 };

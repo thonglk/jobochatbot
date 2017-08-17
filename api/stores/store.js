@@ -139,9 +139,7 @@ export default class Store {
         })
         .then(() => this.bot.child(messengerId).set(id))
         .then(() => {
-          if (id) {
-            this.conversations.child(messengerId).set(id).then(() => resolve(true)).catch(_err => resolve(false));
-          } else resolve(true);
+           resolve(true);
         })
         // .then(() => resolve(true))
         .catch(err => {
