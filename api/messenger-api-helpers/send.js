@@ -102,55 +102,67 @@ const sendLoggedInWelcomeMessage = (recipientId, username) => {
 const sendAcceptPhone = (recipientId, phone) => {
   console.log('SENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd');
   sendMessage(recipientId, [{
-    title: 'Số điện thoại của bạn là ' + phone,
-    buttons: [{
-        type: 'postback',
-        title: 'Đúng',
-        payload: JSON.stringify({
-          type: 'PHONE_FALSE',
-          data: {
-            phone: phone,
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "button",
+        "text": "Số điện thoại của bạn là " + phone,
+        "buttons": [{
+            type: 'postback',
+            title: 'Đúng',
+            payload: JSON.stringify({
+              type: 'PHONE_FALSE',
+              data: {
+                phone: phone,
+              },
+            }),
           },
-        }),
-      },
-      {
-        type: 'postback',
-        title: 'Sai',
-        payload: JSON.stringify({
-          type: 'PHONE_TRUE',
-          data: {
-            phone: phone,
-          },
-        }),
-      },
-    ],
+          {
+            type: 'postback',
+            title: 'Sai',
+            payload: JSON.stringify({
+              type: 'PHONE_TRUE',
+              data: {
+                phone: phone,
+              },
+            }),
+          }
+        ]
+      }
+    }
   }]);
 };
 
 const sendAcceptEmail = (recipientId, email) => {
   sendMessage(recipientId, [{
-    title: 'Email của bạn là ' + email,
-    buttons: [{
-        type: 'postback',
-        title: 'Đúng',
-        payload: JSON.stringify({
-          type: 'EMAIL_FALSE',
-          data: {
-            email: email,
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "button",
+        "text": "Email của bạn là " + email,
+        "buttons": [{
+            type: 'postback',
+            title: 'Đúng',
+            payload: JSON.stringify({
+              type: 'EMAIL_FALSE',
+              data: {
+                email: email,
+              },
+            }),
           },
-        }),
-      },
-      {
-        type: 'postback',
-        title: 'Sai',
-        payload: JSON.stringify({
-          type: 'EMAIL_TRUE',
-          data: {
-            email: email,
-          },
-        }),
-      },
-    ],
+          {
+            type: 'postback',
+            title: 'Sai',
+            payload: JSON.stringify({
+              type: 'EMAIL_TRUE',
+              data: {
+                email: email,
+              },
+            }),
+          }
+        ]
+      }
+    }
   }]);
 };
 
