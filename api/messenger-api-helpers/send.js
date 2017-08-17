@@ -246,23 +246,23 @@ const sendNotFoundEmail = (recipientId) => {
 // Send a different Welcome message based on if the user is logged in.
 const sendReturnMessage = (recipientId) => {
 
-  sendMessage(
-    recipientId, [
-      messages.napMessage
-    ]);
-  // UserStore.getByMessengerId(recipientId)
-  //   .then(userProfile => {
-  //     if (!isEmpty(userProfile)) {
-  //       // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
-  //       sendMessage(
-  //         recipientId, [
-  //           messages.napMessage
-  //         ]);
-  //       sendQuickReplyAddress(recipientId);
-  //     } else {
-  //       sendLoggedOutWelcomeMessage(recipientId);
-  //     }
-  //   });
+  // sendMessage(
+  //   recipientId, [
+  //     messages.napMessage
+  //   ]);
+  UserStore.getByMessengerId(recipientId)
+    .then(userProfile => {
+      if (!isEmpty(userProfile)) {
+        // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
+        sendMessage(
+          recipientId, [
+            messages.napMessage
+          ]);
+        sendQuickReplyAddress(recipientId);
+      } else {
+        sendLoggedOutWelcomeMessage(recipientId);
+      }
+    });
 };
 
 /**
@@ -272,19 +272,19 @@ const sendReturnMessage = (recipientId) => {
  */
 const sendQuickReplyAddress = (recipientId) => {
 
-  sendMessage(recipientId, [
-    messages.locationMessage,
-  ]);
-  // UserStore.getByMessengerId(recipientId)
-  //   .then(userProfile => {
-  //     if (!isEmpty(userProfile)) {
-  //       sendMessage(recipientId, [
-  //         messages.locationMessage,
-  //       ]);
-  //     } else {
-  //       sendLoggedOutWelcomeMessage(recipientId);
-  //     }
-  //   });
+  // sendMessage(recipientId, [
+  //   messages.locationMessage,
+  // ]);
+  UserStore.getByMessengerId(recipientId)
+    .then(userProfile => {
+      if (!isEmpty(userProfile)) {
+        sendMessage(recipientId, [
+          messages.locationMessage,
+        ]);
+      } else {
+        sendLoggedOutWelcomeMessage(recipientId);
+      }
+    });
 }
 
 const sendWelcomeMessage = (recipientId) => {
@@ -326,23 +326,23 @@ const sendReadReceipt = (recipientId) => {
 
 
 const sendQuickReplyFindJobs = (recipientId) => {
-  sendMessage(
-    recipientId, [
-      messages.findJobs,
-    ]
-  );
-  // UserStore.getByMessengerId(recipientId)
-  //   .then(userProfile => {
-  //     if (!isEmpty(userProfile)) {
-  //       sendMessage(
-  //         recipientId, [
-  //           messages.findJobs,
-  //         ]
-  //       );
-  //     } else {
-  //       sendLoggedOutWelcomeMessage(recipientId);
-  //     }
-  //   });
+  // sendMessage(
+  //   recipientId, [
+  //     messages.findJobs,
+  //   ]
+  // );
+  UserStore.getByMessengerId(recipientId)
+    .then(userProfile => {
+      if (!isEmpty(userProfile)) {
+        sendMessage(
+          recipientId, [
+            messages.findJobs,
+          ]
+        );
+      } else {
+        sendLoggedOutWelcomeMessage(recipientId);
+      }
+    });
 }
 
 
