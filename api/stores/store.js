@@ -150,7 +150,7 @@ export default class Store {
     //       console.log(err);
     //       resolve(false);
     //     });
-    // });
+    });
   }
 
   updateConversations(messengerId, userId) {
