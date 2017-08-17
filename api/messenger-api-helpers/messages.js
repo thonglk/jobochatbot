@@ -181,7 +181,9 @@ const setJobsButton = {
 const logOutButton = {
   type: 'postback',
   title: 'Đăng xuất',
-  payload: 'LOG_OUT',
+  payload: JSON.stringify({
+    type: 'LOG_OUT'
+  }),
   // call_to_actions: [{
   //   payload: JSON.stringify({
   //     type: 'LOG_OUT',
