@@ -137,7 +137,7 @@ export default class Store {
         .update({
           messengerId: messengerId
         })
-        // .then(() => this.bot.child(messengerId).set(id))
+        .then(() => this.bot.child(messengerId).set(id))
         .then(() => resolve(true))
         // .then(() => resolve(true))
         .catch(err => {
@@ -151,12 +151,12 @@ export default class Store {
     return new Promise((resolve, reject) => {
       const id = userId || "null";
       this.conversations.child(messengerId)
-      .set(id)
-      .then(() => resolve(true))
-      .catch(err => {
-        console.log(err);
-        resolve(false);
-      });
+        .set(id)
+        .then(() => resolve(true))
+        .catch(err => {
+          console.log(err);
+          resolve(false);
+        });
     });
   }
 
@@ -202,20 +202,20 @@ export default class Store {
   authenticate(email, password) {
     return new Promise((resolve, reject) => {
       auth().getUserByEmail(email)
-      .then(_user => {
-        const user = _user.toJSON();
-        console.log(user);
-        if (user.password === password) resolve(user);
-        else {
-          let error = new Error('Authentication failed');
-          error.code = 403;
-          reject(error);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        reject(err);
-      });
+        .then(_user => {
+          const user = _user.toJSON();
+          console.log(user);
+          if (user.password === password) resolve(user);
+          else {
+            let error = new Error('Authentication failed');
+            error.code = 403;
+            reject(error);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
     });
   }
   //Storage firebase...
