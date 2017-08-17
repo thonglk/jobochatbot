@@ -213,6 +213,8 @@ const handleReceivePostback = (event) => {
     const { email } = JSON.parse(event.postback.payload).data;
     axios.get(`${APIURL}/checkUser?q=${email}`)
       .then(users => {
+        console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
+        console.log('LENGTHHHHHHHHHHHH', users.data.length);
         if (users.data.length > 0) {
           UserStore.updateMessengerByPhone(senderId, email).then(() => sendApi.sendWelcomeByEmail(senderId, users.data[0].name));
         } else sendApi.sendNotFoundEmail(senderId);
@@ -262,7 +264,7 @@ const handleReceiveMessage = (event) => {
       sendApi.sendQuickReplyAddress(senderId);
     } else if (messageText.match(/.*@.*\..*/g)) {
       sendApi.sendAcceptEmail(senderId, messageText);
-    } else if (messageText.match(/[0-9]{0,13}/g)) {
+    } else if (messageText.match(/[0-9]{0,13}/g)[0]) {
       console.log('12731y2736172377812y873yh127he1827he8172he87h182eh8172he87h', messageText);
       sendApi.sendAcceptPhone(senderId, messageText.replace(/^0/g, ''));
     } else {
