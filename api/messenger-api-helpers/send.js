@@ -79,7 +79,7 @@ const sendGetStartWelcomeMessage = (recipientId) => {
       }
     ]
   );
-  // UserStore.getByMessengerId(recipientId)
+  // UserStore.getMessengerId(recipientId)
   //   .then(userProfile => {
   //     if (!isEmpty(userProfile)) {
   //       // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
@@ -250,7 +250,7 @@ const sendReturnMessage = (recipientId) => {
   //   recipientId, [
   //     messages.napMessage
   //   ]);
-  UserStore.getByMessengerId(recipientId)
+  UserStore.getMessengerId(recipientId)
     .then(userProfile => {
       if (!isEmpty(userProfile)) {
         // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
@@ -275,7 +275,7 @@ const sendQuickReplyAddress = (recipientId) => {
   // sendMessage(recipientId, [
   //   messages.locationMessage,
   // ]);
-  UserStore.getByMessengerId(recipientId)
+  UserStore.getMessengerId(recipientId)
     .then(userProfile => {
       if (!isEmpty(userProfile)) {
         sendMessage(recipientId, [
@@ -331,7 +331,7 @@ const sendQuickReplyFindJobs = (recipientId) => {
   //     messages.findJobs,
   //   ]
   // );
-  UserStore.getByMessengerId(recipientId)
+  UserStore.getMessengerId(recipientId)
     .then(userProfile => {
       if (!isEmpty(userProfile)) {
         sendMessage(

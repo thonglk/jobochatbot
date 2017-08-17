@@ -133,6 +133,17 @@ export default class Store {
     });
   }
 
+  getMessengerId(messengerId) {
+    return new Promise((resolve, reject) => {
+      this.bot.once('value')
+      .then(bots => {
+        console.log(bots);
+        resolve(true);
+      })
+      .catch(err => resolve(false));
+    });
+  }
+
   updateMessengerByPhone(messengerId, phone) {
     return new Promise((resolve, reject) => {
       this.bot.child(messengerId).set(phone)
