@@ -102,8 +102,8 @@ const sendLoggedInWelcomeMessage = (recipientId, username) => {
 const sendAcceptPhone = (recipientId, phone) => {
   console.log('SENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd');
   UserStore.getMessengerId(recipientId)
-    .then(!userProfile => {
-      if (userProfile) {
+    .then(userProfile => {
+      if (!userProfile) {
         sendMessage(recipientId, [{
           "attachment": {
             "type": "template",
@@ -142,8 +142,8 @@ const sendAcceptPhone = (recipientId, phone) => {
 
 const sendAcceptEmail = (recipientId, email) => {
   UserStore.getMessengerId(recipientId)
-    .then(!userProfile => {
-      if (userProfile) {
+    .then(userProfile => {
+      if (!userProfile) {
         sendMessage(recipientId, [{
           "attachment": {
             "type": "template",
