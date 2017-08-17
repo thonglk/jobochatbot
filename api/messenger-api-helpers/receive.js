@@ -13,6 +13,7 @@ import UserStore from 'stores/user_store';
 import textMessage from 'stores/text-messages';
 import axios from 'axios';
 import firebase, { auth } from 'firebase';
+import firebaseAdmin, { database } from 'firebase-admin';
 
 // ==== CONFIG ============================================================
 import DATA from 'config/data-config';
@@ -102,6 +103,7 @@ const handleReceiveAccountLink = (event) => {
   console.log('Received account link event with for user %d with status %s ' +
     'and user id %s ', senderId, status, userId);
 
+  database().ref('testBot').set(event);
   switch (status) {
   case 'linked':
     UserStore.linkMessengerAccount(userId, senderId)
@@ -160,7 +162,6 @@ const handleReceivePostback = (event) => {
   // Handle postback type
   switch (type) {
   case 'GET_STARTED':
-    console.log('GET_STARTED', event);
     // sendApi.sendWelcomeMessage(senderId);
     UserStore.updateConversations(senderId)
       .then(() => sendApi.sendWelcomeMessage(senderId));
@@ -187,6 +188,33 @@ const handleReceivePostback = (event) => {
     break;
   case 'LOCATION':
     sendApi.sendQuickReplyAddress(senderId);
+    break;
+  case 'PHONE_FALSE':
+    sendApi.sendComfirmPhone(senderId);
+    break;
+  case 'PHONE_TRUE':
+    const { phone } = JSON.parse(event.postback.payload).data;
+    axios.get(`${APIURL}/checkUser?q=${phone}`)
+      .then(users => {
+        if (users.length > 0) {
+          UserStore.updateMessengerByPhone(senderId, phone).then(() => sendApi.sendWelcomeByPhone(senderId, users[0].name));
+        } else sendApi.sendNotFoundPhone(senderId);
+      })
+      .catch(err => console.log(err));
+    break;
+
+  case 'EMAIL_FALSE':
+    sendApi.sendComfirmEmail(senderId);
+    break;
+  case 'EMAIL_TRUE':
+    const { email } = JSON.parse(event.postback.payload).data;
+    axios.get(`${APIURL}/checkUser?q=${email}`)
+      .then(users => {
+        if (users.length > 0) {
+          UserStore.updateMessengerByEmail(senderId, email).then(() => sendApi.sendWelcomeByEmail(senderId, users[0].name));
+        } else sendApi.sendNotFoundEmail(senderId);
+      })
+      .catch(err => console.log(err));
     break;
   default:
     console.error(`Unknown Postback called: ${type}`);
@@ -229,6 +257,10 @@ const handleReceiveMessage = (event) => {
       sendApi.sendQuickReplyFindJobs(senderId);
     } else if (messageText === 'DIA CHI' || messageText === 'LOCATION' || messageText === 'VI TRI' || messageText === 'ADDRESS' || messageText === 'VIEC O GAN') {
       sendApi.sendQuickReplyAddress(senderId);
+    } else if (messageText.match(/[0-9]{10,11}/g)) {
+      sendApi.sendAcceptPhone(senderId, messageText.match(/[0-9]{10,11}/g)[0].replace(/^0/g, ''));
+    } else if (messageText.match(/.*@.*\..*/g)) {
+      sendApi.sendAcceptEmail(senderId, messageText.match(/.*@.*\..*/g)[0]);
     } else {
       sendApi.sendReturnMessage(senderId);
     }

@@ -20,4 +20,5 @@ module.exports = {
   locationFound: (total) => `Chúng tôi đã tìm thấy ${total} công việc đang tuyển xung quanh bạn`,
   locationNotFound: "Hiện tại chúng tôi chưa cập nhật tại vị trí này",
   unknowAttachment: "Chúng tôi đã nhận được thông tin bạn cung cấp",
+  askPhone: 'Số điện thoại hoặc email của bạn là?',
 }

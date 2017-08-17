@@ -60,31 +60,36 @@ const sendMessage = (recipientId, messagePayloads) => {
 const sendLoggedOutWelcomeMessage = (recipientId) => {
   sendMessage(
     recipientId, [
-      messages.signOutSuccessMessage,
+      // messages.signOutSuccessMessage,
+      {
+        text: textMessages.askPhone
+      }
     ]
   );
 };
 
 // Send a welcome message for a non signed-in user.
 const sendGetStartWelcomeMessage = (recipientId) => {
-  UserStore.getByMessengerId(recipientId)
-    .then(userProfile => {
-      sendMessage(
-        recipientId, [{
-            text: textMessages.welcome,
-          },
-          // ,
-        ]
-      );
-      if (!isEmpty(userProfile)) {
-        // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
-        sendQuickReplyAddress(recipientId);
-      } else {
-        sendMessage(recipientId, [
-          messages.createAccountMessage
-        ])
+  sendMessage(
+    recipientId, [{
+        text: textMessages.welcome,
+      },
+      {
+        text: textMessages.askPhone
       }
-    });
+    ]
+  );
+  // UserStore.getByMessengerId(recipientId)
+  //   .then(userProfile => {
+  //     if (!isEmpty(userProfile)) {
+  //       // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
+  //       sendQuickReplyAddress(recipientId);
+  //     } else {
+  //       sendMessage(recipientId, [
+  //         messages.createAccountMessage
+  //       ])
+  //     }
+  //   });
 };
 // Send a welcome message for a signed in user.
 const sendLoggedInWelcomeMessage = (recipientId, username) => {
@@ -94,8 +99,104 @@ const sendLoggedInWelcomeMessage = (recipientId, username) => {
     ]);
 };
 
+const sendAcceptPhone = (recipientId, phone) => {
+  sendMessage(recipientId, [{
+    text: 'Số điện thoại của bạn là ' + phone,
+    buttons: [{
+        type: 'postback',
+        title: 'Đúng',
+        payload: JSON.stringify({
+          type: 'PHONE_FALSE',
+          data: {
+            phone: phone,
+          },
+        }),
+      },
+      {
+        type: 'postback',
+        title: 'Sai',
+        payload: JSON.stringify({
+          type: 'PHONE_TRUE',
+          data: {
+            phone: phone,
+          },
+        }),
+      },
+    ],
+  }]);
+};
+
+const sendAcceptEmail = (recipientId, email) => {
+  sendMessage(recipientId, [{
+    text: 'Email của bạn là ' + email,
+    buttons: [{
+        type: 'postback',
+        title: 'Đúng',
+        payload: JSON.stringify({
+          type: 'EMAIL_FALSE',
+          data: {
+            email: email,
+          },
+        }),
+      },
+      {
+        type: 'postback',
+        title: 'Sai',
+        payload: JSON.stringify({
+          type: 'EMAIL_TRUE',
+          data: {
+            email: email,
+          },
+        }),
+      },
+    ],
+  }]);
+};
+
+const sendComfirmPhone = (recipientId) => {
+  sendMessage(recipientId, [{
+    text: 'Nhập lại số điện thoại'
+  }]);
+};
+
+const sendComfirmEmail = (recipientId) => {
+  sendMessage(recipientId, [{
+    text: 'Nhập lại Email'
+  }]);
+};
+
+const sendWelcomeByPhone = (recipientId, displayName) => {
+  sendMessage(recipientId, [{
+    text: `Xin chào ${displayName}\nTôi có thể giúp gì cho bạn?`
+  }]);
+};
+
+const sendNotFoundPhone = (recipientId) => {
+  sendMessage(recipientId, [{
+    type: 'web_url',
+    title: 'Bạn chưa đăng ký tài khoản với số điện thoại này, vui lòng đăng ký!',
+    url: 'https://joboapp.com/signup/2',
+    webview_height_ratio: 'tall',
+    messenger_extensions: true,
+  }]);
+}
+
+const sendNotFoundEmail = (recipientId) => {
+  sendMessage(recipientId, [{
+    type: 'web_url',
+    title: 'Bạn chưa đăng ký tài khoản với email này, vui lòng đăng ký!',
+    url: 'https://joboapp.com/signup/2',
+    webview_height_ratio: 'tall',
+    messenger_extensions: true,
+  }]);
+}
 // Send a different Welcome message based on if the user is logged in.
 const sendReturnMessage = (recipientId) => {
+
+  // sendMessage(
+  //   recipientId, [
+  //     messages.napMessage
+  //   ]);
   UserStore.getByMessengerId(recipientId)
     .then(userProfile => {
       if (!isEmpty(userProfile)) {
@@ -117,6 +218,10 @@ const sendReturnMessage = (recipientId) => {
  * @return {[type]}             [description]
  */
 const sendQuickReplyAddress = (recipientId) => {
+
+  // sendMessage(recipientId, [
+  //   messages.locationMessage,
+  // ]);
   UserStore.getByMessengerId(recipientId)
     .then(userProfile => {
       if (!isEmpty(userProfile)) {
@@ -168,6 +273,11 @@ const sendReadReceipt = (recipientId) => {
 
 
 const sendQuickReplyFindJobs = (recipientId) => {
+  // sendMessage(
+  //   recipientId, [
+  //     messages.findJobs,
+  //   ]
+  // );
   UserStore.getByMessengerId(recipientId)
     .then(userProfile => {
       if (!isEmpty(userProfile)) {
@@ -200,4 +310,10 @@ export default {
   sendQuickReplyFindJobs,
   sendQuickReplyAddress,
   sendGenericJobMessage,
+  sendAcceptPhone,
+  sendComfirmPhone,
+  sendWelcomeByPhone,
+  sendNotFoundPhone,
+  sendAcceptEmail,
+  sendNotFoundEmail,
 };
