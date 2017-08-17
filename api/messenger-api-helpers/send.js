@@ -67,15 +67,15 @@ const sendLoggedOutWelcomeMessage = (recipientId) => {
 
 // Send a welcome message for a non signed-in user.
 const sendGetStartWelcomeMessage = (recipientId) => {
-  sendMessage(
-    recipientId, [{
-        text: textMessages.welcome,
-      },
-      // ,
-    ]
-  );
   UserStore.getByMessengerId(recipientId)
     .then(userProfile => {
+      sendMessage(
+        recipientId, [{
+            text: textMessages.welcome,
+          },
+          // ,
+        ]
+      );
       if (!isEmpty(userProfile)) {
         // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
         sendQuickReplyAddress(recipientId);
