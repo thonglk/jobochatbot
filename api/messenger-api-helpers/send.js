@@ -101,69 +101,83 @@ const sendLoggedInWelcomeMessage = (recipientId, username) => {
 
 const sendAcceptPhone = (recipientId, phone) => {
   console.log('SENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd');
-  sendMessage(recipientId, [{
-    "attachment": {
-      "type": "template",
-      "payload": {
-        "template_type": "button",
-        "text": "Số điện thoại của bạn là 0" + phone,
-        "buttons": [{
-            type: 'postback',
-            title: 'Đúng',
-            payload: JSON.stringify({
-              type: 'PHONE_TRUE',
-              data: {
-                phone: phone,
-              },
-            }),
-          },
-          {
-            type: 'postback',
-            title: 'Sai',
-            payload: JSON.stringify({
-              type: 'PHONE_FALSE',
-              data: {
-                phone: phone,
-              },
-            }),
+  UserStore.getMessengerId(recipientId)
+    .then(userProfile => {
+      if (!isEmpty(userProfile)) {
+        sendMessage(recipientId, [{
+          "attachment": {
+            "type": "template",
+            "payload": {
+              "template_type": "button",
+              "text": "Số điện thoại của bạn là 0" + phone,
+              "buttons": [{
+                  type: 'postback',
+                  title: 'Đúng',
+                  payload: JSON.stringify({
+                    type: 'PHONE_TRUE',
+                    data: {
+                      phone: phone,
+                    },
+                  }),
+                },
+                {
+                  type: 'postback',
+                  title: 'Sai',
+                  payload: JSON.stringify({
+                    type: 'PHONE_FALSE',
+                    data: {
+                      phone: phone,
+                    },
+                  }),
+                }
+              ]
+            }
           }
-        ]
+        }]);
+      } else {
+        sendReturnMessage(recipientId);
       }
-    }
-  }]);
+    });
 };
 
 const sendAcceptEmail = (recipientId, email) => {
-  sendMessage(recipientId, [{
-    "attachment": {
-      "type": "template",
-      "payload": {
-        "template_type": "button",
-        "text": "Email của bạn là " + email,
-        "buttons": [{
-            type: 'postback',
-            title: 'Đúng',
-            payload: JSON.stringify({
-              type: 'EMAIL_TRUE',
-              data: {
-                email: email,
-              },
-            }),
-          },
-          {
-            type: 'postback',
-            title: 'Sai',
-            payload: JSON.stringify({
-              type: 'EMAIL_FALSE',
-              data: {
-                email: email,
-              },
-            }),
+  UserStore.getMessengerId(recipientId)
+    .then(userProfile => {
+      if (!isEmpty(userProfile)) {
+        sendMessage(recipientId, [{
+          "attachment": {
+            "type": "template",
+            "payload": {
+              "template_type": "button",
+              "text": "Email của bạn là " + email,
+              "buttons": [{
+                  type: 'postback',
+                  title: 'Đúng',
+                  payload: JSON.stringify({
+                    type: 'EMAIL_TRUE',
+                    data: {
+                      email: email,
+                    },
+                  }),
+                },
+                {
+                  type: 'postback',
+                  title: 'Sai',
+                  payload: JSON.stringify({
+                    type: 'EMAIL_FALSE',
+                    data: {
+                      email: email,
+                    },
+                  }),
+                }
+              ]
+            }
           }
-        ]
+        }]);
+      } else {
+        sendReturnMessage(recipientId);
       }
-    }
-  }]);
+    });
 };
 
 const sendComfirmPhone = (recipientId) => {
