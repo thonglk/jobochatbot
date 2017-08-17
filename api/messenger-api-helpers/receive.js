@@ -197,10 +197,10 @@ const handleReceivePostback = (event) => {
     console.log("DAAAAAAAAAAAAAAAAAAAA", phone);
     axios.get(`${APIURL}/checkUser?q=${phone}`)
       .then(users => {
-        console.log('USERSSSSSSSSSSSSSSSSSSS', users);
-        console.log('LENGTHHHHHHHHHHHH', users.length);
-        if (users.length > 0) {
-          UserStore.updateMessengerByPhone(senderId, phone).then(() => sendApi.sendWelcomeByPhone(senderId, users[0].name));
+        console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
+        console.log('LENGTHHHHHHHHHHHH', users.data.length);
+        if (users.data.length > 0) {
+          UserStore.updateMessengerByPhone(senderId, phone).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name));
         } else sendApi.sendNotFoundPhone(senderId);
       })
       .catch(err => console.log(err));
@@ -213,8 +213,8 @@ const handleReceivePostback = (event) => {
     const { email } = JSON.parse(event.postback.payload).data;
     axios.get(`${APIURL}/checkUser?q=${email}`)
       .then(users => {
-        if (users.length > 0) {
-          UserStore.updateMessengerByPhone(senderId, email).then(() => sendApi.sendWelcomeByEmail(senderId, users[0].name));
+        if (users.data.length > 0) {
+          UserStore.updateMessengerByPhone(senderId, email).then(() => sendApi.sendWelcomeByEmail(senderId, users.data[0].name));
         } else sendApi.sendNotFoundEmail(senderId);
       })
       .catch(err => console.log(err));
