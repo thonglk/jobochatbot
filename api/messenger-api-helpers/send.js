@@ -278,11 +278,16 @@ const sendReturnMessage = (recipientId) => {
     .then(userProfile => {
       if (userProfile) {
         // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
-        sendMessage(
-          recipientId, [
-            messages.napMessage
+        // sendMessage(
+        //   recipientId, [
+        //     messages.napMessage
+        //   ]);
+          sendMessage(
+          recipientId, [{
+            text: textMessages.adminContact
+          }
           ]);
-        sendQuickReplyAddress(recipientId);
+        // sendQuickReplyAddress(recipientId);
       } else {
         sendLoggedOutWelcomeMessage(recipientId);
       }
