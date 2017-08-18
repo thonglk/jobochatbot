@@ -34,6 +34,16 @@ class UserStore extends Store {
     });
   }
 
+  getMessengerIds() {
+    return new Promise((resolve, reject) => {
+      this.getConversations()
+      .then(conversations => {
+        resolve(Object.keys(conversations));
+      })
+      .catch(err => reject(err));
+    });
+  }
+
   linkMessengerAccount(id, messengerId) {
     return new Promise((resolve, reject) => {
       this.updateMessenger(id, messengerId)

@@ -55,6 +55,18 @@ const sendMessage = (recipientId, messagePayloads) => {
 };
 
 
+// Send one or more messages using the Send API.
+const sendNotification = (recipientIds, messagePayloads) => {
+  const messagePayloadArray = castArray(recipientIds)
+    .map(recipientId => castArray(messagePayloads).map((messagePayload) => messageToJSON(recipientId, messagePayload)));
+  messagePayloadArray.forEach(messagePayload =>
+    api.callMessagesAPI(
+      [
+        // typingOn(recipientId),
+        ...messagePayload,
+        // typingOff(recipientId),
+      ]));
+};
 
 // Send a welcome message for a non signed-in user.
 const sendLoggedOutWelcomeMessage = (recipientId) => {
@@ -79,7 +91,7 @@ const sendGetStartWelcomeMessage = (recipientId) => {
       }
     ]
   );
-  // UserStore.getMessengerId(recipientId)
+  // UserStore.checkMessengerId(recipientId)
   //   .then(userProfile => {
   //     if (userProfile) {
   //       // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
@@ -100,8 +112,8 @@ const sendLoggedInWelcomeMessage = (recipientId, username) => {
 };
 
 const sendAcceptPhone = (recipientId, phone) => {
-  console.log('SENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd');
-  UserStore.getMessengerId(recipientId)
+  // console.log('SENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd');
+  UserStore.checkMessengerId(recipientId)
     .then(userProfile => {
       if (!userProfile) {
         sendMessage(recipientId, [{
@@ -141,7 +153,7 @@ const sendAcceptPhone = (recipientId, phone) => {
 };
 
 const sendAcceptEmail = (recipientId, email) => {
-  UserStore.getMessengerId(recipientId)
+  UserStore.checkMessengerId(recipientId)
     .then(userProfile => {
       if (!userProfile) {
         sendMessage(recipientId, [{
@@ -264,7 +276,7 @@ const sendReturnMessage = (recipientId) => {
   //   recipientId, [
   //     messages.napMessage
   //   ]);
-  UserStore.getMessengerId(recipientId)
+  UserStore.checkMessengerId(recipientId)
     .then(userProfile => {
       if (userProfile) {
         // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
@@ -289,7 +301,7 @@ const sendQuickReplyAddress = (recipientId) => {
   // sendMessage(recipientId, [
   //   messages.locationMessage,
   // ]);
-  UserStore.getMessengerId(recipientId)
+  UserStore.checkMessengerId(recipientId)
     .then(userProfile => {
       if (userProfile) {
         sendMessage(recipientId, [
@@ -345,7 +357,7 @@ const sendQuickReplyFindJobs = (recipientId) => {
   //     messages.findJobs,
   //   ]
   // );
-  UserStore.getMessengerId(recipientId)
+  UserStore.checkMessengerId(recipientId)
     .then(userProfile => {
       if (userProfile) {
         sendMessage(
@@ -369,6 +381,7 @@ const sendGenericJobMessage = (recipientId, data) => {
 export default {
   vietnameseDecode: messages.vietnameseDecode,
   sendMessage,
+  sendNotification,
   sendWelcomeMessage,
   sendReturnMessage,
   sendSignOutSuccessMessage,

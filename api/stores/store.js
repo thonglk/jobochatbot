@@ -133,16 +133,33 @@ export default class Store {
     });
   }
 
-  getMessengerId(messengerId) {
+  checkMessengerId(messengerId) {
     return new Promise((resolve, reject) => {
       this.bot.once('value')
       .then(bots => {
         if (!bots.val()) resolve(false);
-        console.log('123123123asakkcjnjkansicnascnoi', bots.val());
+        // console.log('123123123asakkcjnjkansicnascnoi', bots.val());
         if (bots.val()[messengerId]) resolve(true);
         else resolve(false);
       })
       .catch(err => resolve(false));
+    });
+  }
+
+  getConversations() {
+    return new Promise((resolve, reject) => {
+      this.conversations.once('value')
+      .then(conversations => resolve(conversations.val()))
+      .catch(err => reject(err));
+    });
+  }
+
+  getConversation(messengerId) {
+    return new Promise((resolve, reject) => {
+      this.conversations.child(messengerId)
+      .once('value')
+      .then(conversation => resolve(conversation.val()))
+      .catch(err => reject(err));
     });
   }
 
@@ -152,7 +169,7 @@ export default class Store {
         const data = JSON.stringify({
           messengerId
         });
-        console.log('LSDJLSJDLKJSNSNCJSNCJNSJn1982y31n 189hasiudhasnd7yh 1', data);
+        // console.log('LSDJLSJDLKJSNSNCJSNCJNSJn1982y31n 189hasiudhasnd7yh 1', data);
         axios.get(`${APIURL}/update/user?userId=${id}&user=${data}`)
           .then(function (response) {
             console.log(response);
@@ -174,7 +191,7 @@ export default class Store {
         const data = JSON.stringify({
           messengerId
         });
-        console.log('LSDJLSJDLKJSNSNCJSNCJNSJn1982y31n 189hasiudhasnd7yh 1', data);
+        // console.log('LSDJLSJDLKJSNSNCJSNCJNSJn1982y31n 189hasiudhasnd7yh 1', data);
         axios.get(`${APIURL}/update/user?userId=${id}&user=${data}`)
           .then(function (response) {
             console.log(response);
