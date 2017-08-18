@@ -146,8 +146,21 @@ export default class Store {
     });
   }
 
-  updateMessengerByPhone(messengerId, phone) {
+  updateMessengerByPhone(messengerId, phone, id) {
     return new Promise((resolve, reject) => {
+      if (id) {
+        const data = JSON.stringify({
+          messengerId
+        });
+        console.log('LSDJLSJDLKJSNSNCJSNCJNSJn1982y31n 189hasiudhasnd7yh 1', data);
+        axios.get(`${APIURL}/update/user?userId=${id}&user=${data}`)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
       this.bot.child(messengerId).set(phone)
       .then(() => this.conversations.child(messengerId).set(phone))
       .then(() => resolve(true))

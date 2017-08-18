@@ -379,6 +379,7 @@ export default {
   sendGenericJobMessage,
   sendAcceptPhone,
   sendComfirmPhone,
+  sendComfirmEmail,
   sendWelcomeByPhone,
   sendNotFoundPhone,
   sendAcceptEmail,

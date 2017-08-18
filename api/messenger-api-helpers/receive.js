@@ -200,7 +200,7 @@ const handleReceivePostback = (event) => {
         console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
         console.log('LENGTHHHHHHHHHHHH', users.data.length);
         if (users.data.length > 0) {
-          UserStore.updateMessengerByPhone(senderId, phone).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name));
+          UserStore.updateMessengerByPhone(senderId, phone, users.data[0].userId).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name));
         } else sendApi.sendNotFoundPhone(senderId);
       })
       .catch(err => console.log(err));
@@ -216,7 +216,7 @@ const handleReceivePostback = (event) => {
         console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
         console.log('LENGTHHHHHHHHHHHH', users.data.length);
         if (users.data.length > 0) {
-          UserStore.updateMessengerByPhone(senderId, email).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name));
+          UserStore.updateMessengerByPhone(senderId, email, users.data[0].userId).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name));
         } else sendApi.sendNotFoundEmail(senderId);
       })
       .catch(err => console.log(err));
