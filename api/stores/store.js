@@ -215,8 +215,8 @@ export default class Store {
 
   updateConversations(messengerId, send, receive) {
     return new Promise((resolve, reject) => {
-      this.conversations.child(messengerId)
-        .child(`${firebase.database.ServerValue.TIMESTAMP}`)
+      this.conversations.child(`${messengerId}/${firebase.database.ServerValue.TIMESTAMP}`)
+        // .child()
         .update({
           send: send || 'Get Started',
           receive: receive || 'OK'

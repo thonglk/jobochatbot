@@ -194,11 +194,11 @@ const handleReceivePostback = (event) => {
     break;
   case 'PHONE_TRUE':
     const { phone } = JSON.parse(event.postback.payload).data;
-    console.log("DAAAAAAAAAAAAAAAAAAAA", phone);
+    // console.log("DAAAAAAAAAAAAAAAAAAAA", phone);
     axios.get(`${APIURL}/checkUser?q=${phone}`)
       .then(users => {
-        console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
-        console.log('LENGTHHHHHHHHHHHH', users.data.length);
+        // console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
+        // console.log('LENGTHHHHHHHHHHHH', users.data.length);
         if (users.data.length > 0) {
           UserStore.updateMessengerByPhone(senderId, phone, users.data[0].userId).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name));
         } else sendApi.sendNotFoundPhone(senderId);
@@ -213,8 +213,8 @@ const handleReceivePostback = (event) => {
     const { email } = JSON.parse(event.postback.payload).data;
     axios.get(`${APIURL}/checkUser?q=${email}`)
       .then(users => {
-        console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
-        console.log('LENGTHHHHHHHHHHHH', users.data.length);
+        // console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
+        // console.log('LENGTHHHHHHHHHHHH', users.data.length);
         if (users.data.length > 0) {
           UserStore.updateMessengerByPhone(senderId, email, users.data[0].userId).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name));
         } else sendApi.sendNotFoundEmail(senderId);
@@ -265,8 +265,14 @@ const handleReceiveMessage = (event) => {
     } else if (messageText.match(/.*@.*\..*/g)) {
       sendApi.sendAcceptEmail(senderId, messageText);
     } else if (messageText.match(/[0-9]{0,13}/g)[0]) {
-      console.log('12731y2736172377812y873yh127he1827he8172he87h182eh8172he87h', messageText);
-      sendApi.sendAcceptPhone(senderId, messageText.replace(/^0/g, ''));
+      if (messageText.match(/[0-9]{10,11}/g)[0]) {
+        sendApi.sendMessage(senderId, [{
+          text: textMessage.phoneFormatErr
+        }]);
+      } else {
+        // console.log('12731y2736172377812y873yh127he1827he8172he87h182eh8172he87h', messageText);
+        sendApi.sendAcceptPhone(senderId, messageText.replace(/^0/g, ''));
+      }
     } else {
       sendApi.sendReturnMessage(senderId);
     }
