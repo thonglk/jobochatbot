@@ -282,7 +282,7 @@ const sendReturnMessage = (recipientId, message, type = 'text-bot') => {
             const key = Object.keys(conversation)[0];
             const lastedTime = Number(key);
             const timeDiff = Math.abs(Date.now() - lastedTime) / 60000; // Phút
-            if (timeDiff >= 5 || (timeDiff < 5 && conversation[key].type !== /.*-admin/g)) sendMessage(
+            if (timeDiff >= 5 || (timeDiff < 5 && conversation[key].type.match(/.*-bot/g)[0])) sendMessage(
               recipientId, [{
                 text: textMessages.adminContact
               }], message, type);
