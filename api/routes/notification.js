@@ -8,6 +8,12 @@ const router = express.Router({
 }); // eslint-disable-line
 
 router.route('/')
+  .get((req, res, next) => {
+    // UserStore.updateConversations('1321', {dfdfd: '43234'})
+    // .then(() => res.status(200).send('123'));
+    UserStore.getLastedConversation('1321')
+    .then(data => res.status(200).json((Object.keys(data))[0]));
+  })
   .post((req, res, next) => {
     const { messages, recipientIds } = req.body;
 

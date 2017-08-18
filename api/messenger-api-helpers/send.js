@@ -145,7 +145,7 @@ const sendAcceptPhone = (recipientId, phone) => {
           }
         }]);
       } else {
-        sendReturnMessage(recipientId);
+        sendLoggedOutWelcomeMessage(recipientId);
       }
     });
 };
@@ -185,7 +185,7 @@ const sendAcceptEmail = (recipientId, email) => {
           }
         }]);
       } else {
-        sendReturnMessage(recipientId);
+        sendLoggedOutWelcomeMessage(recipientId);
       }
     });
 };
@@ -282,11 +282,16 @@ const sendReturnMessage = (recipientId) => {
         //   recipientId, [
         //     messages.napMessage
         //   ]);
-        // sendMessage(
-        // recipientId, [{
-        //   text: textMessages.adminContact
-        // }
-        // ]);
+        UserStore.getLastedConversation(recipientId)
+          .then(conversation => {
+            const lastedTime = Number(Object.keys(conversation)[0]);
+            const timeDiff = Math.abs(Date.now() - lastedTime) / 60000; // Phút
+            if (timeDiff >= 5) sendMessage(
+              recipientId, [{
+                text: textMessages.adminContact
+              }]);
+          });
+        //
         // sendQuickReplyAddress(recipientId);
       } else {
         sendLoggedOutWelcomeMessage(recipientId);

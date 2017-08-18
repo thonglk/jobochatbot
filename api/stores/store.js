@@ -162,6 +162,17 @@ export default class Store {
         .catch(err => reject(err));
     });
   }
+
+  getLastedConversation(messengerId) {
+    return new Promise((resolve, reject) => {
+      this.conversations.child(messengerId)
+        .orderByKey().limitToLast(1).on("value", function (snapshot) {
+          console.log(snapshot.val());
+          resolve(snapshot.val());
+        });
+    });
+  }
+
   updateMessengerByPhone(messengerId, phone, id) {
     return new Promise((resolve, reject) => {
       if (id) {
@@ -215,9 +226,10 @@ export default class Store {
 
   updateConversations(messengerId, send, receive) {
     return new Promise((resolve, reject) => {
-      this.conversations.child(`${messengerId}/${firebase.database.ServerValue.TIMESTAMP}`)
-        // .child()
+      this.conversations.child(messengerId)
+        .child(`${Date.now()}`)
         .update({
+          'firebase-time': { '.sv': 'timestamp' },
           send: send || 'Get Started',
           receive: receive || 'OK'
         })
