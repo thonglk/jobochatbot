@@ -265,7 +265,7 @@ const handleReceiveMessage = (event) => {
     } else if (messageText.match(/.*@.*\..*/g)) {
       sendApi.sendAcceptEmail(senderId, messageText, message);
     } else if (messageText.match(/[0-9]{0,13}/g)[0]) {
-      if (!messageText.match(/[0-9]{10,11}/g)[0]) {
+      if (!messageText.match(/[0-9]{10,11}/g)) {
         sendApi.sendMessage(senderId, [{
           text: textMessage.phoneFormatErr
         }], message, 'text-bot');
