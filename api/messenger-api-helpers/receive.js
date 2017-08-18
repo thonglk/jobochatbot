@@ -270,7 +270,6 @@ const handleReceiveMessage = (event) => {
           text: textMessage.phoneFormatErr
         }], message, 'text-bot');
       } else {
-        // console.log('12731y2736172377812y873yh127he1827he8172he87h182eh8172he87h', messageText);
         sendApi.sendAcceptPhone(senderId, messageText.replace(/^0/g, ''), message);
       }
     } else {
