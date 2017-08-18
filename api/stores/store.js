@@ -218,8 +218,8 @@ export default class Store {
       this.conversations.child(messengerId)
         .child(`${firebase.database.ServerValue.TIMESTAMP}`)
         .update({
-          send,
-          receive
+          send: send || 'Get Started',
+          receive: receive || 'OK'
         })
         .then(() => resolve(true))
         .catch(err => {
