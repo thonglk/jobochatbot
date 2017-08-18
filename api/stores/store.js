@@ -213,18 +213,14 @@ export default class Store {
     });
   }
 
-  updateConversations(messengerId, userId) {
+  updateConversations(messengerId, send, receive) {
     return new Promise((resolve, reject) => {
-      const id = {
-        [`${userId}`]: {
-          [`${firebase.database.ServerValue.TIMESTAMP}`]: {
-            send: 'Get Started',
-            receive: 'OK'
-          }
-        }
-      } || "null";
       this.conversations.child(messengerId)
-        .set(id)
+        .child(`${firebase.database.ServerValue.TIMESTAMP}`)
+        .update({
+          send,
+          receive
+        })
         .then(() => resolve(true))
         .catch(err => {
           console.log(err);
