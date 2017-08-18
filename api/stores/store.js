@@ -136,30 +136,30 @@ export default class Store {
   checkMessengerId(messengerId) {
     return new Promise((resolve, reject) => {
       this.bot.once('value')
-      .then(bots => {
-        if (!bots.val()) resolve(false);
-        // console.log('123123123asakkcjnjkansicnascnoi', bots.val());
-        if (bots.val()[messengerId]) resolve(true);
-        else resolve(false);
-      })
-      .catch(err => resolve(false));
+        .then(bots => {
+          if (!bots.val()) resolve(false);
+          // console.log('123123123asakkcjnjkansicnascnoi', bots.val());
+          if (bots.val()[messengerId]) resolve(true);
+          else resolve(false);
+        })
+        .catch(err => resolve(false));
     });
   }
 
   getConversations() {
     return new Promise((resolve, reject) => {
       this.conversations.once('value')
-      .then(conversations => resolve(conversations.val()))
-      .catch(err => reject(err));
+        .then(conversations => resolve(conversations.val()))
+        .catch(err => reject(err));
     });
   }
 
   getConversation(messengerId) {
     return new Promise((resolve, reject) => {
       this.conversations.child(messengerId)
-      .once('value')
-      .then(conversation => resolve(conversation.val()))
-      .catch(err => reject(err));
+        .once('value')
+        .then(conversation => resolve(conversation.val()))
+        .catch(err => reject(err));
     });
   }
   updateMessengerByPhone(messengerId, phone, id) {
@@ -178,9 +178,9 @@ export default class Store {
           });
       }
       this.bot.child(messengerId).set(phone)
-      .then(() => this.conversations.child(messengerId).set(phone))
-      .then(() => resolve(true))
-      .catch(err => resolve(false));
+        // .then(() => this.conversations.child(messengerId).set(phone))
+        .then(() => resolve(true))
+        .catch(err => resolve(false));
     });
   }
 
@@ -215,7 +215,14 @@ export default class Store {
 
   updateConversations(messengerId, userId) {
     return new Promise((resolve, reject) => {
-      const id = userId || "null";
+      const id = {
+        `${userId}`: {
+          `${firebase.database.ServerValue.TIMESTAMP}`: {
+            send: 'Get Started',
+            receive: 'OK'
+          }
+        }
+      } || "null";
       this.conversations.child(messengerId)
         .set(id)
         .then(() => resolve(true))

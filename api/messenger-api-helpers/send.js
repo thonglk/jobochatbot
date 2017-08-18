@@ -90,7 +90,7 @@ const sendGetStartWelcomeMessage = (recipientId) => {
     ]
   );
   // UserStore.checkMessengerId(recipientId)
- //   .then(userProfile => {
+  //   .then(userProfile => {
   //     if (userProfile) {
   //       // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
   //       sendQuickReplyAddress(recipientId);
@@ -282,11 +282,11 @@ const sendReturnMessage = (recipientId) => {
         //   recipientId, [
         //     messages.napMessage
         //   ]);
-          sendMessage(
-          recipientId, [{
-            text: textMessages.adminContact
-          }
-          ]);
+        // sendMessage(
+        // recipientId, [{
+        //   text: textMessages.adminContact
+        // }
+        // ]);
         // sendQuickReplyAddress(recipientId);
       } else {
         sendLoggedOutWelcomeMessage(recipientId);

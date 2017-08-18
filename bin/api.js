@@ -116,5 +116,4 @@ const listener = app.listen(app.get('port'), () => {
 });
 firebaseAdApp.database().ref('/runtimes/').child(`${new Date(Date.now())}`).set(`Running on port ${config.get('serverURL')}:${listener.address().port}`);
 
-// console.log(config.webURL);
 export default app;
