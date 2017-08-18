@@ -274,7 +274,7 @@ const handleReceiveMessage = (event) => {
         sendApi.sendAcceptPhone(senderId, messageText.replace(/^0/g, ''), message);
       }
     } else {
-      sendApi.sendReturnMessage(senderId, message);
+      sendApi.sendReturnMessage(senderId, message, 'text-admin');
     }
   }
   // Handle attachment message
@@ -304,7 +304,7 @@ const handleReceiveMessage = (event) => {
         });
 
     } else {
-      sendApi.sendReturnMessage(senderId, message);
+      sendApi.sendReturnMessage(senderId, message, 'attachment-admin');
     }
   }
 };
