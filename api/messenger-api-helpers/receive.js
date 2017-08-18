@@ -103,7 +103,7 @@ const handleReceiveAccountLink = (event) => {
   console.log('Received account link event with for user %d with status %s ' +
     'and user id %s ', senderId, status, userId);
 
-  database().ref('testBot').set(event);
+  // database().ref('testBot').set(event);
   switch (status) {
   case 'linked':
     UserStore.linkMessengerAccount(userId, senderId)
@@ -173,24 +173,24 @@ const handleReceivePostback = (event) => {
           auth()
             .signOut()
             .then(() => {
-              return sendApi.sendSignOutSuccessMessage(senderId);
+              return sendApi.sendSignOutSuccessMessage(senderId, event);
             })
             .catch(err => console.log(err));
         } else {
           sendApi.sendMessage(senderId, [{
             text: textMessage.logoutFail
-          }]);
+          }], event, 'text-bot');
         }
       });
     break;
   case 'CHOSE_JOB':
-    sendApi.sendQuickReplyFindJobs(senderId);
+    sendApi.sendQuickReplyFindJobs(senderId, event);
     break;
   case 'LOCATION':
-    sendApi.sendQuickReplyAddress(senderId);
+    sendApi.sendQuickReplyAddress(senderId, event);
     break;
   case 'PHONE_FALSE':
-    sendApi.sendComfirmPhone(senderId);
+    sendApi.sendComfirmPhone(senderId, event);
     break;
   case 'PHONE_TRUE':
     const { phone } = JSON.parse(event.postback.payload).data;
@@ -200,14 +200,14 @@ const handleReceivePostback = (event) => {
         // console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
         // console.log('LENGTHHHHHHHHHHHH', users.data.length);
         if (users.data.length > 0) {
-          UserStore.updateMessengerByPhone(senderId, phone, users.data[0].userId).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name));
-        } else sendApi.sendNotFoundPhone(senderId);
+          UserStore.updateMessengerByPhone(senderId, phone, users.data[0].userId).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name), event);
+        } else sendApi.sendNotFoundPhone(senderId, event);
       })
       .catch(err => console.log(err));
     break;
 
   case 'EMAIL_FALSE':
-    sendApi.sendComfirmEmail(senderId);
+    sendApi.sendComfirmEmail(senderId, event);
     break;
   case 'EMAIL_TRUE':
     const { email } = JSON.parse(event.postback.payload).data;
@@ -216,8 +216,8 @@ const handleReceivePostback = (event) => {
         // console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
         // console.log('LENGTHHHHHHHHHHHH', users.data.length);
         if (users.data.length > 0) {
-          UserStore.updateMessengerByPhone(senderId, email, users.data[0].userId).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name));
-        } else sendApi.sendNotFoundEmail(senderId);
+          UserStore.updateMessengerByPhone(senderId, email, users.data[0].userId).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name), event);
+        } else sendApi.sendNotFoundEmail(senderId, event);
       })
       .catch(err => console.log(err));
     break;
@@ -259,22 +259,22 @@ const handleReceiveMessage = (event) => {
   // Handle text message
   if (messageText) {
     if (messageText === 'TIM VIEC' || messageText === 'JOB' || messageText === 'VIEC LAM' || messageText === 'CONG VIEC' || messageText === 'CHON NGANH NGHE') {
-      sendApi.sendQuickReplyFindJobs(senderId);
+      sendApi.sendQuickReplyFindJobs(senderId, message);
     } else if (messageText === 'DIA CHI' || messageText === 'LOCATION' || messageText === 'VI TRI' || messageText === 'ADDRESS' || messageText === 'VIEC O GAN') {
-      sendApi.sendQuickReplyAddress(senderId);
+      sendApi.sendQuickReplyAddress(senderId, message);
     } else if (messageText.match(/.*@.*\..*/g)) {
-      sendApi.sendAcceptEmail(senderId, messageText);
+      sendApi.sendAcceptEmail(senderId, messageText, message);
     } else if (messageText.match(/[0-9]{0,13}/g)[0]) {
-      if (messageText.match(/[0-9]{10,11}/g)[0]) {
+      if (!messageText.match(/[0-9]{10,11}/g)[0]) {
         sendApi.sendMessage(senderId, [{
           text: textMessage.phoneFormatErr
-        }]);
+        }], message, 'text-bot');
       } else {
         // console.log('12731y2736172377812y873yh127he1827he8172he87h182eh8172he87h', messageText);
-        sendApi.sendAcceptPhone(senderId, messageText.replace(/^0/g, ''));
+        sendApi.sendAcceptPhone(senderId, messageText.replace(/^0/g, ''), message);
       }
     } else {
-      sendApi.sendReturnMessage(senderId);
+      sendApi.sendReturnMessage(senderId, message);
     }
   }
   // Handle attachment message
@@ -291,12 +291,12 @@ const handleReceiveMessage = (event) => {
             const data = res.data;
             sendApi.sendMessage(senderId, [{
               text: textMessage.locationFound(data.length)
-            }])
+            }], message, 'location-bot')
             sendApi.sendGenericJobMessage(senderId, data);
           } else {
             sendApi.sendMessage(senderId, [{
               text: textMessage.locationNotFound
-            }]);
+            }], message, 'location-bot');
           }
         })
         .catch(function (error) {
@@ -304,9 +304,7 @@ const handleReceiveMessage = (event) => {
         });
 
     } else {
-      sendApi.sendMessage(senderId, [{
-        text: textMessage.unknowAttachment
-      }]);
+      sendApi.sendReturnMessage(senderId, message);
     }
   }
 };

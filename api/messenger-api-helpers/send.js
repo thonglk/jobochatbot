@@ -42,7 +42,7 @@ const messageToJSON = (recipientId, messagePayload) => {
 };
 
 // Send one or more messages using the Send API.
-const sendMessage = (recipientId, messagePayloads) => {
+const sendMessage = (recipientId, messagePayloads, message = 'Unknow', type = 'message-admin') => {
   const messagePayloadArray = castArray(messagePayloads)
     .map((messagePayload) => messageToJSON(recipientId, messagePayload));
 
@@ -52,6 +52,8 @@ const sendMessage = (recipientId, messagePayloads) => {
       ...messagePayloadArray,
       typingOff(recipientId),
     ]);
+  UserStore.updateConversations(recipientId, message, messagePayloadArray, type)
+  .then(result => console.log(result));
 };
 
 // Send one or more messages using the Send API.
@@ -67,14 +69,16 @@ const sendNotification = (recipientIds, messagePayloads) => {
       ]));
 };
 // Send a welcome message for a non signed-in user.
-const sendLoggedOutWelcomeMessage = (recipientId) => {
+const sendLoggedOutWelcomeMessage = (recipientId, message) => {
   sendMessage(
     recipientId, [
       // messages.signOutSuccessMessage,
       {
         text: textMessages.askPhone
       }
-    ]
+    ],
+    message,
+    'text-bot'
   );
 };
 
@@ -87,29 +91,20 @@ const sendGetStartWelcomeMessage = (recipientId) => {
       {
         text: textMessages.askPhone
       }
-    ]
+    ],
+    'Get Started',
+    'text-bot'
   );
-  // UserStore.checkMessengerId(recipientId)
-  //   .then(userProfile => {
-  //     if (userProfile) {
-  //       // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
-  //       sendQuickReplyAddress(recipientId);
-  //     } else {
-  //       sendMessage(recipientId, [
-  //         messages.createAccountMessage
-  //       ])
-  //     }
-  //   });
 };
 // Send a welcome message for a signed in user.
-const sendLoggedInWelcomeMessage = (recipientId, username) => {
+const sendLoggedInWelcomeMessage = (recipientId, username, message) => {
   sendMessage(
     recipientId, [
       messages.loggedInMessage(username),
-    ]);
+    ], message, 'attachment-bot');
 };
 
-const sendAcceptPhone = (recipientId, phone) => {
+const sendAcceptPhone = (recipientId, phone, message) => {
   // console.log('SENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd');
   UserStore.checkMessengerId(recipientId)
     .then(userProfile => {
@@ -143,14 +138,14 @@ const sendAcceptPhone = (recipientId, phone) => {
               ]
             }
           }
-        }]);
+        }], message, 'template-bot');
       } else {
-        sendLoggedOutWelcomeMessage(recipientId);
+        sendLoggedOutWelcomeMessage(recipientId, message);
       }
     });
 };
 
-const sendAcceptEmail = (recipientId, email) => {
+const sendAcceptEmail = (recipientId, email, message) => {
   UserStore.checkMessengerId(recipientId)
     .then(userProfile => {
       if (!userProfile) {
@@ -183,26 +178,26 @@ const sendAcceptEmail = (recipientId, email) => {
               ]
             }
           }
-        }]);
+        }], message, 'template-bot');
       } else {
-        sendLoggedOutWelcomeMessage(recipientId);
+        sendLoggedOutWelcomeMessage(recipientId, message);
       }
     });
 };
 
-const sendComfirmPhone = (recipientId) => {
+const sendComfirmPhone = (recipientId, message) => {
   sendMessage(recipientId, [{
     text: 'Nhập lại số điện thoại'
-  }]);
+  }], message, 'text-bot');
 };
 
-const sendComfirmEmail = (recipientId) => {
+const sendComfirmEmail = (recipientId, message) => {
   sendMessage(recipientId, [{
     text: 'Nhập lại Email'
-  }]);
+  }], message, 'text-bot');
 };
 
-const sendWelcomeByPhone = (recipientId, displayName) => {
+const sendWelcomeByPhone = (recipientId, displayName, message) => {
 
   sendMessage(recipientId, [{
     "attachment": {
@@ -227,10 +222,10 @@ const sendWelcomeByPhone = (recipientId, displayName) => {
         ]
       }
     }
-  }]);
+  }], message, 'template-bot');
 };
 
-const sendNotFoundPhone = (recipientId) => {
+const sendNotFoundPhone = (recipientId, message) => {
   sendMessage(recipientId, [{
     "attachment": {
       "type": "template",
@@ -246,10 +241,10 @@ const sendNotFoundPhone = (recipientId) => {
         }]
       }
     }
-  }]);
+  }], message, 'template-bot');
 }
 
-const sendNotFoundEmail = (recipientId) => {
+const sendNotFoundEmail = (recipientId, message) => {
   sendMessage(recipientId, [{
     "attachment": {
       "type": "template",
@@ -265,10 +260,10 @@ const sendNotFoundEmail = (recipientId) => {
         }]
       }
     }
-  }]);
+  }], message, 'template-bot');
 }
 // Send a different Welcome message based on if the user is logged in.
-const sendReturnMessage = (recipientId) => {
+const sendReturnMessage = (recipientId, message) => {
 
   // sendMessage(
   //   recipientId, [
@@ -284,17 +279,18 @@ const sendReturnMessage = (recipientId) => {
         //   ]);
         UserStore.getLastedConversation(recipientId)
           .then(conversation => {
-            const lastedTime = Number(Object.keys(conversation)[0]);
+            const key = Object.keys(conversation)[0];
+            const lastedTime = Number(key);
             const timeDiff = Math.abs(Date.now() - lastedTime) / 60000; // Phút
-            if (timeDiff >= 5) sendMessage(
+            if (timeDiff >= 5 || (timeDiff < 5 && conversation[key].type !== /.*-admin/g)) sendMessage(
               recipientId, [{
                 text: textMessages.adminContact
-              }]);
+              }], message, 'text-bot');
           });
         //
         // sendQuickReplyAddress(recipientId);
       } else {
-        sendLoggedOutWelcomeMessage(recipientId);
+        sendLoggedOutWelcomeMessage(recipientId, message);
       }
     });
 };
@@ -304,7 +300,7 @@ const sendReturnMessage = (recipientId) => {
  * @param  {[type]} recipientId [description]
  * @return {[type]}             [description]
  */
-const sendQuickReplyAddress = (recipientId) => {
+const sendQuickReplyAddress = (recipientId, message) => {
 
   // sendMessage(recipientId, [
   //   messages.locationMessage,
@@ -314,9 +310,9 @@ const sendQuickReplyAddress = (recipientId) => {
       if (userProfile) {
         sendMessage(recipientId, [
           messages.locationMessage,
-        ]);
+        ], message, 'location-bot');
       } else {
-        sendLoggedOutWelcomeMessage(recipientId);
+        sendLoggedOutWelcomeMessage(recipientId, message);
       }
     });
 }
@@ -326,25 +322,25 @@ const sendWelcomeMessage = (recipientId) => {
 };
 
 // Send a successfully signed in message.
-const sendSignOutSuccessMessage = (recipientId) =>
+const sendSignOutSuccessMessage = (recipientId, message) =>
   sendMessage(recipientId, [
     messages.signOutSuccessMessage,
-  ]);
+  ], message, 'template-bot');
 
 // Send a successfully signed out message.
-const sendSignInSuccessMessage = (recipientId, username) => {
+const sendSignInSuccessMessage = (recipientId, username, message) => {
   sendMessage(
     recipientId, [
       messages.signInGreetingMessage(username),
       messages.signInSuccessMessage,
-    ]);
+    ], message, 'template-bot');
 };
 // Send a successfully signed up message.
-const sendSignUpSuccessMessage = (recipientId) => {
+const sendSignUpSuccessMessage = (recipientId, message) => {
   sendMessage(
     recipientId, [
       messages.signUpSuccessMessage,
-    ]);
+    ], message, 'template-bot');
 };
 // Send a read receipt to indicate the message has been read
 const sendReadReceipt = (recipientId) => {
@@ -359,7 +355,7 @@ const sendReadReceipt = (recipientId) => {
 };
 
 
-const sendQuickReplyFindJobs = (recipientId) => {
+const sendQuickReplyFindJobs = (recipientId, message) => {
   // sendMessage(
   //   recipientId, [
   //     messages.findJobs,
@@ -371,19 +367,19 @@ const sendQuickReplyFindJobs = (recipientId) => {
         sendMessage(
           recipientId, [
             messages.findJobs,
-          ]
+          ], message, 'quick-bot'
         );
       } else {
-        sendLoggedOutWelcomeMessage(recipientId);
+        sendLoggedOutWelcomeMessage(recipientId, message);
       }
     });
 }
 
 
-const sendGenericJobMessage = (recipientId, data) => {
+const sendGenericJobMessage = (recipientId, data, message) => {
   sendMessage(recipientId, [
     messages.genericMessage(data),
-  ]);
+  ], message, 'generic-bot');
 }
 
 export default {

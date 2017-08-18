@@ -224,12 +224,13 @@ export default class Store {
     });
   }
 
-  updateConversations(messengerId, send, receive) {
+  updateConversations(messengerId, send, receive, type) {
     return new Promise((resolve, reject) => {
       this.conversations.child(messengerId)
         .child(`${Date.now()}`)
         .update({
           'firebase-time': { '.sv': 'timestamp' },
+          type: type || 'text',
           send: send || 'Get Started',
           receive: receive || 'OK'
         })

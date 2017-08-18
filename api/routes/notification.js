@@ -11,8 +11,8 @@ router.route('/')
   .get((req, res, next) => {
     // UserStore.updateConversations('1321', {dfdfd: '43234'})
     // .then(() => res.status(200).send('123'));
-    UserStore.getLastedConversation('1321')
-    .then(data => res.status(200).json((Object.keys(data))[0]));
+    UserStore.getLastedConversation('1747394891967196')
+    .then(data => res.status(200).json(data['1503045539254'].send));
   })
   .post((req, res, next) => {
     const { messages, recipientIds } = req.body;

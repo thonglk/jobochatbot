@@ -22,5 +22,5 @@ module.exports = {
   unknowAttachment: "Chúng tôi đã nhận được thông tin bạn cung cấp",
   askPhone: 'Số điện thoại hoặc email của bạn là?',
   adminContact: 'Chờ xíu nha, bạn sẽ được kết nối với quản trị viên ngay thôi.\nBạn cũng có thể tìm thấy các hướng dẫn trong menu.',
-  phoneFormatErr: 'Số điện thoại vừa nhập chưa đúng định dạng.\nSố điện thoại phải là số di động.'
+  phoneFormatErr: 'Số điện thoại vừa nhập chưa đúng định dạng.\nSố điện thoại phải là số di động. Vui lòng nhập lại!'
 }
