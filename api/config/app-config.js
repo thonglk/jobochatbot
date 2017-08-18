@@ -40,7 +40,7 @@ const WEBURL = (process.env.WEBURL) ?
   (process.env.WEBURL) :
   config.get('webURL');
 
-if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL && WHITE_LIST_DOMAINS && APIURL && WEBURL)) {
+if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKENS && SERVER_URL && WHITE_LIST_DOMAINS && APIURL && WEBURL)) {
   console.error("Missing config values");
   process.exit(1);
 }
