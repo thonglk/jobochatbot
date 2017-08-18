@@ -162,7 +162,6 @@ export default class Store {
       .catch(err => reject(err));
     });
   }
-
   updateMessengerByPhone(messengerId, phone, id) {
     return new Promise((resolve, reject) => {
       if (id) {

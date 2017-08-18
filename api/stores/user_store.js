@@ -44,7 +44,7 @@ class UserStore extends Store {
     });
   }
 
-  linkMessengerAccount(id, messengerId) {
+ linkMessengerAccount(id, messengerId) {
     return new Promise((resolve, reject) => {
       this.updateMessenger(id, messengerId)
         .then(status => {

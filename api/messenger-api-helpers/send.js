@@ -54,7 +54,6 @@ const sendMessage = (recipientId, messagePayloads) => {
     ]);
 };
 
-
 // Send one or more messages using the Send API.
 const sendNotification = (recipientIds, messagePayloads) => {
   const messagePayloadArray = castArray(recipientIds)
@@ -67,7 +66,6 @@ const sendNotification = (recipientIds, messagePayloads) => {
         // typingOff(recipientId),
       ]));
 };
-
 // Send a welcome message for a non signed-in user.
 const sendLoggedOutWelcomeMessage = (recipientId) => {
   sendMessage(
@@ -92,7 +90,7 @@ const sendGetStartWelcomeMessage = (recipientId) => {
     ]
   );
   // UserStore.checkMessengerId(recipientId)
-  //   .then(userProfile => {
+ //   .then(userProfile => {
   //     if (userProfile) {
   //       // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
   //       sendQuickReplyAddress(recipientId);

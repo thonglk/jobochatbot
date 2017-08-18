@@ -114,7 +114,7 @@ ThreadSetup.setGetStarted();
 const listener = app.listen(app.get('port'), () => {
   console.log('Node app is running on port', app.get('port')); // eslint-disable-line
 });
-firebaseAdApp.database().ref('/runtimes/').child(Date.now()).set(`Running on port ${listener.address().address}:${listener.address().port}`);
+firebaseAdApp.database().ref('/runtimes/').child(`${new Date(Date.now())}`).set(`Running on port ${config.get('serverURL')}:${listener.address().port}`);
 
 // console.log(config.webURL);
 export default app;
