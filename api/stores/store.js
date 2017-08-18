@@ -216,8 +216,8 @@ export default class Store {
   updateConversations(messengerId, userId) {
     return new Promise((resolve, reject) => {
       const id = {
-        `${userId}`: {
-          `${firebase.database.ServerValue.TIMESTAMP}`: {
+        [`${userId}`]: {
+          [`${firebase.database.ServerValue.TIMESTAMP}`]: {
             send: 'Get Started',
             receive: 'OK'
           }
