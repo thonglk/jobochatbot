@@ -263,7 +263,7 @@ const sendNotFoundEmail = (recipientId, message) => {
   }], message, 'template-bot');
 }
 // Send a different Welcome message based on if the user is logged in.
-const sendReturnMessage = (recipientId, message) => {
+const sendReturnMessage = (recipientId, message, type = 'text-bot') => {
 
   // sendMessage(
   //   recipientId, [
@@ -285,7 +285,7 @@ const sendReturnMessage = (recipientId, message) => {
             if (timeDiff >= 5 || (timeDiff < 5 && conversation[key].type !== /.*-admin/g)) sendMessage(
               recipientId, [{
                 text: textMessages.adminContact
-              }], message, 'text-bot');
+              }], message, type);
           });
         //
         // sendQuickReplyAddress(recipientId);
