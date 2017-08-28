@@ -63,23 +63,20 @@ const sendNotification = (recipientIds, messagePayloads) => {
   messagePayloadArray.forEach(messagePayload =>
     api.callMessagesAPI(
       [
-        // typingOn(recipientId),
         ...messagePayload,
-        // typingOff(recipientId),
       ]));
 };
 // Send a welcome message for a non signed-in user.
 const sendLoggedOutWelcomeMessage = (recipientId, message) => {
-  sendMessage(
-    recipientId, [
-      // messages.signOutSuccessMessage,
-      {
-        text: textMessages.askPhone
-      }
-    ],
-    message,
-    'text-bot'
-  );
+  // sendMessage(
+  //   recipientId, [
+  //     {
+  //       text: textMessages.askPhone
+  //     }
+  //   ],
+  //   message,
+  //   'text-bot'
+  // );
 };
 
 // Send a welcome message for a non signed-in user.
@@ -105,7 +102,6 @@ const sendLoggedInWelcomeMessage = (recipientId, username, message) => {
 };
 
 const sendAcceptPhone = (recipientId, phone, message) => {
-  // console.log('SENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd');
   UserStore.checkMessengerId(recipientId)
     .then(userProfile => {
       if (!userProfile) {
@@ -356,11 +352,6 @@ const sendReadReceipt = (recipientId) => {
 
 
 const sendQuickReplyFindJobs = (recipientId, message) => {
-  // sendMessage(
-  //   recipientId, [
-  //     messages.findJobs,
-  //   ]
-  // );
   UserStore.checkMessengerId(recipientId)
     .then(userProfile => {
       if (userProfile) {
