@@ -232,13 +232,13 @@ const sendNotFoundPhone = (recipientId, message) => {
       "payload": {
         "template_type": "button",
         "text": textMessages.phoneNotRegistered,
-        "buttons": [{
-          type: 'web_url',
-          title: 'Đăng ký',
-          url: 'https://joboapp.com/signup/2',
-          webview_height_ratio: 'tall',
-          messenger_extensions: true,
-        }]
+        // "buttons": [{
+        //   type: 'web_url',
+        //   title: 'Đăng ký',
+        //   url: 'https://joboapp.com/signup/2',
+        //   webview_height_ratio: 'tall',
+        //   messenger_extensions: true,
+        // }]
       }
     }
   }, {
@@ -255,13 +255,13 @@ const sendNotFoundEmail = (recipientId, message) => {
       "payload": {
         "template_type": "button",
         "text": textMessages.emailNotRegistered,
-        "buttons": [{
-          type: 'web_url',
-          title: 'Đăng ký',
-          url: 'https://joboapp.com/signup/2',
-          webview_height_ratio: 'tall',
-          messenger_extensions: true,
-        }]
+        // "buttons": [{
+        //   type: 'web_url',
+        //   title: 'Đăng ký',
+        //   url: 'https://joboapp.com/signup/2',
+        //   webview_height_ratio: 'tall',
+        //   messenger_extensions: true,
+        // }]
       }
     }
   }, {
@@ -272,19 +272,9 @@ const sendNotFoundEmail = (recipientId, message) => {
 }
 // Send a different Welcome message based on if the user is logged in.
 const sendReturnMessage = (recipientId, message, type = 'text-bot') => {
-
-  // sendMessage(
-  //   recipientId, [
-  //     messages.napMessage
-  //   ]);
   UserStore.checkMessengerId(recipientId)
     .then(userProfile => {
       if (userProfile) {
-        // sendLoggedInWelcomeMessage(recipientId, userProfile.name);
-        // sendMessage(
-        //   recipientId, [
-        //     messages.napMessage
-        //   ]);
         UserStore.getLastedConversation(recipientId)
           .then(conversation => {
             const key = Object.keys(conversation)[0];
@@ -295,8 +285,6 @@ const sendReturnMessage = (recipientId, message, type = 'text-bot') => {
                 text: textMessages.adminContact
               }], message, type);
           });
-        //
-        // sendQuickReplyAddress(recipientId);
       } else {
         sendLoggedOutWelcomeMessage(recipientId, message);
       }
@@ -309,10 +297,6 @@ const sendReturnMessage = (recipientId, message, type = 'text-bot') => {
  * @return {[type]}             [description]
  */
 const sendQuickReplyAddress = (recipientId, message) => {
-
-  // sendMessage(recipientId, [
-  //   messages.locationMessage,
-  // ]);
   UserStore.checkMessengerId(recipientId)
     .then(userProfile => {
       if (userProfile) {

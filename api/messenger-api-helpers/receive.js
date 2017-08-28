@@ -194,11 +194,8 @@ const handleReceivePostback = (event) => {
     break;
   case 'PHONE_TRUE':
     const { phone } = JSON.parse(event.postback.payload).data;
-    // console.log("DAAAAAAAAAAAAAAAAAAAA", phone);
     axios.get(`${APIURL}/checkUser?q=${phone}`)
       .then(users => {
-        // console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
-        // console.log('LENGTHHHHHHHHHHHH', users.data.length);
         if (users.data.length > 0) {
           UserStore.updateMessengerByPhone(senderId, phone, users.data[0].userId).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name), event);
         } else sendApi.sendNotFoundPhone(senderId, event);
@@ -213,8 +210,6 @@ const handleReceivePostback = (event) => {
     const { email } = JSON.parse(event.postback.payload).data;
     axios.get(`${APIURL}/checkUser?q=${email}`)
       .then(users => {
-        // console.log('USERSSSSSSSSSSSSSSSSSSS', users.data);
-        // console.log('LENGTHHHHHHHHHHHH', users.data.length);
         if (users.data.length > 0) {
           UserStore.updateMessengerByPhone(senderId, email, users.data[0].userId).then(() => sendApi.sendWelcomeByPhone(senderId, users.data[0].name), event);
         } else sendApi.sendNotFoundEmail(senderId, event);
@@ -226,13 +221,6 @@ const handleReceivePostback = (event) => {
     break;
   }
 };
-
-/*
- * handleReceiveMessage - Message Event called when a message is sent to
- * your page. The 'message' object format can vary depending on the kind
- * of message that was received. Read more at: https://developers.facebook.com/
- * docs/messenger-platform/webhook-reference/message-received
- */
 
 const handleReceiveMessage = (event) => {
   const message = event.message;
@@ -270,7 +258,7 @@ const handleReceiveMessage = (event) => {
           text: textMessage.phoneFormatErr
         }], message, 'text-bot');
       } else {
-        sendApi.sendAcceptPhone(senderId, messageText.replace(/^0/g, ''), message);
+        sendApi.sendAcceptPhone(senderId, messageText.match(/[0-9]{10,11}/g)[0].replace(/^0/g, ''), message);
       }
     } else {
       sendApi.sendReturnMessage(senderId, message, 'text-admin');
@@ -281,11 +269,9 @@ const handleReceiveMessage = (event) => {
     if (messageAttachments[0] && messageAttachments[0].payload && messageAttachments[0].payload.coordinates) {
       const location = messageAttachments[0].payload.coordinates
       const url = `${APIURL}/dash/job?lat=${location.lat}&lng=${location.long}`;
-      // const url = 'https://jobohihi.herokuapp.com/dash/job?lat=10.7871254&lng=106.6755164';
       let body = '';
       axios.get(url)
         .then(function (res) {
-          // console.log('DATA', parseArray(res));
           if (res) {
             const data = res.data;
             sendApi.sendMessage(senderId, [{
