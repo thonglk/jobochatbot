@@ -251,7 +251,7 @@ const handleReceiveMessage = (event) => {
     } else if (messageText === 'DIA CHI' || messageText === 'LOCATION' || messageText === 'VI TRI' || messageText === 'ADDRESS' || messageText === 'VIEC O GAN') {
       sendApi.sendQuickReplyAddress(senderId, message);
     } else if (messageText.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g)) {
-      sendApi.sendAcceptEmail(senderId, messageText.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g)[0], message);
+      sendApi.sendAcceptEmail(senderId, messageText.toLowerCase().match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g)[0], message);
     } else if (messageText.match(/[0-9]{0,13}/g)[0]) {
       if (!messageText.match(/[0-9]{10,11}/g)) {
         sendApi.sendMessage(senderId, [{
