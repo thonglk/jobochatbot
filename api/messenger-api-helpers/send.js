@@ -301,16 +301,16 @@ const sendReturnMessage = (recipientId, message, type = 'text-bot') => {
  * @return {[type]}             [description]
  */
 const sendQuickReplyAddress = (recipientId, message) => {
-  UserStore.checkMessengerId(recipientId)
-    .then(userProfile => {
-      if (userProfile) {
+  // UserStore.checkMessengerId(recipientId)
+  //   .then(userProfile => {
+      // if (userProfile) {
         sendMessage(recipientId, [
           messages.locationMessage,
         ], message, 'location-bot');
-      } else {
-        sendLoggedOutWelcomeMessage(recipientId, message);
-      }
-    });
+      // } else {
+      //   sendLoggedOutWelcomeMessage(recipientId, message);
+      // }
+    // });
 }
 
 const sendWelcomeMessage = (recipientId) => {
