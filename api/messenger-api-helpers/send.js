@@ -233,46 +233,50 @@ const sendNotFoundPhone = (recipientId, message) => {
         "template_type": "button",
         "text": textMessages.phoneNotRegistered,
         "buttons": [{
-          type: 'web_url',
-          title: 'Đăng ký',
-          url: 'https://joboapp.com/signup/2',
-          webview_height_ratio: 'tall',
-          messenger_extensions: true,
-        }]
-      }
-    }
-  }, {
-    quick_replies: [{
-      content_type: "location"
-    }]
-  }], message, 'template-bot');
-}
-
-const sendNotFoundEmail = (recipientId, message) => {
-  sendMessage(recipientId, [{
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "button",
-          "text": textMessages.emailNotRegistered,
-          "buttons": [{
             type: 'web_url',
             title: 'Đăng ký',
             url: 'https://joboapp.com/signup/2',
             webview_height_ratio: 'tall',
             messenger_extensions: true,
-          }]
-        }
+          },
+          {
+            type: 'postback',
+            title: 'Tìm việc theo vị trí',
+            payload: JSON.stringify({
+              type: 'LOCATION',
+            }),
+          }
+        ]
       }
-    },
-    {
-      type: 'postback',
-      title: 'Tìm việc theo vị trí',
-      payload: JSON.stringify({
-        type: 'LOCATION',
-      }),
     }
-  ], message, 'template-bot');
+  }], message, 'template-bot');
+}
+
+const sendNotFoundEmail = (recipientId, message) => {
+  sendMessage(recipientId, [{
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "button",
+        "text": textMessages.emailNotRegistered,
+        "buttons": [{
+            type: 'web_url',
+            title: 'Đăng ký',
+            url: 'https://joboapp.com/signup/2',
+            webview_height_ratio: 'tall',
+            messenger_extensions: true,
+          },
+          {
+            type: 'postback',
+            title: 'Tìm việc theo vị trí',
+            payload: JSON.stringify({
+              type: 'LOCATION',
+            }),
+          }
+        ]
+      }
+    }
+  }], message, 'template-bot');
 }
 // Send a different Welcome message based on if the user is logged in.
 const sendReturnMessage = (recipientId, message, type = 'text-bot') => {
