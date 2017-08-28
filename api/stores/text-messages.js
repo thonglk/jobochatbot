@@ -11,6 +11,8 @@ module.exports = {
   signUpSuccess: 'Cám ơn bạn đã tạo tài khoản trên Jobo, để có thể tìm việc tốt hơn, bạn vui lòng cập nhật thông tin cá nhân tại địa chỉ http://joboapp.com/',
   loginFail: 'Đăng nhập không thành công. Vui lòng thử lại!',
   logoutFail: 'Đăng xuất không thành công. Vui lòng thử lại!',
+  emailNotRegistered: "Bạn chưa đăng ký tài khoản với địa chỉ email này!\nVui lòng cho biết vị trí của bạn để tôi giúp bạn tìm việc xung quanh đó.\nHoặc bạn có thể đăng ký để thực hiện nhiều tính năng hơn!",
+  phoneNotRegistered: "Bạn chưa đăng ký tài khoản với số điện thoại này!\nVui lòng cho biết vị trí của bạn để tôi giúp bạn tìm việc xung quanh đó.\nHoặc bạn có thể đăng ký để thực hiện nhiều tính năng hơn!",
   findJobs: 'Bạn muốn tìm việc gì?',
   jobs: ['PG', 'Phục vụ', 'Lễ tân'],
   jobsMessage: 'Danh sách việc làm',

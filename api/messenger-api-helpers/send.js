@@ -53,7 +53,7 @@ const sendMessage = (recipientId, messagePayloads, message = 'Unknow', type = 'm
       typingOff(recipientId),
     ]);
   UserStore.updateConversations(recipientId, message, messagePayloadArray, type)
-  .then(result => console.log(result));
+    .then(result => console.log(result));
 };
 
 // Send one or more messages using the Send API.
@@ -231,7 +231,7 @@ const sendNotFoundPhone = (recipientId, message) => {
       "type": "template",
       "payload": {
         "template_type": "button",
-        "text": "Bạn chưa đăng ký tài khoản với số điện thoại này, vui lòng đăng ký!",
+        "text": textMessages.phoneNotRegistered,
         "buttons": [{
           type: 'web_url',
           title: 'Đăng ký',
@@ -241,6 +241,10 @@ const sendNotFoundPhone = (recipientId, message) => {
         }]
       }
     }
+  }, {
+    quick_replies: [{
+      content_type: "location"
+    }]
   }], message, 'template-bot');
 }
 
@@ -250,7 +254,7 @@ const sendNotFoundEmail = (recipientId, message) => {
       "type": "template",
       "payload": {
         "template_type": "button",
-        "text": "Bạn chưa đăng ký tài khoản với email này, vui lòng đăng ký!",
+        "text": textMessages.emailNotRegistered,
         "buttons": [{
           type: 'web_url',
           title: 'Đăng ký',
@@ -260,6 +264,10 @@ const sendNotFoundEmail = (recipientId, message) => {
         }]
       }
     }
+  }, {
+    quick_replies: [{
+      content_type: "location"
+    }]
   }], message, 'template-bot');
 }
 // Send a different Welcome message based on if the user is logged in.
