@@ -16,7 +16,7 @@ module.exports = {
   findJobs: 'Bạn muốn tìm việc gì?',
   jobs: ['PG', 'Phục vụ', 'Lễ tân'],
   jobsMessage: 'Danh sách việc làm',
-  genericBtnTitle: 'Xem chi tiết ứng tuyển',
+  genericBtnTitle: 'Chi tiết',
   appViewMore: 'Xem thêm',
   viewMore: "Xem thêm tại Joboapp.com",
   locationFound: (total) => `Chúng tôi đã tìm thấy ${total} công việc đang tuyển xung quanh bạn`,
