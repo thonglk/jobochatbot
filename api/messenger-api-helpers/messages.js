@@ -175,7 +175,7 @@ const attachmentMessage = (type, url) => {
 const setJobsButton = {
   type: 'web_url',
   title: textMessages.jobsMessage,
-  url: `https://joboapp.com/`,
+  url: `${WEBURL}`,
   webview_height_ratio: 'full',
   messenger_extensions: true,
 };
