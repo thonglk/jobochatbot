@@ -58,12 +58,15 @@ router.route('/')
 
     if (recipientIds && recipientIds !== 'all') {
       sendApi.sendNotification(recipientIds, messageToSend);
+      res.sendStatus(200);
     } else {
       UserStore.getMessengerIds()
-        .then(messengerIds => sendApi.sendNotification(messengerIds, messageToSend))
+        .then(messengerIds => {
+          sendApi.sendNotification(messengerIds, messageToSend);
+          res.sendStatus(200);
+        })
         .catch(err => res.status(err.state).send(err));
     }
-    res.sendStatus(200);
   });
 
 module.exports = router;
