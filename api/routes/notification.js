@@ -13,7 +13,7 @@ router.route('/')
   // })
   .post((req, res, next) => {
     const { messages, recipientIds } = req.body;
-    const messageToSend = [];
+    let messageToSend = [];
     if (messages.text && messages.calltoaction && messages.linktoaction) {
       const buttonMessage = {
         "attachment": {
