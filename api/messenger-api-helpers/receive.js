@@ -251,12 +251,11 @@ const handleReceiveMessage = (event) => {
       sendApi.sendQuickReplyAddress(senderId, message);
     } else if (messageText.match(/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g)) {
       sendApi.sendAcceptEmail(senderId, messageText.toLowerCase().match(/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g)[0], message);
-    } else if (messageText.match(/[0-9]{8,13}/g)[0]) {
+    } else if (messageText.match(/[0-9]{8,13}/g)) {
       if (!messageText.match(/[0-9]{10,11}/g)) {
-        UserStore.checkMessengerId(recipientId)
+        UserStore.checkMessengerId(senderId)
           .then(userProfile => {
             if (!userProfile) {
-              console.log(userProfile);
               sendApi.sendMessage(senderId, [{
                 text: textMessage.phoneFormatErr
               }], message, 'text-bot');
