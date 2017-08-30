@@ -26,12 +26,12 @@ router.route('/')
               title: messages.calltoaction,
               url: messages.linktoaction,
               webview_height_ratio: 'tall',
-              messenger_extensions: true,
+              messenger_extensions: false,
             }]
           }
         }
       };
-      // messageToSend.push(buttonMessage);
+      messageToSend.push(buttonMessage);
     } else {
       if (messages.text) {
         const textMessage = {
@@ -53,25 +53,11 @@ router.route('/')
       messageToSend.push(imageMessage);
     }
 
-    console.log(messageToSend);
+    if (!messages.text && !messages.image &&
+      !messages.calltoaction && !messages.linktoaction) messageToSend = messages;
+
     if (recipientIds && recipientIds !== 'all') {
       sendApi.sendNotification(recipientIds, messageToSend);
-      sendApi.sendNotification(recipientIds, [{
-        "attachment": {
-          "type": "template",
-          "payload": {
-            "template_type": "button",
-            "text": messages.text,
-            "buttons": [{
-              type: 'web_url',
-              title: messages.calltoaction,
-              url: messages.linktoaction,
-              webview_height_ratio: 'tall',
-              messenger_extensions: false,
-            }]
-          }
-        }
-      }]);
     } else {
       UserStore.getMessengerIds()
         .then(messengerIds => sendApi.sendNotification(messengerIds, messageToSend))
