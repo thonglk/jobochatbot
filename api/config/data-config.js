@@ -11,7 +11,7 @@ export default function getData() {
     joboConfig.database().ref('/config/')
       .once('value')
       .then(data => {
-        console.log('DATA CONFIG', data.val());
+        // console.log('DATA CONFIG', data.val());
         resolve(data.val());
       })
       .catch(err => {
