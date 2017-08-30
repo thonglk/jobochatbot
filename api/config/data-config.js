@@ -8,7 +8,10 @@ var joboConfig = firebase.initializeApp({
 
 module.exports = joboConfig.database().ref('/config/')
 .once('value')
-.then(data => data)
+.then(data => {
+  console.log('DATA CONFIG', data);
+  return data;
+})
 .catch(err => {
   console.log(err);
   return err;
