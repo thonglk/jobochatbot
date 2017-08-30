@@ -139,7 +139,7 @@ export default class Store {
         .then(bots => {
           if (!bots.val()) resolve(false);
           // console.log('123123123asakkcjnjkansicnascnoi', bots.val());
-          if (bots.val()[messengerId]) resolve(true);
+          if (bots.val()[messengerId]) resolve(bots.val()[messengerId]);
           else resolve(false);
         })
         .catch(err => resolve(false));

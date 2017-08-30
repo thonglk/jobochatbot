@@ -145,7 +145,7 @@ const sendAcceptPhone = (recipientId, phone, message) => {
               "text": `Bạn đang đăng nhập với ${msg}.\nBạn muốn đăng nhập lại với số điện thoại 0${phone}?`,
               "buttons": [{
                   type: 'postback',
-                  title: 'Đúng',
+                  title: 'Đồng ý',
                   payload: JSON.stringify({
                     type: 'PHONE_TRUE',
                     data: {
@@ -155,7 +155,7 @@ const sendAcceptPhone = (recipientId, phone, message) => {
                 },
                 {
                   type: 'postback',
-                  title: 'Sai',
+                  title: 'Huỷ bỏ',
                   payload: JSON.stringify({
                     type: 'LOGIN_AGAIN',
                     data: {
@@ -215,7 +215,7 @@ const sendAcceptEmail = (recipientId, email, message) => {
               "text": `Bạn đang đăng nhập với ${msg}.\nBạn muốn đăng nhập lại với email ${email}?`,
               "buttons": [{
                   type: 'postback',
-                  title: 'Đúng',
+                  title: 'Đồng ý',
                   payload: JSON.stringify({
                     type: 'EMAIL_TRUE',
                     data: {
@@ -225,11 +225,11 @@ const sendAcceptEmail = (recipientId, email, message) => {
                 },
                 {
                   type: 'postback',
-                  title: 'Sai',
+                  title: 'Huỷ bỏ',
                   payload: JSON.stringify({
                     type: 'LOGIN_AGAIN',
                     data: {
-                      phone: phone,
+                      email: email,
                     },
                   }),
                 }
