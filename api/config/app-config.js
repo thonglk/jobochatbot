@@ -1,5 +1,4 @@
 import config from 'config';
-import DATA from 'config/data-config';
 import FIRE_BASE from './firebase-config';
 import FIRE_BASE_ADMIN from './firebase-admin-config';
 /*
@@ -37,12 +36,9 @@ const APIURL = (process.env.APIURL) ?
   (process.env.APIURL) :
   config.get('apiURL');
 
-const WEBURL = (process.env.WEBURL) ?
-  (process.env.WEBURL) : DATA.WEBURL;
-
-if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKENS && SERVER_URL && WHITE_LIST_DOMAINS && APIURL && WEBURL)) {
+if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKENS && SERVER_URL && WHITE_LIST_DOMAINS && APIURL)) {
   console.error("Missing config values");
   process.exit(1);
 }
 
-module.exports = { APP_SECRET, VALIDATION_TOKEN, PAGE_ACCESS_TOKENS, SERVER_URL, FIRE_BASE, FIRE_BASE_ADMIN, WHITE_LIST_DOMAINS, APIURL, WEBURL, DATA };
+module.exports = { APP_SECRET, VALIDATION_TOKEN, PAGE_ACCESS_TOKENS, SERVER_URL, FIRE_BASE, FIRE_BASE_ADMIN, WHITE_LIST_DOMAINS, APIURL };

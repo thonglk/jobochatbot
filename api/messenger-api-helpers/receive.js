@@ -16,7 +16,6 @@ import firebase, { auth } from 'firebase';
 import firebaseAdmin, { database } from 'firebase-admin';
 
 // ==== CONFIG ============================================================
-import DATA from 'config/data-config';
 import { APIURL } from 'config/app-config';
 
 const handleReceivedAuthentication = (event) => {

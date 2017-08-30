@@ -1,5 +1,5 @@
 // ===== APP CONFIG ============================================================
-import { SERVER_URL, WEBURL, DATA } from 'config/app-config.js';
+import { SERVER_URL, WEBURL } from 'config/app-config.js';
 import textMessages from 'stores/text-messages';
 
 /**
@@ -230,6 +230,7 @@ const persistentMenu = {
 };
 
 const genericMessage = (data) => {
+  const DATA = global.DATA;
   return {
     attachment: {
       type: "template",

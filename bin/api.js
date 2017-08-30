@@ -17,6 +17,7 @@ import PrettyError from 'pretty-error';
 import ThreadSetup from 'messenger-api-helpers/thread-setup';
 // ===== APP CONFIG ============================================================
 import { APP_SECRET, FIRE_BASE, FIRE_BASE_ADMIN } from 'config/app-config.js';
+import getData from 'config/data-config.js';
 // ===== CONFIG PRETTY ERROR ===================================================
 import config from 'config';
 const pretty = new PrettyError();
@@ -34,6 +35,13 @@ if (firebaseApp.options.apiKey === FIRE_BASE[process.env.NODE_ENV].apiKey) {
 const firebaseAdApp = firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(FIRE_BASE_ADMIN['development'].cert),
   databaseURL: FIRE_BASE_ADMIN['development'].databaseURL
+});
+
+global.DATA = {};
+getData().then(data => global.DATA = data)
+.catch(err => {
+  console.log(err);
+  process.exit(1);
 });
 
 /* ----------  Views  ---------- */

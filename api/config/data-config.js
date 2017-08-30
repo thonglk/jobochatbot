@@ -2,20 +2,24 @@ import firebase from 'firebase-admin';
 import { FIRE_BASE_ADMIN } from 'config/app-config.js';
 
 var joboConfig = firebase.initializeApp({
-    credential: firebase.credential.cert(FIRE_BASE_ADMIN['config'].cert),
-    databaseURL: FIRE_BASE_ADMIN['config'].databaseURL
+  credential: firebase.credential.cert(FIRE_BASE_ADMIN['Jobo'].cert),
+  databaseURL: FIRE_BASE_ADMIN['Jobo'].databaseURL
 }, "joboConfig");
 
-module.exports = joboConfig.database().ref('/config/')
-.once('value')
-.then(data => {
-  console.log('DATA CONFIG', data.val());
-  return data.val();
-})
-.catch(err => {
-  console.log(err);
-  return err;
-});
+export default function getData() {
+  return new Promise((resolve, reject) => {
+    joboConfig.database().ref('/config/')
+      .once('value')
+      .then(data => {
+        console.log('DATA CONFIG', data.val());
+        resolve(data.val());
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+}
 
 // module.exports = {
 //   'UpdateAt': "2017-04-10T04:44:21.253Z",

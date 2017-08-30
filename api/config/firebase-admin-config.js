@@ -29,7 +29,7 @@ const FIRE_BASE_ADMIN = {
       "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-q7ytj%40jobo-b8204.iam.gserviceaccount.com"
     }
   },
-  config: {
+  Jobo: {
     databaseURL: "https://jobfast-359da.firebaseio.com",
     cert: {
       "type": "service_account",
