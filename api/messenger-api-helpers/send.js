@@ -136,7 +136,37 @@ const sendAcceptPhone = (recipientId, phone, message) => {
           }
         }], message, 'template-bot');
       } else {
-        sendReturnMessage(recipientId, message, 'text-admin');
+        const msg = userProfile.match(/[0-9]{10,11}/g) ? `số điện thoại là ${userProfile}` : `email là ${userProfile}`;
+        sendMessage(recipientId, [{
+          "attachment": {
+            "type": "template",
+            "payload": {
+              "template_type": "button",
+              "text": `Bạn đang đăng nhập với ${msg}.\nBạn muốn đăng nhập lại với số điện thoại 0${phone}?`,
+              "buttons": [{
+                  type: 'postback',
+                  title: 'Đúng',
+                  payload: JSON.stringify({
+                    type: 'PHONE_TRUE',
+                    data: {
+                      phone: phone,
+                    },
+                  }),
+                },
+                {
+                  type: 'postback',
+                  title: 'Sai',
+                  payload: JSON.stringify({
+                    type: 'LOGIN_AGAIN',
+                    data: {
+                      phone: phone,
+                    },
+                  }),
+                }
+              ]
+            }
+          }
+        }], message, 'template-bot');
       }
     });
 };
@@ -176,7 +206,37 @@ const sendAcceptEmail = (recipientId, email, message) => {
           }
         }], message, 'template-bot');
       } else {
-        sendReturnMessage(recipientId, message, 'text-admin');
+        const msg = userProfile.match(/[0-9]{10,11}/g) ? `số điện thoại là ${userProfile}` : `email là ${userProfile}`;
+        sendMessage(recipientId, [{
+          "attachment": {
+            "type": "template",
+            "payload": {
+              "template_type": "button",
+              "text": `Bạn đang đăng nhập với ${msg}.\nBạn muốn đăng nhập lại với email ${email}?`,
+              "buttons": [{
+                  type: 'postback',
+                  title: 'Đúng',
+                  payload: JSON.stringify({
+                    type: 'EMAIL_TRUE',
+                    data: {
+                      email: email,
+                    },
+                  }),
+                },
+                {
+                  type: 'postback',
+                  title: 'Sai',
+                  payload: JSON.stringify({
+                    type: 'LOGIN_AGAIN',
+                    data: {
+                      phone: phone,
+                    },
+                  }),
+                }
+              ]
+            }
+          }
+        }], message, 'template-bot');
       }
     });
 };
