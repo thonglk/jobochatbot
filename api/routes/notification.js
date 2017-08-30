@@ -33,17 +33,7 @@ router.route('/')
       };
       messageToSend.push(buttonMessage);
     } else {
-      if (messages.image) {
-        const imageMessage = {
-          "attachment": {
-            "type": "image",
-            "payload": {
-              "url": messages.image
-            }
-          }
-        }
-        messageToSend.push(imageMessage);
-      } else if (messages.text) {
+      if (messages.text) {
         const textMessage = {
           "text": messages.text
         }
@@ -51,7 +41,19 @@ router.route('/')
       }
     }
 
+    if (messages.image) {
+      const imageMessage = {
+        "attachment": {
+          "type": "image",
+          "payload": {
+            "url": messages.image
+          }
+        }
+      }
+      messageToSend.push(imageMessage);
+    }
 
+    console.log(messageToSend);
     if (recipientIds && recipientIds !== 'all') {
       sendApi.sendNotification(recipientIds, messageToSend);
     } else {
