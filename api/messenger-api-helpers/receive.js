@@ -256,6 +256,7 @@ const handleReceiveMessage = (event) => {
         UserStore.checkMessengerId(recipientId)
           .then(userProfile => {
             if (!userProfile) {
+              console.log(userProfile);
               sendApi.sendMessage(senderId, [{
                 text: textMessage.phoneFormatErr
               }], message, 'text-bot');
