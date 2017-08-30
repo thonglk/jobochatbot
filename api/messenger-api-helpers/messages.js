@@ -244,7 +244,9 @@ const genericMessage = (data) => {
           buttons: [{
             type: "web_url",
             url: `${DATA.WEBURL}/view/store/${data[0].storeId}`,
-            title: textMessages.genericBtnTitle
+            title: textMessages.genericBtnTitle,
+            webview_height_ratio: 'full',
+            messenger_extensions: true,
           }]
         }, {
           title: DATA.data.job[data[1].job] + ' ' + DATA.data.working_type[data[1].working_type],
@@ -254,7 +256,9 @@ const genericMessage = (data) => {
           buttons: [{
             type: "web_url",
             url: `${DATA.WEBURL}/view/store/${data[1].storeId}`,
-            title: textMessages.genericBtnTitle
+            title: textMessages.genericBtnTitle,
+            webview_height_ratio: 'full',
+            messenger_extensions: true,
           }]
         }, {
           title: DATA.data.job[data[2].job] + ' ' + DATA.data.working_type[data[2].working_type],
@@ -264,7 +268,9 @@ const genericMessage = (data) => {
           buttons: [{
             type: "web_url",
             url: `${DATA.WEBURL}/view/store/${data[2].storeId}`,
-            title: textMessages.genericBtnTitle
+            title: textMessages.genericBtnTitle,
+            webview_height_ratio: 'full',
+            messenger_extensions: true,
           }]
         }, {
           title: DATA.data.job[data[3].job] + ' ' + DATA.data.working_type[data[3].working_type],
@@ -274,7 +280,9 @@ const genericMessage = (data) => {
           buttons: [{
             type: "web_url",
             url: `${DATA.WEBURL}/view/store/${data[3].storeId}`,
-            title: textMessages.genericBtnTitle
+            title: textMessages.genericBtnTitle,
+            webview_height_ratio: 'full',
+            messenger_extensions: true,
           }]
         }, {
           title: DATA.data.job[data[4].job] + ' ' + DATA.data.working_type[data[4].working_type],
@@ -284,7 +292,9 @@ const genericMessage = (data) => {
           buttons: [{
             type: "web_url",
             url: `${DATA.WEBURL}/view/store/${data[4].storeId}`,
-            title: textMessages.genericBtnTitle
+            title: textMessages.genericBtnTitle,
+            webview_height_ratio: 'full',
+            messenger_extensions: true,
           }]
         }, {
           title: DATA.data.job[data[5].job] + ' ' + DATA.data.working_type[data[5].working_type],
@@ -294,7 +304,9 @@ const genericMessage = (data) => {
           buttons: [{
             type: "web_url",
             url: `${DATA.WEBURL}/view/store/${data[5].storeId}`,
-            title: textMessages.genericBtnTitle
+            title: textMessages.genericBtnTitle,
+            webview_height_ratio: 'full',
+            messenger_extensions: true,
           }]
         }, {
           title: textMessages.viewMore,
@@ -303,7 +315,9 @@ const genericMessage = (data) => {
           buttons: [{
             type: "web_url",
             url: `${DATA.WEBURL}`,
-            title: textMessages.appViewMore
+            title: textMessages.appViewMore,
+            webview_height_ratio: 'full',
+            messenger_extensions: true,
           }]
         }]
       }
