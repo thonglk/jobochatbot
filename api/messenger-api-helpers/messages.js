@@ -1,6 +1,5 @@
 // ===== APP CONFIG ============================================================
-import { SERVER_URL, WEBURL } from 'config/app-config.js';
-import DATA from 'config/data-config';
+import { SERVER_URL, WEBURL, DATA } from 'config/app-config.js';
 import textMessages from 'stores/text-messages';
 
 /**
