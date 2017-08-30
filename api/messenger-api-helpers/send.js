@@ -136,7 +136,7 @@ const sendAcceptPhone = (recipientId, phone, message) => {
           }
         }], message, 'template-bot');
       } else {
-        const msg = userProfile.match(/[0-9]{10,11}/g) ? `số điện thoại là ${userProfile}` : `email là ${userProfile}`;
+        const msg = userProfile.match(/[0-9]{0,11}/g) ? `số điện thoại là ${userProfile}` : `email là ${userProfile}`;
         sendMessage(recipientId, [{
           "attachment": {
             "type": "template",
@@ -206,7 +206,7 @@ const sendAcceptEmail = (recipientId, email, message) => {
           }
         }], message, 'template-bot');
       } else {
-        const msg = userProfile.match(/[0-9]{10,11}/g) ? `số điện thoại là ${userProfile}` : `email là ${userProfile}`;
+        const msg = userProfile.match(/[0-9]{0,11}/g) ? `số điện thoại là ${userProfile}` : `email là ${userProfile}`;
         sendMessage(recipientId, [{
           "attachment": {
             "type": "template",
