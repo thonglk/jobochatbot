@@ -136,7 +136,7 @@ const sendAcceptPhone = (recipientId, phone, message) => {
           }
         }], message, 'template-bot');
       } else {
-        sendLoggedOutWelcomeMessage(recipientId, message);
+        sendReturnMessage(recipientId, message, 'text-admin');
       }
     });
 };
@@ -176,7 +176,7 @@ const sendAcceptEmail = (recipientId, email, message) => {
           }
         }], message, 'template-bot');
       } else {
-        sendLoggedOutWelcomeMessage(recipientId, message);
+        sendReturnMessage(recipientId, message, 'text-admin');
       }
     });
 };
@@ -290,7 +290,7 @@ const sendReturnMessage = (recipientId, message, type = 'text-bot') => {
               }], message, type);
           });
       } else {
-        sendLoggedOutWelcomeMessage(recipientId, message);
+        sendReturnMessage(recipientId, message, 'text-admin');
       }
     });
 };
@@ -361,7 +361,7 @@ const sendQuickReplyFindJobs = (recipientId, message) => {
           ], message, 'quick-bot'
         );
       } else {
-        sendLoggedOutWelcomeMessage(recipientId, message);
+        sendReturnMessage(recipientId, message, 'text-admin');
       }
     });
 }

@@ -251,11 +251,18 @@ const handleReceiveMessage = (event) => {
       sendApi.sendQuickReplyAddress(senderId, message);
     } else if (messageText.match(/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g)) {
       sendApi.sendAcceptEmail(senderId, messageText.toLowerCase().match(/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g)[0], message);
-    } else if (messageText.match(/[0-9]{0,13}/g)[0]) {
+    } else if (messageText.match(/[0-9]{8,13}/g)[0]) {
       if (!messageText.match(/[0-9]{10,11}/g)) {
-        sendApi.sendMessage(senderId, [{
-          text: textMessage.phoneFormatErr
-        }], message, 'text-bot');
+        UserStore.checkMessengerId(recipientId)
+          .then(userProfile => {
+            if (!userProfile) {
+              sendApi.sendMessage(senderId, [{
+                text: textMessage.phoneFormatErr
+              }], message, 'text-bot');
+            } else {
+              sendApi.sendReturnMessage(senderId, message, 'text-admin');
+            }
+          });
       } else {
         sendApi.sendAcceptPhone(senderId, messageText.match(/[0-9]{10,11}/g)[0].replace(/^0/g, ''), message);
       }
