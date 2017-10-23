@@ -18,7 +18,7 @@ module.exports = {
   jobsMessage: 'Danh sách việc làm',
   genericBtnTitle: 'Chi tiết',
   appViewMore: 'Xem thêm',
-  viewMore: "Xem thêm tại Joboapp.com",
+  viewMore: "Xem thêm tại Jobo.asia",
   locationFound: (total) => `Chúng tôi đã tìm thấy ${total} công việc đang tuyển xung quanh bạn`,
   locationNotFound: "Hiện tại chúng tôi chưa cập nhật tại vị trí này",
   unknowAttachment: "Chúng tôi đã nhận được thông tin bạn cung cấp",
