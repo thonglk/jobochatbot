@@ -1,6 +1,6 @@
 module.exports = {
   authentication: 'Truy cập thành công',
-  welcome: 'Xin chào! 👋 Mừng bạn đến với ứng dụng hỗ trợ tìm việc làm Jobo! https://joboapp.com',
+  welcome: 'Xin chào! 👋 Mừng bạn đến với ứng dụng hỗ trợ tìm việc làm Jobo! https://jobo.asia',
   createAccount: 'Để sử dụng ứng dụng của Jobo bạn cần phải đăng nhập.',
   hello: (username) => `Xin chào ${username}!`,
   signInSuccess: 'Bây giờ bạn có thể tham gia tìm kiếm các việc làm bạn muốn.\nĐể có thể tìm việc tốt hơn, bạn vui lòng cập nhật thông tin cá nhân tại địa chỉ http://joboapp.com/',
@@ -23,6 +23,6 @@ module.exports = {
   locationNotFound: "Hiện tại chúng tôi chưa cập nhật tại vị trí này",
   unknowAttachment: "Chúng tôi đã nhận được thông tin bạn cung cấp",
   askPhone: 'Số điện thoại hoặc email của bạn là?',
-  adminContact: 'Chờ xíu nha, bạn sẽ được kết nối với quản trị viên ngay thôi.\nBạn cũng có thể tìm thấy các hướng dẫn trong menu.',
+  adminContact: 'Chờ mình xíu nha.',
   phoneFormatErr: 'Số điện thoại vừa nhập chưa đúng định dạng.\nSố điện thoại phải là số di động. Vui lòng nhập lại!'
 }
