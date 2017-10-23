@@ -156,7 +156,7 @@ const handleReceivePostback = (event) => {
    */
   const { type } = JSON.parse(event.postback.payload);
   const senderId = event.sender.id;
-
+  console.log(event.postback)
   // Perform an action based on the type of payload received.
   // Handle postback type
   switch (type) {
