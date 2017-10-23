@@ -2,8 +2,8 @@
     "appSecret": "22d0cd4f4a7c5f7bd68324cab4139228",
     "pageAccessTokens": ["EAAZAsqUIyieIBAJ9oToMT2BteWPEu4CawrcjEmSTpZCdIIKwJ8lepuc3yewwfyRm8nBm8NEvhcrUl5y8XeZBj1teTJGVs6z6ZBUDRiBjKhvt6VQkcYr8YMqzZAuZAAVqmMJSQYaN1sTDSlucWubMHIHi09hHi9bnHgTZBnnZAwcwAgODqbM3p54l"],
     "validationToken": "jobobot",
-    "serverURL": "https://jobo-bot.herokuapp.com",
-    "apiURL": "https://jobohihi.herokuapp.com",
-    "webURL": "https://joboapp.com",
-    "whiteListDomains": ["https://jobo-bot.herokuapp.com/", "https://joboapp.com/", "http://localhost:3030/", "https://jobohihi.herokuapp.com"]
+    "serverURL": "https://jobo-chat.herokuapp.com",
+    "apiURL": "https://jobo-server.herokuapp.com",
+    "webURL": "https://jobo.asia",
+    "whiteListDomains": ["https://jobo-bot.herokuapp.com/", "https://jobo.asia/", "http://localhost:3030/", "https://jobo-server.herokuapp.com"]
 }
