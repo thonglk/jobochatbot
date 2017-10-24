@@ -415,11 +415,7 @@ const sendQuickReplyFindJobs = (recipientId, message) => {
   UserStore.checkMessengerId(recipientId)
     .then(userProfile => {
       if (userProfile) {
-        sendMessage(
-          recipientId, [
-            messages.findJobs,
-          ], message, 'quick-bot'
-        );
+        sendMessage(recipientId, [messages.findJobs,], message, 'quick-bot');
       } else {
         sendReturnMessage(recipientId, message, 'text-admin');
       }

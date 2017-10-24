@@ -1,17 +1,17 @@
 const FIRE_BASE_ADMIN = {
   development: {
-    databaseURL: "https://jobo-app.firebaseio.com",
+    databaseURL: "https://jobo-chat.firebaseio.com",
     cert: {
-      "type": "service_account",
-      "project_id": "jobo-app",
-      "private_key_id": "d25f0015427c296f7b8da7714d08a79bc79e4aa5",
-      "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCkcwIss8aUJS9q\nR6Lb1Y5mzt0oHSS6UB/V8ojH+LpxOB1w2s9cIFZqquNZ/dAXoZLxDknTvK4fo3n0\nE/D4Nn6h1JxGGr2Xrmx903T7x2xlJTESI2gOVzi4kFC13r1v61kneniEvyErncNG\nKGxi4cg10e7EsUMr6kPXlEzO+vnj4t06VhYAe7SL4zzb5lRayDIipm4xJbqTQVWi\n4GayDJWKnErXt8Cnor8adqbDZGuJhQ7/Y6rKS8skxTES60Jeo2Tru8d66FKBm01c\nWXGWwWA0nRuKxNFk5wLDnRzg0eNUF5oGLGXdjX3QuNklXFl8j7GumUknkTqxkGbG\nVzjMsSZ9AgMBAAECggEAEl2BtapSGANbGzxq1LAx2gtqKWuvyVrfY05Vtjdx4ukI\naK0XEUvPOtRg1ZEB51G1DlSxLANbUs839GkxtRao57vNxAqCd+kT1q2B2Ah6c4VG\nyKbJnShifkInsVfxwgj/iOglg3Ww56UTxMcI67YZXOFYEAFX5hSghPfb6BWhSLDE\nfaIFfy4zLdsP0C9MgNcV+NzzsDD0NMRksj6lBGsohrogPx2dl3qrzqlQbHM95aW7\nAFrTRR1hF+SH4cf86VQWe8XvIpWygr0rNU18gIai76/2H7qtHY7nYv78ZIbCxdpz\nNXJUl6ZWC2RUALNHakFqTLjjgr2xW7et7BrptGJ9JQKBgQDOsdWDuyshkMNKrKjL\nwW3Fe6HMKu2sY5qum0tIm1tLWSx/F9h4Hr/lDIcBO1k+er3SaW023fomrhTf3g2A\nq/pzAaw1q3cTUyHecJUu7zLABW3Z23ULCoYvfh7/5DJJdI24tY3vwafClSn4N/ON\nvsgEpEZQ0jBZKVwvUVX1TZlVHwKBgQDLrWKyMrej34TnDZaP54rOCAxX+NXKMyC1\nI2CtWqXIvtzbRWLPDgBK8zWHUbNM7RKyAIuKNLMVFN60iBUIIaS4Iutn9YnnDt2u\nNrL0D0ugspk1u7xQtzUs4x98UUN1wUZ59cx0kha14/8bg3zeb4Ghs+xWim6fp7ej\nuEW4oCPU4wKBgDT3STmaivDtAb5vBEpCZPjIN6v0DDeyxn6b+OzAMuLaFRb0a1pM\ntuvhC+963+Gs3lu+/Gek9mdXEK5VXqxsZZ92/EQ8jiT7lqBDxVbjoOOoAIBlRlbv\n+XbOIO998Iz2OyLsE1UvEOhCBSFAZT8bdnIKDqLDWfRfLupJM3fKzNINAoGBAI7a\np1Sw+dh4V3DvOODp15M2VeIF530QayphC9fKsmigZatteSYcfdwTxUGJ7iZQSUKL\n21MuL0TkBGe+4nF3l16HL3EU6IolBRrBxrYjXDnzyj3D1QsP1L4M9vJs1NHso4+6\n9JH2PPOKXE1h5dzlfJh755GzOm/EZKrx/gTGXRtdAoGAUraZXIX64oKyMONCz54V\ndoh8zwbxJoP8QYvxu4PNJ5TOFjbE/pqS3axB/DEUFI61VH6buZXzk7GO8VdKPMmc\nu+UzfGapnUOrySpd5e1goj1rFnQRI/sH35ahiKQF1kqmxo7yHDOgkVP8/YY+ixbp\ns2IG1/1q2ueBfeuSzGL75Pg=\n-----END PRIVATE KEY-----\n",
-      "client_email": "jobo-app@appspot.gserviceaccount.com",
-      "client_id": "104411682699978595454",
-      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "token_uri": "https://accounts.google.com/o/oauth2/token",
-      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/jobo-app%40appspot.gserviceaccount.com"
+        "type": "service_account",
+        "project_id": "jobo-chat",
+        "private_key_id": "dadaa2894385e39becf4224109fd59ba866414f4",
+        "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDZDEwnCY6YboXU\nd0fSmOAL8QuPVNj6P+fJc+sa7/HUqpcZrnubJAfPYjDCiUOf9p6mo2g5nQEZiiim\nQYiB+KMt8sHPvRtNF5tWeXN3s7quKAJcwCZC8RySeiR9EfKTniI6QrFwQt0pU1Ay\ncPg/whb1LwXoyA6C7PErOEJ+xsDQmCxEOLmGrbmDe81tBJZIBU8WupV7j9416qOs\n3iPnYIJxr6gqJWKNp6ALUM/48c1pAompn6aB7zOweyvvfC6ZKuMUfsEii5FDYR+A\n9eeeghZFXv9VLp4zpsWUZqytGEEW9xgWdC5aCbMN6PoAvhbrr+CEz2hqimMFEqyn\nfRnrDTx3AgMBAAECggEAEGqys90wMO1jJ//hqdcwUxbnVe8H/l2pDX68EKyHcRt6\nFFIzPTfLc28s2voA6G+B7n67mmf6tlDR5Elept4Ekawj5q+aCgm4ESFcj3hDrXqP\nOy65diTAkX+1lNQvseSrGBcFTsVv7vlDPp122XO3wtHMs5+2IUcEss0tkmM8IErO\nmuG1TweQccK6CU+GdvtZ0bsMv16S0fBz9hNfWQ0JRtiBSMeYJahf1wMKoLPHzdfU\nMyK39U3JPHOjaQaYkj80MAdXVOT4fjy7j//p7cLT57Exj4y8jHFpwI9XRawCyKrw\nl6yLzHpGQ4To5ERur8JUtMHF9gYctDr3XI5zZ1fZ0QKBgQDxoZQtlxWpfHBPXwB3\nwclUqfsTZHvmCBeGROX73+Hy2S84W0lrvmr3mrLMnl6syx8OS4tZdA3s8pbvj0HH\nFD8IXV2acc3Mf+OfQiawRowobSSeSPUr//vsPYfobsMtLzOjiO0n20p/nVV3gGCG\nZQyUDuHZVDvSBGz3bUXDeHiZLwKBgQDl9HuIBkW3pcpGvfBMqwOyRhLJFEXL14Nh\npwJ2nBs7eTd09S95+P14s2Y0U2AGc96FmElVrXk8teSn982pocAW3mdD6KgBpC6m\nlEGCJB9da7f27qspUpqsne1+a4GfhBrFp3IVx9HOYgDsJ/xSLnr+Ajhn5lNiJMN5\n3H3iuUSvOQKBgQDi3W4ej+gKxYc9PllWF2BMWXwe7Q1XIOnVawLzxXSDal7nbu40\ndwg/icOuUlNZsSxrY4pmZoxcmDgWnE6J9/xmgiLMS2WKR9kTQizI/LPDkRX8d0ua\nEDIb0Hm2RaiC1/qH5Jul/EKqJrKEDMiT5nQ03vQ19Nxlhzo35STHLmksiQKBgQCQ\nEES8CUHwNfutqh07yv/71g66zuqTNCdpLFpMuKwO7Hgj29+siKMz1SC4s2s7X6gP\nBkMbXBzSPhpMaOD93woayabkUoO+038ueT85KyxDONL97rRopQmmDyLUysFgkEC9\nh5PftVnp9Fgjm0Fmsxv2uqlf3lpq6CFW3R44xl0TcQKBgHC+jSs3fVr7/0uTVXIE\n89V+ypBbPfI4T2Fl9wPuizTxmLTbbnq3neIVurs6RyM5bWUSPIIoU59NajgCBATL\naE8us6ldgDneXCDGt8z1YwFtpLz5H9ItkOMFl4+Y3WLbk3mgdvpI5M8YsgcnDQ8y\nk1GnVuyRg5oTiYM6g7UTvLnx\n-----END PRIVATE KEY-----\n",
+        "client_email": "firebase-adminsdk-h83yt@jobo-chat.iam.gserviceaccount.com",
+        "client_id": "117827674445250600196",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://accounts.google.com/o/oauth2/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-h83yt%40jobo-chat.iam.gserviceaccount.com"
     }
   },
   production: {
